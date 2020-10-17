@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import BreweryList from '../components/BreweryList';
-import breweriesContent from './brewery-content';
+import React, { Component } from "react";
+import BreweryList from "../components/BreweryList";
+import breweriesContent from "./brewery-content";
 
 const BreweryListPage = () => (
-      <>
-      <h1>Breweries List!</h1>
-      <BreweryList breweries={breweriesContent} />
-      </>
-)
+  <>
+    <h1>Breweries List!</h1>
+    <BreweryList breweries={breweriesContent} />
+  </>
+);
 
 export default BreweryListPage;
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MyApp from './Testing';
 
 const Index = () => (
       <>
@@ -6,6 +7,7 @@ const Index = () => (
       <p>
       Thank you for coming.
       </p>
+      <MyApp />
       </>
 )
 

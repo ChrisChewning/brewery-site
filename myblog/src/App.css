@@ -8,9 +8,9 @@ p {
 
 /*horizontal nav bar*/
 ul {
-list-style-type: none;
-margin: 0;
-padding: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 li {
@@ -25,9 +25,9 @@ ul {
   overflow: hidden;
   background-color: #dddddd;
 }
-.nav-pages{
+.nav-pages {
   margin: 0%;
-  padding:0;
+  padding: 0;
   margin-bottom: 5px;
 }
 
@@ -43,4 +43,47 @@ ul {
 
 #about {
   float: right;
+}
+
+.event-paragraph{
+  font-size: 18px;
+  font-style: italic;
+}
+
+/*CALENDAR */
+.cal-parent{
+  position: relative;
+}
+
+.cal {
+  float: right;
+  position: fixed;
+  width: 20%;
+}
+
+
+.cal-parent {
+    background-color:red;
+    margin:0 auto;
+    position:relative
+}
+.cal {
+    width:20%;
+    border:1px solid white;
+    position:fixed; right:0
+}
+
+
+.react-calendar__tile {
+    height: 70px;
+    background-color: white;
+}
+
+.react-calendar__tile--active {
+    background-color: gray !important;
+}
+
+.react-calendar__tile2 {
+    background-color: blue !important;
+    color: black !important;
 }
