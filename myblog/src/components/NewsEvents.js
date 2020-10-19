@@ -23,9 +23,10 @@ class NewsEvents extends React.Component {
     //display the three closeset future events to today.
     return (
       <>
+      <h2>Upcoming Events</h2>
         {upcomingEvents.map((upcomingEvent, key) => (
           <>
-            <h2>{upcomingEvent.title}</h2>
+            <h3>{upcomingEvent.title}</h3>
             <p className="event-paragraph">
               {upcomingEvent.month}.{upcomingEvent.day}.{upcomingEvent.year}
             </p>

@@ -53,11 +53,37 @@ ul {
 }
 
 
+/*SITE WIDE STYLING */
 #page-body {
-  max-width: 700px;
+  width: 80%;
+  float: left;
   margin: auto;
-  padding: 64px;
+  text-align: center;
+  /* padding: 64px; */
 }
+
+
+/* SIDE NAV */
+
+.sidenav {
+  height: auto;
+  width: 15%;
+  float: right;
+  position: absolute;
+  border-left: solid 1px black;
+  padding: 2%;
+
+/*  z-index: 1;*/
+  top: 15%;
+  right: 3%;
+  /*background-color: #111;*/
+  overflow-x: hidden;
+  overflow-y: hidden;
+  min-height: 100vh;
+  margin-left: -15rem;
+
+}
+
 
 /*CALENDAR */
 .cal-parent{

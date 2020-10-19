@@ -10,8 +10,9 @@ const Index = () => (
       Thank you for coming.
       </p>
       <EventsCalendar />
-      <h1>News and Events</h1>
+      <div className="sidenav">
       <NewsEvents dates= { newsEventsContent } />
+      </div>
       </>
 )
 

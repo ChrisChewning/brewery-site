@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const NavBar = () => (
+  <header>
   <nav className="navbar">
     <ul>
       <li className="nav-pages">
@@ -18,6 +19,7 @@ const NavBar = () => (
       </li>
     </ul>
   </nav>
+  </header>
 );
 
 export default NavBar;
