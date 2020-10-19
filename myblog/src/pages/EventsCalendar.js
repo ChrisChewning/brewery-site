@@ -3,7 +3,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 
-class MyApp extends Component {
+class EventsCalendar extends Component {
   constructor(props) {
       super(props)
       this.state = {
@@ -39,4 +39,4 @@ class MyApp extends Component {
   }
 }
 
-export default MyApp;
+export default EventsCalendar;

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Index from "./pages/Index";
 import About from "./pages/About";
-import NewsEventsListPage from "./pages/NewsEventsListPage";
+import Community from "./pages/CommunityPage";
+import CommunityPost from "./pages/CommunityPost";
 import BreweryIndex from "./pages/BreweryIndex";
 import BreweryListPage from "./pages/BreweryListPage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -19,10 +20,11 @@ class App extends Component {
           <div id="page-body">
             <Switch>
               <Route path="/" component={Index} exact />
-              <Route path="/about" component={About} />
-              <Route path="/news-events" component={NewsEventsListPage} />
               <Route path="/breweries" component={BreweryListPage} />
               <Route path="/brewery/:name" component={BreweryIndex} />
+              <Route path="/community" component={Community} exact />
+              <Route path="/community/:name" component={CommunityPost} />
+              <Route path="/about" component={About} />
               <Route component={NotFound} />
             </Switch>
           </div>

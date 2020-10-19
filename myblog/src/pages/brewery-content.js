@@ -1,7 +1,12 @@
 const breweriesContent = [
   {
     name: 'adelberts', //case-sensitive
-    title: 'Belgiums and IPAs',
+    beers: 'Belgiums and IPAs',
+    image: '',
+    lat: '',
+    lon: '',
+    website: '',
+    hours: '',
     content: [
       'This is the first paragraph',
       'This is the second paragraph',
@@ -9,12 +14,43 @@ const breweriesContent = [
     ]
   },
   {
-  name: 'austinbeerworks',
-  title: 'Craft IPAs and design',
+  name: 'austin beerworks',
+  beers: 'Craft IPAs and design',
+  image: '',
+  lat: '',  //
+  lon: '',
+  website: '',
+  hours: '',
   content: [
     'This is sample content',
   ]
-}
+},
+{
+name: 'Hopsquad',
+beers: 'IPAs',
+image: '',
+lat: '',  //
+lon: '',
+website: '',
+hours: '',
+content: [
+  'This is sample content',
+]
+},
+{
+name: 'Circle',
+beers: 'I am not sure',
+image: '',
+lat: '',  //
+lon: '',
+website: '',
+hours: '',
+content: [
+  'This is sample content',
+]
+},
+
+
 ]
 
 export default breweriesContent;

@@ -8,7 +8,6 @@ const BreweryIndex = ({ match }) => {
   const breweries = breweriesContent.find(brewery => brewery.name === name) //=== name is saying equal to the match.params.name from the url parameter.
 
 //find the brewery name from the array of objects.
-
   if (!breweries) return <NotFound />
 
 //array of breweries besides the page you're on.

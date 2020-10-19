@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 
 class NewsEvents extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+
   render() {
     const dates = this.props.dates;
     var now = new Date();
