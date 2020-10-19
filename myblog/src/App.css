@@ -45,9 +45,18 @@ ul {
   float: right;
 }
 
+
+
 .event-paragraph{
   font-size: 18px;
   font-style: italic;
+}
+
+
+#page-body {
+  max-width: 700px;
+  margin: auto;
+  padding: 64px;
 }
 
 /*CALENDAR */
