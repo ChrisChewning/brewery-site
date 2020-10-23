@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import EventsCalendar from '../components/Calendar-Events';
 import NewsEvents from "../components/NewsEvents"; //component
 import newsEventsContent from "./news-events-content"; //data

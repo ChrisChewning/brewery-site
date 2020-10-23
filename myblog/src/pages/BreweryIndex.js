@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import BreweryList from '../components/BreweryList';
 import breweriesContent from './brewery-content'; //now has access to whatever name we put in the URL.
 import NotFound from './NotFound';

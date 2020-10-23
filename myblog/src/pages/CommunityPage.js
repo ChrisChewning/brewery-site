@@ -11,7 +11,7 @@ const Community = () => {
             <>
                 <p key={key}>Post by {post.poster} on 'date from db adddate'</p>
                 <p>{post.content}</p>
-                
+
                   <Link
                     className="brewery-list-item"
                     key={key}
