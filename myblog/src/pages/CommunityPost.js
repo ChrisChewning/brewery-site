@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import posts from './community-content';
 import {Redirect} from 'react-router-dom';
+import UpvotesSection from '../components/UpvotesSection';
 import CommentsList from '../components/CommentsList';
 
 
@@ -18,7 +19,6 @@ const CommunityPost = ({ match }) => {
     const fetchData = async () => {
       const result = await fetch(`/api/community/${name}`)
       const body = await result.json();  //will contain the post info
-      console.log(body);
 
       setPostInfo(body); ///call setPostInfo, which has the state for upvotes and comments.
     }
@@ -31,8 +31,8 @@ const CommunityPost = ({ match }) => {
   <>
   <div className="post-parent">
 <h2 className="post-title">{post.title}</h2>
-<p>This post has been upvoted {postInfo.upvotes} times</p>
-<p>{post.content}</p>
+<UpvotesSection postName={name} upvotes={postInfo.upvotes} setPostInfo={setPostInfo} />
+<p class="post-content">{post.content}</p>
 </div>
 <CommentsList comments={postInfo.comments} />
 
@@ -42,3 +42,6 @@ const CommunityPost = ({ match }) => {
 
 
 export default CommunityPost;
+
+
+//setPostInfo is the hook

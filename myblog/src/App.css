@@ -122,3 +122,28 @@ ul {
     background-color: blue !important;
     color: black !important;
 }
+
+
+/*UPVOTES */
+.post-parent {
+  background-color: gray;
+  clear: both;
+  overflow: auto;
+
+
+}
+
+.post-parent:group{
+  clear: both;
+  width: 30%;
+}
+
+div#upvotes-section{
+  float: left;
+  margin: 10% 10%;
+}
+
+.post-content{
+width: 15%;
+float: right;
+}
