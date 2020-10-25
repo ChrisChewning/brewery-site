@@ -3,7 +3,7 @@ import posts from './community-content';
 import {Redirect} from 'react-router-dom';
 import UpvotesSection from '../components/UpvotesSection';
 import CommentsList from '../components/CommentsList';
-
+import AddComments from '../components/AddComments';
 
 const CommunityPost = ({ match }) => {
   const name = match.params.name;
@@ -19,7 +19,6 @@ const CommunityPost = ({ match }) => {
     const fetchData = async () => {
       const result = await fetch(`/api/community/${name}`)
       const body = await result.json();  //will contain the post info
-
       setPostInfo(body); ///call setPostInfo, which has the state for upvotes and comments.
     }
     fetchData();
@@ -27,13 +26,18 @@ const CommunityPost = ({ match }) => {
 
   if (!post) return <Redirect to ="/community" />
 
+
+console.log(postInfo.upvotes)
   return (
   <>
   <div className="post-parent">
 <h2 className="post-title">{post.title}</h2>
+<div className="post-upvotes-content">
 <UpvotesSection postName={name} upvotes={postInfo.upvotes} setPostInfo={setPostInfo} />
-<p class="post-content">{post.content}</p>
+<p className="post-content">{post.content}</p>
 </div>
+</div>
+<AddComments postName={name} setPostInfo={setPostInfo} />
 <CommentsList comments={postInfo.comments} />
 
   </>

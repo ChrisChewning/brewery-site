@@ -2,7 +2,7 @@ import React from 'react';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 
-const UpvotesSection = ({ postName, upvotes, downvotes, setPostInfo }) => { //props. 1. is for the name in the URL.  2. is for postName.upvotes.  3. is the hook
+const UpvotesSection = ({ postName, upvotes, setPostInfo }) => { //props. 1. is for the name in the URL.  2. is for postName.upvotes.  3. is the hook
 
   const upvotePost = async () => {
     const result = await fetch(`/api/community/${postName}/upvote`, {
@@ -25,7 +25,6 @@ const UpvotesSection = ({ postName, upvotes, downvotes, setPostInfo }) => { //pr
     <ThumbUpIcon onClick={() => upvotePost()} />
     <p> {upvotes} </p>
     <ThumbDownIcon onClick={() => downvotePost()} />
-
     </div>
   );
 }
