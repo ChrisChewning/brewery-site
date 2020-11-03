@@ -1,10 +1,10 @@
-const mongoose = require('monoose');
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const brewerySchema = new Schema({
   name: { type: String },
   beers: { type: String },
-  image: { type: Image },
+  image: { data: Buffer, type: String },
   location: {type: String},
   website: {type: String},
   hours: {type: String},
