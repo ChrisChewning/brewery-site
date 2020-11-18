@@ -23,7 +23,7 @@ class App extends Component {
               <Route path="/breweries" component={BreweryListPage} />
               <Route path="/brewery/:name" component={BreweryIndex} />
               <Route path="/community" component={Community} exact />
-              <Route path="/community/:name" component={CommunityPost} />
+              <Route path="/community/posts/:id" component={CommunityPost} /> //passes params props
               <Route path="/about" component={About} />
               <Route component={NotFound} />
             </Switch>

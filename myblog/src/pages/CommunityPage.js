@@ -1,30 +1,41 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import posts from './community-content';
+import axios from 'axios';
 
-const Community = () => {
 
-    return (
-      <>
-      <h1>Community Page</h1>
-        {posts.map((post, key) => (
-            <>
-                <p key={key}>Post by {post.poster} on 'date from db adddate'</p>
-                <p>{post.content}</p>
+export default class Community extends React.Component {
+  state = {
+    posts: []
+  }
 
-                  <Link
-                    className="brewery-list-item"
-                    key={key}
-                    to={`/community/${post.name}`}
-                    >
-                    <h3>{post.name}</h3>
-                  </Link>
-
-                </>
-            ))}
-            </>
-
-)
+componentDidMount() {
+  axios.get(`http://localhost:8000/api/community/posts`)
+  .then(res => {
+    const posts = res.data;
+    this.setState({ posts });
+  })
 }
 
-export default Community;
+render() {
+  return (
+      <>
+      { this.state.posts.map((post, key) => (
+        <ul>
+        <li key={post._id}>{post.name}</li>
+        <br></br>
+        <li>{post.content}</li>
+        <Link className="brewery-list-item"
+          key={key}
+          to= {`/community/posts/${post._id}`}
+          >
+        <h3>{post.name}</h3>
+    </Link>
+  </ul>
+  ))
+}
+</>
+)
+
+}
+}

@@ -2,13 +2,13 @@ const router = require('express').Router();
 let Comment = require('../models/comment.model');
 let Post = require('../models/post.model');
 
-//GET COMMENTS AND UPVOTES
+//GET COMMENTS
 router.route('/brewery-meetup').get(async (req, res) => {
   try {
 //Comment.findOne({name: postName})
 
   const postName = req.params.name; //postName gets name from url paramters
-  const postInfo = await Comment.findOne({name: postName})  //matches name url paramter we passed. Mongo returns client object we can use to send queries to the db
+  const postInfo = await Post.comments.find()  //matches name url paramter we passed. Mongo returns client object we can use to send queries to the db
   res.status(200).json(postInfo); //instead of send, use json since we are working with json.
 } catch (error) {
   res.status(500).json({ message: 'Error', error })
@@ -16,7 +16,7 @@ router.route('/brewery-meetup').get(async (req, res) => {
 })
 
 
-
+//GET ALL POSTS, COMMENTS AND UPVOTES
 //SEE EVERY COMMENT (working)
 router.route('/').get((req, res) => {
   Comment.find()
@@ -31,36 +31,25 @@ router.route('/brewery-meetup/test').get((req, res) => {
   .catch(err => res.status(400).json('Error ' + err))
 })
 
-router.route('/brewery-meetup/add-comment/').post((req, res) => {
-  //Set variables
-  const name = req.body.name; //how to get logged in username?  //destructure to const { name, comment } = req.body;  ?
-  const comment = req.body.comment;
-  const postName = 'brewery-meetup'; //will be req.params.name
-  const postDetails = Post.findOne({ name: postName })  //Posts name is brewery-meetup in the db.
 
-  const updatePost = Post.updateOne({ name: postName }, {
+
+
+//UPDATE A POST WITH A COMMENT
+router.route('/:name/add-comment/:id').post(async (req, res) => {
+const {username, votes, comment } = req.body;
+try {
+const postId = req.params.id; //set the req id to a variable
+  const saveCommentToPost = await Post.findById({_id: postId})//.populate(User)//  //.populate(User) later
+    const post = await Post.updateOne({ _id : postId }, { //update the id that matches req.params.id (ex: brewery-meetup id)
     '$set': {
-      comment: postDetails.comment.concat({ name, comment }), //add to array.
-    },
-  }); //find the name from postName ?
-
-
-//return updated comment Array
-const updatedPostDetails = Comment.findOne({ name: postName })
-  newComment.updateOne({name: postName}, {
-    '$set': {
-      comment: postDetails.comment.concat({ username, text }), //add to array.
+      comments: saveCommentToPost.comments.concat({ username, votes, comment })
     },
   })
-  .then(() => res.json('Comment added'))
-  .catch(err => res.status(400).json('Error ' +err));
-});
-
-///working one before
-
-
-
-
+  res.send(post)
+}catch(err){
+  res.status(400).send(err);
+}
+})
 
 
 
@@ -72,16 +61,11 @@ router.route('/:name/upvotes').post((req, res) => {
 })
 
 
-router.route('/').get((req, res) => {
-  Comment.find()
-  .then(comments => res.json(comments))
-  .catch(err => res.status(400).json('Error ' + err))
-})
 
-
-//UPVOTE ENDPOINT	//UPVOTE ENDPOINT
+//UPVOTE ENDPOINT
 router.route('/:name/upvotes').post((req, res) => {
   const postName = req.params.name;
 })
+
 
 module.exports = router;

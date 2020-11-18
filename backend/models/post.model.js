@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
+  username: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,
@@ -17,7 +21,11 @@ const postSchema = new Schema({
   comments: {
     type: Array,
   }
-});
+},
+  {
+    timestamps: true,
+  }
+);
 
 const Post = mongoose.model("Post", postSchema); //arg 1 could be anything
 
