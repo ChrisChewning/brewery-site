@@ -30,7 +30,6 @@ client.once('open', () => {
 
 //require the files and use them.
 const usersRouter = require('../routes/users');
-
 const postsRouter = require('../routes/posts');
 const commentsRouter = require('../routes/comments');
 const breweriesRouter = require('../routes/breweries');

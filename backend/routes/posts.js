@@ -62,28 +62,28 @@ router.route('/:id').delete((req, res) => {
   })
 
 //UPVOTE POST
-router.route('/:name/upvote').post(async (req, res) => {
-          const postName = req.params.name;
-          const postInfo = await Post.findOne({ name: postName });
-          await Post.updateOne({ name: postName }, {
+router.route('/:id/upvote').post(async (req, res) => {
+          const postId = req.params.id;
+          const postInfo = await Post.findOne({ _id: postId });
+          await Post.updateOne({ _id: postId }, {
               '$set': {
                   votes: postInfo.votes + 1,
               },
           });
-          const updatedPostInfo = await Post.findOne({ name: postName });
+          const updatedPostInfo = await Post.findOne({ _id: postId });
           res.status(200).json(updatedPostInfo.votes);
       });
 
 //DOWNVOTE POST
-router.route('/:name/downvote').post(async (req, res) => {
-              const postName = req.params.name;
-              const postInfo = await Post.findOne({ name: postName });
-              await Post.updateOne({ name: postName }, {
+router.route('/:id/downvote').post(async (req, res) => {
+              const postId = req.params.id;
+              const postInfo = await Post.findOne({ _id: postId });
+              await Post.updateOne({ _id: postId }, {
                   '$set': {
                       votes: postInfo.votes - 1,
                   },
               });
-              const updatedPostInfo = await Post.findOne({ name: postName });
+              const updatedPostInfo = await Post.findOne({ _id: postId });
 
               res.status(200).json(updatedPostInfo.votes);
           });
