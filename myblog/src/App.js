@@ -8,11 +8,12 @@ import BreweryListPage from "./pages/BreweryListPage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBar from "./NavBar";
 import NotFound from "./pages/NotFound";
-
+import AddComments from "./components/AddComments";
 import "./App.css";
 
 class App extends Component {
   render() {
+
     return (
       <Router>
         <div className="App">
@@ -23,7 +24,7 @@ class App extends Component {
               <Route path="/breweries" component={BreweryListPage} />
               <Route path="/brewery/:name" component={BreweryIndex} />
               <Route path="/community" component={Community} exact />
-              <Route path="/community/posts/:id" component={CommunityPost} /> //passes params props
+              <Route path="/community/posts/:id" component={CommunityPost} />
               <Route path="/about" component={About} />
               <Route component={NotFound} />
             </Switch>

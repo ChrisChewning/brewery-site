@@ -2,9 +2,9 @@ const router = require('express').Router();
 let Post = require('../models/post.model');
 
 ///api/community/posts
+
+
 //GET ALL POSTS
-
-
 router.route('').get((req, res) => {
   Post.find()
   .then(posts => res.json(posts))

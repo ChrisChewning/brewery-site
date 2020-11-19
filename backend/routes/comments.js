@@ -35,7 +35,7 @@ router.route('/brewery-meetup/test').get((req, res) => {
 
 
 //UPDATE A POST WITH A COMMENT
-router.route('/:name/add-comment/:id').post(async (req, res) => {
+router.route('/:id/add-comment').post(async (req, res) => {
 const {username, votes, comment } = req.body;
 try {
 const postId = req.params.id; //set the req id to a variable

@@ -3,6 +3,8 @@ import { Redirect } from "react-router-dom";
 import UpvotesSection from "../components/UpvotesSection";
 import CommentsList from "../components/CommentsList";
 import AddComments from "../components/AddComments";
+import AddComment from "../components/AddComments";
+
 import axios from "axios";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
@@ -17,6 +19,7 @@ class CommunityPost extends Component {
       content: "",
       votes: "",
       comments: [],
+      id: this.props.match.params.id,
     };
   }
 
@@ -64,7 +67,12 @@ class CommunityPost extends Component {
     this.setState({ votes: newTotal });
   };
 
+
+
   render() {
+    const id = this.props.match.params.id;
+    const comments = this.state.comments;
+    console.log(id, 'line 71')
     return (
       <>
         <div className="post-parent">
@@ -77,8 +85,12 @@ class CommunityPost extends Component {
             <p className="post-content">{this.state.content}</p>
 
         </div>
+        <AddComment id = {this.state.id} comments= {this.state.comments}/>
         <p>Comments</p>
-        
+        {this.state.comments.map((comment, i) => (
+          <p key={i}>{comment.username} | <i>need time here</i> <br></br><br></br> {comment.comment}</p>
+      )
+     )}
       </>
     );
   }
