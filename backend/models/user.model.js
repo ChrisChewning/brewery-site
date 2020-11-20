@@ -12,7 +12,7 @@ const userSchema = new Schema({
   },
   email: {
       type: String,
-      unique: true,
+      unique: true,  //duplicate key error collection is happening even when this is commented out.
       required: [true, "can't be blank"],
       trim: true
     },

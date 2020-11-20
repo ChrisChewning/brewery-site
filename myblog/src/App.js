@@ -10,6 +10,7 @@ import NavBar from "./NavBar";
 import NotFound from "./pages/NotFound";
 import AddComments from "./components/AddComments";
 import "./App.css";
+import CreateUser from "./components/CreateUser";
 
 class App extends Component {
   render() {
@@ -26,6 +27,7 @@ class App extends Component {
               <Route path="/community" component={Community} exact />
               <Route path="/community/posts/:id" component={CommunityPost} />
               <Route path="/about" component={About} />
+              <Route path="/login" component={CreateUser} />
               <Route component={NotFound} />
             </Switch>
           </div>
