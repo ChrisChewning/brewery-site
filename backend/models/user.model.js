@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
+
 
 const userSchema = new Schema({
   username: {
@@ -13,7 +15,7 @@ const userSchema = new Schema({
   email: {
       type: String,
       unique: true,  //duplicate key error collection is happening even when this is commented out.
-      required: [true, "can't be blank"],
+      required: true,
       trim: true
     },
   password: {
@@ -23,8 +25,17 @@ const userSchema = new Schema({
   passwordConfirm: {
     type: String,
     required: true
+  },
+  register_date: {
+    type: Date,
+    default: Date.now
   }
-})
+});
+
+//Custom error msg for 11000
+userSchema.plugin(uniqueValidator, { message: 'Error, expected {PATH} to be unique.' });
+
+
 
 const User = mongoose.model('User', userSchema); //arg 1 could be anything
 

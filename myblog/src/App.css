@@ -192,3 +192,12 @@ h4.comment-username {
   padding-bottom: 5%;
   border-bottom: 1px solid #e0e0e0;
 }
+
+
+.hideCustomError {
+  display: none !important;
+}
+
+.showCustomError{
+  background-color: yellow;
+}

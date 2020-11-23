@@ -1,6 +1,8 @@
 const router = require('express').Router();
 let User = require('../models/user.model');
 
+
+
 //GET ALL USERS
 router.route('/').get((req, res) => {
   User.find()
@@ -14,6 +16,10 @@ router.route('/adduser').post((req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   const passwordConfirm = req.body.passwordConfirm;
+
+  if (password !== passwordConfirm){
+    return res.status(400).json({ msg: 'Passwords do not match' });
+  }
 
   const newUser = new User({
     username,

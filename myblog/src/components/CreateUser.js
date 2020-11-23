@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import { isEmail } from "validator";
 import axios from "axios";
 
 
@@ -6,14 +7,13 @@ class CreateUser extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
-
     this.state = {
-      username: "",
-      email: "",
-      password: "",
-      passwordConfirm: ""
+      username: '',
+      email: '',
+      password: '',
+      passwordConfirm: '',
+      errorMessage: '',
+      customError: '',
     };
   }
 
@@ -41,29 +41,45 @@ class CreateUser extends Component {
     });
   };
 
-
-
-
   onSubmit = (e) => {
     e.preventDefault();
-    const login = {
+    const register = {
       username: this.state.username,
       email: this.state.email,
       password: this.state.password,
       passwordConfirm: this.state.passwordConfirm
     };
 
+    console.log(register, ' this is register');
 
-    console.log(login);
-    axios.post('http://localhost:8000/users/adduser', login)
-    .then(res => console.log(res.data))
 
-    this.setState({ username: "", email: "", password: "", passwordConfirm: "" }); //user can submit multiple users at once.
+  axios.post('http://localhost:8000/users/adduser', register)
+.then(response => {
+  console.log(response)
+})
+.catch(error => {
+  console.log(error.response)
+  this.setState({errorMessage: error.response.data.msg})
+  this.setState({customError: error.response.data.toString()})
+  console.log(this.state.errorMessage)
+})
+
+    // axios.post('http://localhost:8000/users/adduser', register)
+    // .then(res => console.log(res.data))
+    // .catch(err => {console.log(err, ' this is error')})
+
+    //set states back to null
+    this.setState({ username:'', email: '', password: '', passwordConfirm: '', errorMessage: '', customError: ''  });
   };
 
+
   render() {
+    console.log(this.state.customError, ' custom error')
+
     return (
       <>
+      <p>{this.state.errorMessage}</p>
+      <p className={`${this.state.customError == '[object Object]' ? "hideCustomError": "showCustomError" }`}>{this.state.customError}</p>
         <h3>Create New User</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
@@ -74,6 +90,7 @@ class CreateUser extends Component {
               className="form-control"
               value={this.state.username}
               onChange={this.onChangeUsername}
+
             />
           </div>
           <label>Email: </label>
