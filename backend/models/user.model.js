@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
-
+const bcrypt = require("bcryptjs");
 
 const userSchema = new Schema({
   username: {
@@ -20,11 +20,17 @@ const userSchema = new Schema({
     },
   password: {
     type: String,
-    required: true
+    required: true,
+    minlength: 8,
+    validate: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/,
+    bcrypt: true
   },
   passwordConfirm: {
     type: String,
-    required: true
+    required: true,
+    minlength: 8,
+    validate: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/,
+    bcrypte: true
   },
   register_date: {
     type: Date,

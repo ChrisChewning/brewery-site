@@ -1,5 +1,6 @@
 const router = require('express').Router();
 let User = require('../models/user.model');
+const Bcrypt = require("bcryptjs");
 
 
 
@@ -12,20 +13,28 @@ router.route('/').get((req, res) => {
 
 //ADD USER
 router.route('/adduser').post((req, res) => {
-  const username = req.body.username;
-  const email = req.body.email;
-  const password = req.body.password;
-  const passwordConfirm = req.body.passwordConfirm;
+  const {username, email, password, passwordConfirm} = req.body
 
   if (password !== passwordConfirm){
     return res.status(400).json({ msg: 'Passwords do not match' });
   }
 
+
+  var pwValidate =  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/;
+  if(!password.match(pwValidate))
+  {
+    return res.status(400).json({ msg: 'Password must be at least 8 characters, have a capital, and have a special character'})
+  }
+
+
+
+  Bcrypt.hash(password, 12)
+  .then(hashedpassword =>{
   const newUser = new User({
     username,
     email,
-    password,
-    passwordConfirm,
+    password: hashedpassword,
+    passwordConfirm: hashedpassword
   });
 
   newUser.save()
@@ -33,6 +42,7 @@ router.route('/adduser').post((req, res) => {
   .catch(err => res.status(400).json('Error ' +err));
 });
 
+});
 
 //DELETE USER
 router.route('/:id').delete((req, res) => {

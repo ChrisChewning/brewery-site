@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { isEmail } from "validator";
 import axios from "axios";
 
-
 class CreateUser extends Component {
   constructor(props) {
     super(props);
@@ -43,15 +42,20 @@ class CreateUser extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+
+
     const register = {
       username: this.state.username,
       email: this.state.email,
       password: this.state.password,
-      passwordConfirm: this.state.passwordConfirm
+      passwordConfirm: this.state.password
     };
 
     console.log(register, ' this is register');
 
+
+
+//before creating user
 
   axios.post('http://localhost:8000/users/adduser', register)
 .then(response => {
@@ -64,17 +68,14 @@ class CreateUser extends Component {
   console.log(this.state.errorMessage)
 })
 
-    // axios.post('http://localhost:8000/users/adduser', register)
-    // .then(res => console.log(res.data))
-    // .catch(err => {console.log(err, ' this is error')})
 
-    //set states back to null
     this.setState({ username:'', email: '', password: '', passwordConfirm: '', errorMessage: '', customError: ''  });
   };
 
 
   render() {
-    console.log(this.state.customError, ' custom error')
+    console.log(this.state.password, 'password')
+//    console.log(this.state.customError, ' custom error')
 
     return (
       <>
@@ -128,6 +129,7 @@ class CreateUser extends Component {
             />
           </div>
         </form>
+        <p>Passwords need to be at least 8 characters, have one capitalized letter, and one special character</p>
       </>
     );
   }
