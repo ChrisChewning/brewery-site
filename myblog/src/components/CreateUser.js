@@ -106,7 +106,7 @@ class CreateUser extends Component {
           <div className="form-group">
             <label>Password: </label>
             <input
-              type="text"
+              type="password"
               required
               className="form-control"
               value={this.state.password}
@@ -115,7 +115,7 @@ class CreateUser extends Component {
           </div>
           <label>Confirm Password: </label>
           <input
-            type="text"
+            type="password"
             required
             className="form-control"
             value={this.state.passwordConfirm}

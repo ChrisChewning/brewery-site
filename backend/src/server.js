@@ -2,6 +2,7 @@ import express from 'express';
 //import bodyParser from 'body-parser'; don't need b.c of the new version of express.
 //import { MongoClient } from 'mongodb'; //can connect to local db
 const mongoose = require('mongoose'); //helps us connect to mongodb database
+const config = require('config');
 
 require('dotenv').config(); //env variables can be in the dotenv file.
 
@@ -10,12 +11,14 @@ const app = express();
 const port = process.env.port || 8000;
 const cors = require('cors');
 
+
 //middleware
 app.use(cors());
 app.use(express.json());
 //app.use(bodyParser.json());
 
 const uri = process.env.ATLAS_URI;
+const jwt = process.env.JWT_SECRET;
 console.log(uri);
 //mongoose.connect(uri, { useNewUrlParser: true; useCreateIndex: true; }); //FLAGS: mongodb nodejs driver parses the connection string. useCreateIndex: mongodb deprecating ensure index fn
 
