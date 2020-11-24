@@ -3,13 +3,10 @@ import express from 'express';
 //import { MongoClient } from 'mongodb'; //can connect to local db
 const mongoose = require('mongoose'); //helps us connect to mongodb database
 const config = require('config');
-
-require('dotenv').config(); //env variables can be in the dotenv file.
-
-
 const app = express();
 const port = process.env.port || 8000;
 const cors = require('cors');
+require('dotenv').config(); //env variables can be in the dotenv file.
 
 
 //middleware
@@ -36,10 +33,12 @@ const usersRouter = require('../routes/users');
 const postsRouter = require('../routes/posts');
 const commentsRouter = require('../routes/comments');
 const breweriesRouter = require('../routes/breweries');
+const authRouter = require('../routes/auth');
 
 app.use('/users', usersRouter); // means /users is the base route
 app.use('/api/community', commentsRouter);
 app.use('/api/brewery', breweriesRouter);
 app.use('/api/community/posts', postsRouter);
+app.use('/api/login', authRouter);
 
 app.listen(port, () => console.log('Listening on port 8000'));  //argument to specify which port to listen on. then a callback
