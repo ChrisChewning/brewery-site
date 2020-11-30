@@ -32,7 +32,7 @@ router.route('/adduser').post((req, res, user) => {
   }
 
   //PW REGEX VALIDATION
-  var pwValidate =  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/;
+  var pwValidate =  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]+)(?=.*[^a-zA-Z0-9]).{8,1024}$/;
   if(!password.match(pwValidate))
   {
     return res.status(400).json({ msg: 'Password must be at least 8 characters, have a capital, and have a special character'})

@@ -1,6 +1,7 @@
 const router = require('express').Router();
 let Comment = require('../models/comment.model');
 let Post = require('../models/post.model');
+const auth = require('../middleware/auth');
 
 //GET COMMENTS
 router.route('/brewery-meetup').get(async (req, res) => {
@@ -35,7 +36,7 @@ router.route('/brewery-meetup/test').get((req, res) => {
 
 
 //UPDATE A POST WITH A COMMENT
-router.route('/:id/add-comment').post(async (req, res) => {
+router.route('/:id/add-comment').post(auth, async (req, res) => {
 const {username, votes, comment } = req.body;
 try {
 const postId = req.params.id; //set the req id to a variable

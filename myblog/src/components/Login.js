@@ -23,29 +23,31 @@ onChangePassword = (e) => {
 }
 
 
-handleSubmit = e => {
+onSubmit = e => {
   e.preventDefault();
-
   const auth = {
     username: this.state.username,
     password: this.state.password
   }
 
-axios.post('http://localhost:8000/login', auth)
+console.log(this.state.username)
+console.log(this.state.password)
+axios.post('http://localhost:8000/api/login', auth)
 .then(res => {
-  console.log(res)
+  console.log(res, ' RES')
 })
 .catch(err => {
-  console.log(err)
+  console.log(err, ' ERR')
 })
 }
+
+
 
 render(){
 
   return(
     <>
-    <p>This is the login page</p>
-      <h3>Create New User</h3>
+      <h3>Login</h3>
       <form onSubmit={this.onSubmit}>
         <div className="form-group">
           <label>Username: </label>
@@ -63,7 +65,7 @@ render(){
         <div className="form-group">
           <label>Password: </label>
           <input
-            type="text"
+            type="password"
             required
             className="form-control"
             value={this.state.password}
@@ -74,7 +76,7 @@ render(){
         <div className="form-group">
           <input
             type="submit"
-            value="Create User"
+            value="Login"
             className="btn btn-primary"
           />
         </div>

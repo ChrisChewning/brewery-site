@@ -29,7 +29,6 @@ router.route('/').post((req, res, user) => {
      console.log(user.password, ' user pw')
   res.json({success: true, message: "here's your token", token: token})
 
-  .catch(err => res.status(400).json('Error ' +err))
   console.log(password, ' pw')
   console.log(user.password, ' user pw')
     })
