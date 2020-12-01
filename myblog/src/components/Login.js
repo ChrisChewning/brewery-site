@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Switch, Route, Redirect } from 'react-router-dom';
 //import Alert from 'react-bootstrap/Alert';
-
+import eyeball from '../images/eyeball.png';
+import Icon from '@material-ui/core/Icon';
+import { Visibility , VisibilityOff, MailOutlineIcon, PersonIcon } from '@material-ui/icons';
 
 class Login extends Component {
   constructor(props){
@@ -12,7 +14,8 @@ class Login extends Component {
       username: '',
       password: '',
       redirect: '',
-      error: false
+      error: false,
+      revealPw: false
     }
 
   }
@@ -26,6 +29,9 @@ onChangePassword = (e) => {
   this.setState({password: e.target.value})
 }
 
+togglePw = (e) => {
+  this.setState({revealPw : !this.state.revealPw})
+}
 
 onSubmit = e => {
   e.preventDefault();
@@ -45,7 +51,8 @@ axios.post('http://localhost:8000/api/login', auth)
 .catch(err => {
   console.log(err, ' ERR')
   if (err){
-    this.setState({redirect: "/login", username: '', password: '', error: 'Invalid Credentials'})
+    this.setState({redirect: "/login", username: '', password: '', error: 'Invalid Credentials', revealPw: false
+})
       }
 })
 }
@@ -75,20 +82,29 @@ render(){
             className="form-control"
             value={this.state.username}
             onChange={this.onChangeUsername}
-
           />
         </div>
 
-
-        <div className="form-group">
-          <label>Password: </label>
+<div>
+        <div style={{ 'position': 'relative'}}>
+          <div>
+            <label>Password: </label>
           <input
-            type="password"
+            type={this.state.revealPw ? "text" : "password"}
+            id="input"
             required
-            className="form-control"
             value={this.state.password}
             onChange={this.onChangePassword}
-          />
+          >
+          </input>
+          <span onClick={this.togglePw} >
+            <span>
+            {this.state.revealPw ? <VisibilityOff /> : <Visibility />}
+            </span>
+          </span>
+        </div>
+
+</div>
         </div>
 
         <div className="form-group">

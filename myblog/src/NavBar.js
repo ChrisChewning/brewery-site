@@ -17,7 +17,11 @@ const NavBar = () => (
       <li className="nav-pages" id="about">
         <Link to="/About">About</Link>
       </li>
-  
+
+      <li className="nav-pages" id="account">
+        <Link to="/Login">Account</Link>
+      </li>
+
     </ul>
   </nav>
   </header>
