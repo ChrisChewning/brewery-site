@@ -17,6 +17,7 @@ const NavBar = () => (
       <li className="nav-pages" id="about">
         <Link to="/About">About</Link>
       </li>
+  
     </ul>
   </nav>
   </header>

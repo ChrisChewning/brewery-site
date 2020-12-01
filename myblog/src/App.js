@@ -12,7 +12,7 @@ import AddComments from "./components/AddComments";
 import "./App.css";
 import CreateUser from "./components/CreateUser";
 import Login from "./components/Login";
-
+import MyAccount from "./components/MyAccount";
 
 class App extends Component {
   render() {
@@ -31,6 +31,7 @@ class App extends Component {
               <Route path="/about" component={About} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={CreateUser} />
+              <Route path="/MyAccount" component={MyAccount} />
               <Route component={NotFound} />
             </Switch>
           </div>
