@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Switch, Route, Redirect } from 'react-router-dom';
 //import Alert from 'react-bootstrap/Alert';
-import eyeball from '../images/eyeball.png';
 import Icon from '@material-ui/core/Icon';
 import { Visibility , VisibilityOff, MailOutlineIcon, PersonIcon } from '@material-ui/icons';
 
@@ -15,7 +14,7 @@ class Login extends Component {
       password: '',
       redirect: '',
       error: false,
-      revealPw: false
+      revealPw: false,
     }
 
   }
@@ -42,10 +41,15 @@ onSubmit = e => {
 
 axios.post('http://localhost:8000/api/login', auth)
 .then(res => {
-  console.log(res, ' RES')
+  console.log(res, ' RES token')
+  localStorage.setItem('token', res.data.token)
+  localStorage.setItem('user', res.data.user._id)
+  console.log(res.data.user, ' user')
+  console.log(localStorage)
   if (res.status === 200){
-    this.setState({redirect: "/myaccount"})
-    console.log(this.state.redirect)
+//    this.setState({redirect: "/myaccount"})
+this.setState({username: res.data.user.username})
+    console.log(this.state.username)
   }
 })
 .catch(err => {

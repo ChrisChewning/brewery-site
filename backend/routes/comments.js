@@ -12,7 +12,7 @@ router.route('/brewery-meetup').get(async (req, res) => {
   const postInfo = await Post.comments.find()  //matches name url paramter we passed. Mongo returns client object we can use to send queries to the db
   res.status(200).json(postInfo); //instead of send, use json since we are working with json.
 } catch (error) {
-  res.status(500).json({ message: 'Error', error })
+  res.status(500).json({ 'message': 'Error', error })
 }
 })
 

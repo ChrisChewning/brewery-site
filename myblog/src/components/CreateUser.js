@@ -60,6 +60,10 @@ class CreateUser extends Component {
   axios.post('http://localhost:8000/users/adduser', register)
 .then(response => {
   console.log(response)
+  if (response.data.status === 'created'){
+  this.props.handleSuccessAuth(response.data);
+  console.log(this.props.handleSuccessAuth)
+}
 })
 .catch(error => {
   console.log(error.response)

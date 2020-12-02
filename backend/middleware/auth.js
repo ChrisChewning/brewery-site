@@ -7,7 +7,7 @@ require('dotenv').config(); //env variables can be in the dotenv file.
 //function auth(req, res, next) {
 const auth = (req, res, next) => {
   const token = req.header('x-auth-token');
-
+console.log(token, '<-- token')
 //Check for token
 if (!token) res.status(401).json({ msg: 'Authorization denied'})  //401 means unauthorized
 

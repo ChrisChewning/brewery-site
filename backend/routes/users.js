@@ -16,6 +16,15 @@ router.route('/').get((req, res) => {
   .catch(err => res.status(400).json('Error ' + err))
 })
 
+//GET A SPECIFIC USER
+router.route('/:id').get((req, res) => {
+  User.findById(req.params.id)
+  .then(user => res.json(user))
+  .catch(err => res.status(400).json('Error: ' + err))
+})
+
+
+
 //ADD USER
 router.route('/adduser').post((req, res, user) => {
   const {username, email, password, passwordConfirm} = req.body

@@ -15,6 +15,20 @@ import Login from "./components/Login";
 import MyAccount from "./components/MyAccount";
 
 class App extends Component {
+  constructor(){
+    super();
+
+    this.state = {
+      loggedIn: "NOT_LOGGED_IN",
+      user: {}
+    }
+  }
+
+
+setUser = user => {
+  this.setState({user: user})
+}
+
   render() {
 
     return (

@@ -19,7 +19,7 @@ const NavBar = () => (
       </li>
 
       <li className="nav-pages" id="account">
-        <Link to="/Login">Account</Link>
+        <Link to="/MyAccount">Account</Link>
       </li>
 
     </ul>

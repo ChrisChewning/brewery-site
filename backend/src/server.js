@@ -7,11 +7,13 @@ const app = express();
 const port = process.env.port || 8000;
 const cors = require('cors');
 require('dotenv').config(); //env variables can be in the dotenv file.
+var session = require('express-session');
 
 
 //middleware
 app.use(cors());
 app.use(express.json());
+app.use(session({secret:"hello", resave: false, saveUninitialized: true}))
 //app.use(bodyParser.json());
 
 const uri = process.env.ATLAS_URI;

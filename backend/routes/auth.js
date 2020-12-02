@@ -27,11 +27,14 @@ router.route('/').post((req, res, user) => {
      if(!isMatch) return res.status(400).json({msg: 'Invalid credentials'});
      console.log(password, ' pw')
      console.log(user.password, ' user pw')
-  res.json({success: true, message: "here's your token", token: token})
+  res.json({success: true, message: "here's your token", token: token, user: user})
 
   console.log(password, ' pw')
   console.log(user.password, ' user pw')
-    })
+})
+.catch(err => {
+  console.log(err)
+})
   })
 });
 
