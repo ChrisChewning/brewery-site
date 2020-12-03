@@ -27,7 +27,7 @@ router.route('/:id').get((req, res) => {
 
 //ADD USER
 router.route('/adduser').post((req, res, user) => {
-  const {username, email, password, passwordConfirm} = req.body
+  const {username, email, password, passwordConfirm, image} = req.body
   //JWT
   const payload = { id: user._id };
   const options = {expiresIn: 3600};
@@ -54,7 +54,8 @@ router.route('/adduser').post((req, res, user) => {
     username,
     email,
     password: hashedpassword,
-    passwordConfirm: hashedpassword
+    passwordConfirm: hashedpassword,
+    image
   });
   newUser.save()
   .then(() => res.json({success: true, message: "here's your token", token: token}))
@@ -70,11 +71,6 @@ router.route('/:id').delete((req, res) => {
   .catch(err => res.status(400).json('Error: ' + err))
 })
 
-
-//LOGIN USER
-//router.route('/login').post(req, res => {
-
-//})
 
 
 module.exports = router;

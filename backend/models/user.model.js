@@ -14,7 +14,7 @@ const userSchema = new Schema({
   },
   email: {
       type: String,
-      unique: true,  //duplicate key error collection is happening even when this is commented out.
+      unique: true,
       required: true,
       trim: true
     },
@@ -30,13 +30,23 @@ const userSchema = new Schema({
     required: true,
     minlength: 8,
     validate: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/,
-    bcrypte: true
+    bcrypt: true
+  },
+  image: {
+    data: Buffer,
+    type: String,
+    required: true
   },
   register_date: {
     type: Date,
     default: Date.now
-  }
+  },
+ modified_date: {
+   type: String
+ }
 });
+
+
 
 //Custom error msg for 11000
 userSchema.plugin(uniqueValidator, { message: 'Error, expected {PATH} to be unique.' });
