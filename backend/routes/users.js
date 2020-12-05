@@ -4,10 +4,75 @@ let User = require('../models/user.model');
 const Bcrypt = require("bcryptjs");
 const config = require('config');
 const jwt = require("jsonwebtoken");
+const multer = require('multer');
+const path = require("path");
 
 const token = process.env.JWT_SECRET;
 
-console.log(token)
+var storage = multer.diskStorage({
+   destination: "public/uploads/images",
+   filename: function(req, file, cb){
+      cb(null,"IMAGE-" + Date.now() + path.extname(file.originalname));
+   }
+});
+
+const upload = multer({
+   storage: storage,
+   limits:{fileSize: 1000000},
+}).single("image");
+
+
+router.route("/update-image/:id").post((req, res) => {
+  upload(req, res, (err) => {
+  const image = req.file.filename;
+  const id = req.params.id;
+  console.log(req.file, ' req.file')
+  console.log(image, ' image')
+  User.findByIdAndUpdate({_id: req.params.id},
+  {$set: { image: req.file.filename}})
+  .then(user => res.send(image))
+  .catch(err => res.status(400).json('Error: ' + err))
+})
+})
+
+
+
+// console.log(upload, ' upload')
+// router.route('/update-image/:id').post((req, res) {
+//   upload(req, res, err) {
+//     if (err) {
+//
+//     }
+//   }
+  //   upload(req, res, function (err) {
+  //     if (err) {
+  //       // This is a good practice when you want to handle your errors differently
+  //
+//
+//   console.log(req.file, 'req file') //undefined
+//   //const image = req.body
+//   const id = req.params.id;
+//   const image = req.file.filename;
+// console.log(image, ' image')
+//   User.findByIdAndUpdate(id, image)
+//   .then(() => res.json('Image updated'))
+//   .catch(err => res.status(400).json('Error: ' + err))
+// })
+
+
+
+//app.post('/editPhoto', (req, res, next) => {
+//   upload(req, res, function (err) {
+//     if (err) {
+//       // This is a good practice when you want to handle your errors differently
+//
+//       return
+//     }
+//
+//     // Everything went fine
+//   })
+// })
+
 
 //GET ALL USERS
 router.route('/').get((req, res) => {
@@ -72,5 +137,36 @@ router.route('/:id').delete((req, res) => {
 })
 
 
+
+
+router.route('/update-email/:id').post((req, res) => {
+  const id = req.params.id;
+  const email = req.body;
+  User.findByIdAndUpdate(id, email)
+  .then(() => res.json('User Updated.'))
+  .catch(err => res.status(400).json('Error: ' + err))
+})
+
+//
+// router.post('/update-image:/idd', upload.single('image'), async (req, res) => {
+//   const id = req.params.id;
+//   const image = req.body;
+//   User.findByIdAndUpdate(id, image)
+//   .then(() => res.json('User updated'))
+//   .catch(err => res.status(400).json('Error' + err))
+// })
+
+//var upload = multer({ storage: storage }).single('myImage');
+
+
+// router.route('/update-image/:id').post((upload.single('image'), req, res) => {
+//   console.log(request.file);
+//   //img: request.file.filename;
+//   const id = req.params.id;
+//   const image = req.body;
+//   User.findByIdAndUpdate(id, image)
+//   .then(user => res.json('User updated'))
+//   .catch(err => res.status(400).json('Error: ' + err))
+// })
 
 module.exports = router;
