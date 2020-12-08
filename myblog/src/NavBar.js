@@ -1,7 +1,13 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-const NavBar = () => (
+class NavBar extends Component {
+
+
+render() {
+
+
+return (
   <header>
   <nav className="navbar">
     <ul>
@@ -22,13 +28,12 @@ const NavBar = () => (
         <Link to="/MyAccount">Account</Link>
       </li>
 
-      <li className="nav-pages" id="auth">
-        <Link to="/Login">Login </Link>
-      </li>
-
     </ul>
   </nav>
   </header>
 );
+
+}
+}
 
 export default NavBar;

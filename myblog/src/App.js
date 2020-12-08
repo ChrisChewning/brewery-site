@@ -55,7 +55,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <NavBar />
+          <NavBar user={this.state.user} />
           <div id="page-body">
             <Switch>
               <Route path="/" component={Index} exact />
