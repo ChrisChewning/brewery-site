@@ -48,8 +48,10 @@ axios.post('http://localhost:8000/api/login', auth)
   console.log(localStorage)
   if (res.status === 200){
 //    this.setState({redirect: "/myaccount"})
-this.setState({username: res.data.user.username})
+this.setState({username: res.data.user.username, user: res.data})
     console.log(this.state.username)
+    console.log(this.state.user)
+
   }
 })
 .catch(err => {

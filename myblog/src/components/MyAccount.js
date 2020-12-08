@@ -6,49 +6,17 @@ class MyAccount extends Component {
   constructor(props) {
     super(props);
 
-//console.log(PROCESS.env.PUBLIC_URL, ' process env')
-    //this.onFormSubmit = this.onFormSubmit.bind(this);
-    //this.onChange = this.onChange.bind(this);
-
     this.state = {
-      username: '',
-      email: '',
-      register_date: '',
-      image: '',
+      image: this.props.user.image,
       imageError: '',
-      file: null
+      file: null,
     };
 
     this.handleSuccessAuth = this.handleSuccessAuth.bind(this);
     this.changeImage = this.changeImage.bind(this);
     this.onChange = this.onChange.bind(this);
-
-    this.user = window.localStorage.getItem('user'); //this.user allows it to be accessible instead of const user
-
   }
 
-//const user = window.localStorage.getItem('user');
-
-
-  componentDidMount(){
-    const config = {
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token')
-      }
-    }
-    //get user
-    axios.get(`http://localhost:8000/users/${this.user}`, config)
-        .then(
-          res => {
-            this.setState({ username: res.data.username, email: res.data.email, register_date: res.data.register_date, image: res.data.image})
-        console.log(this.state.image)
-        console.log(this.user, ' user')
-      },
-      err => {
-        console.log(err)
-      }
-    )
-  }
 
   changeImage = e => {
     e.preventDefault();
@@ -68,8 +36,9 @@ class MyAccount extends Component {
 console.log(this.state.image)
   })
   .catch(error => {
+    //need to set up error handling here so it's just a png or jpg or gif file.
     console.log(error.res) //undefined
-  //  this.setState({imageError: error.response.data.msg})
+    this.setState({imageError: error.response.data.msg})
     console.log(this.state.imageError) //undefined
   })
 
@@ -91,13 +60,13 @@ handleSuccessAuth(data){
 }
 
   render() {
-
+    console.log(this.props.user)
     return (
       <>
       <p>My Account Page</p>
-        <h2>hi {this.state.username}</h2>
-        <h3>email address: {this.state.email}</h3>
-        <h3>Member since: {this.state.register_date}</h3>
+        <h2>hi {this.props.user.username}</h2>
+        <h3>email address: {this.props.user.email}</h3>
+        <h3>Member since: {this.props.user.register_date}</h3>
 
         <form enctype="multipart/form-data" name="image" onSubmit={this.changeImage}>
           <div class="form-group">

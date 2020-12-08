@@ -13,6 +13,7 @@ import "./App.css";
 import CreateUser from "./components/CreateUser";
 import Login from "./components/Login";
 import MyAccount from "./components/MyAccount";
+import axios from "axios";
 
 
 
@@ -22,15 +23,32 @@ class App extends Component {
     super();
 
     this.state = {
-      loggedIn: "NOT_LOGGED_IN",
       user: {}
     }
+
+    this.user = window.localStorage.getItem('user'); //this.user allows it to be accessible instead of const user
+
+  }
+
+  componentDidMount(){
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    }
+    //get user
+    axios.get(`http://localhost:8000/users/${this.user}`, config)
+        .then(
+          res => {
+            this.setState({ user: res.data})
+      },
+      err => {
+        console.log(err)
+      }
+    )
   }
 
 
-setUser = user => {
-  this.setState({user: user})
-}
 
   render() {
 
@@ -48,7 +66,7 @@ setUser = user => {
               <Route path="/about" component={About} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={CreateUser} />
-              <Route path="/MyAccount" component={MyAccount} />
+              <Route path="/MyAccount" component={() => <MyAccount user={this.state.user} />} />
               <Route component={NotFound} />
             </Switch>
           </div>

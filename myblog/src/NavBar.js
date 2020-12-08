@@ -22,6 +22,10 @@ const NavBar = () => (
         <Link to="/MyAccount">Account</Link>
       </li>
 
+      <li className="nav-pages" id="auth">
+        <Link to="/Login">Login </Link>
+      </li>
+
     </ul>
   </nav>
   </header>
