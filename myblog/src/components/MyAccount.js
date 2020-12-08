@@ -6,7 +6,7 @@ class MyAccount extends Component {
   constructor(props) {
     super(props);
 
-
+//console.log(PROCESS.env.PUBLIC_URL, ' process env')
     //this.onFormSubmit = this.onFormSubmit.bind(this);
     //this.onChange = this.onChange.bind(this);
 
@@ -42,6 +42,7 @@ class MyAccount extends Component {
           res => {
             this.setState({ username: res.data.username, email: res.data.email, register_date: res.data.register_date, image: res.data.image})
         console.log(this.state.image)
+        console.log(this.user, ' user')
       },
       err => {
         console.log(err)
@@ -112,7 +113,7 @@ handleSuccessAuth(data){
     </div>
     </form>
     <p> image here: </p>
-            <img src={this.state.image} />
+            <img src = {this.state.image}  />
       </>
     )
 }

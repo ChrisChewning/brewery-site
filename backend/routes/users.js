@@ -29,49 +29,11 @@ router.route("/update-image/:id").post((req, res) => {
   console.log(req.file, ' req.file')
   console.log(image, ' image')
   User.findByIdAndUpdate({_id: req.params.id},
-  {$set: { image: req.file.filename}})
+  {$set: { image: req.file.path}})
   .then(user => res.send(image))
   .catch(err => res.status(400).json('Error: ' + err))
 })
 })
-
-
-
-// console.log(upload, ' upload')
-// router.route('/update-image/:id').post((req, res) {
-//   upload(req, res, err) {
-//     if (err) {
-//
-//     }
-//   }
-  //   upload(req, res, function (err) {
-  //     if (err) {
-  //       // This is a good practice when you want to handle your errors differently
-  //
-//
-//   console.log(req.file, 'req file') //undefined
-//   //const image = req.body
-//   const id = req.params.id;
-//   const image = req.file.filename;
-// console.log(image, ' image')
-//   User.findByIdAndUpdate(id, image)
-//   .then(() => res.json('Image updated'))
-//   .catch(err => res.status(400).json('Error: ' + err))
-// })
-
-
-
-//app.post('/editPhoto', (req, res, next) => {
-//   upload(req, res, function (err) {
-//     if (err) {
-//       // This is a good practice when you want to handle your errors differently
-//
-//       return
-//     }
-//
-//     // Everything went fine
-//   })
-// })
 
 
 //GET ALL USERS

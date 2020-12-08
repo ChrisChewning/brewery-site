@@ -15,6 +15,9 @@ app.use(cors());
 app.use(express.json());
 app.use(session({secret:"hello", resave: false, saveUninitialized: true}))
 //app.use(bodyParser.json());
+//app.use(path.join(_dirname, '/uploads')', express.static('./uploads/images/'));
+
+app.use('/public/uploads/images', express.static('public/uploads/images'))
 
 const uri = process.env.ATLAS_URI;
 const jwt = process.env.JWT_SECRET;
