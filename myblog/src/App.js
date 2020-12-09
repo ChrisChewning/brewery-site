@@ -5,7 +5,7 @@ import Community from "./pages/CommunityPage";
 import CommunityPost from "./pages/CommunityPost";
 import BreweryIndex from "./pages/BreweryIndex";
 import BreweryListPage from "./pages/BreweryListPage";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import NavBar from "./NavBar";
 import NotFound from "./pages/NotFound";
 import AddComments from "./components/AddComments";
@@ -14,6 +14,7 @@ import CreateUser from "./components/CreateUser";
 import Login from "./components/Login";
 import MyAccount from "./components/MyAccount";
 import axios from "axios";
+import { withRouter } from 'react-router'
 
 
 
@@ -23,14 +24,16 @@ class App extends Component {
     super();
 
     this.state = {
+      loggedIn: false,
       user: {}
     }
 
     this.user = window.localStorage.getItem('user'); //this.user allows it to be accessible instead of const user
-
+  //  this.handleLogout = this.handleLogout.bind(this);
   }
 
-  componentDidMount(){
+//get user, including token
+  componentDidMount = () => {
     const config = {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -40,7 +43,7 @@ class App extends Component {
     axios.get(`http://localhost:8000/users/${this.user}`, config)
         .then(
           res => {
-            this.setState({ user: res.data})
+            this.setUser(res.data)
       },
       err => {
         console.log(err)
@@ -48,14 +51,24 @@ class App extends Component {
     )
   }
 
+ setUser = user => {
+  this.setState({
+    user: user
+   })
+ }
 
 
   render() {
 
+    // if (this.state.user){
+    //   return <Redirect to="/" />
+    // }
+
+    console.log(this.state.user, ' app js user')
     return (
       <Router>
         <div className="App">
-          <NavBar user={this.state.user} />
+          <NavBar user= {this.state.user} setUser={this.setUser} />
           <div id="page-body">
             <Switch>
               <Route path="/" component={Index} exact />
@@ -64,9 +77,9 @@ class App extends Component {
               <Route path="/community" component={Community} exact />
               <Route path="/community/posts/:id" component={CommunityPost} />
               <Route path="/about" component={About} />
-              <Route path="/login" component={Login} />
+              <Route path="/login" component={() => <Login setUser={this.setUser} />} />
               <Route path="/register" component={CreateUser} />
-              <Route path="/MyAccount" component={() => <MyAccount user={this.state.user} />} />
+              <Route path="/MyAccount" component={() => <MyAccount user={this.state.user} setUser={this.setUser} />} />
               <Route component={NotFound} />
             </Switch>
           </div>

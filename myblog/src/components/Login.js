@@ -5,16 +5,19 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Icon from '@material-ui/core/Icon';
 import { Visibility , VisibilityOff, MailOutlineIcon, PersonIcon } from '@material-ui/icons';
 
+
 class Login extends Component {
   constructor(props){
     super(props);
 
     this.state = {
+      user: {},
       username: '',
       password: '',
       redirect: '',
       error: false,
       revealPw: false,
+      loggedIn: false
     }
 
   }
@@ -44,25 +47,18 @@ axios.post('http://localhost:8000/api/login', auth)
   console.log(res, ' RES token')
   localStorage.setItem('token', res.data.token)
   localStorage.setItem('user', res.data.user._id)
-  console.log(res.data.user, ' user')
-  console.log(localStorage)
-  if (res.status === 200){
-//    this.setState({redirect: "/myaccount"})
-this.setState({username: res.data.user.username, user: res.data})
-    console.log(this.state.username)
-    console.log(this.state.user)
-
-  }
+    this.setState({username: res.data.user.username, user: res.data, loggedIn: true})
+    this.props.setUser(res.data.user);
 })
 .catch(err => {
   console.log(err, ' ERR')
   if (err){
-    this.setState({redirect: "/login", username: '', password: '', error: 'Invalid Credentials', revealPw: false
-})
+    this.setState({redirect: "/login", username: '', password: '', error: 'Invalid Credentials', revealPw: false})
       }
 })
-}
 
+
+}
 
 renderRedirect = () => {
     if (this.state.redirect) {
@@ -72,13 +68,16 @@ renderRedirect = () => {
   }
 
 render(){
-
+  if(this.state.loggedIn){
+    return <Redirect to ={'/myaccount'} />
+  }
   return(
     <>
     {this.renderRedirect()}
     <p className= 'alert'>{this.state.error}</p>
 
       <h3>Login</h3>
+
       <form onSubmit={this.onSubmit}>
         <div className="form-group">
           <label>Username: </label>
@@ -122,6 +121,7 @@ render(){
         </div>
       </form>
       </>
+
   )
 }
 
