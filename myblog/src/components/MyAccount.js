@@ -4,14 +4,15 @@ import CreateUser from "../components/CreateUser";
 import Login from "../components/Login";
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
+import NavBar from "../../src/NavBar";
+import AddBeer from "../components/AddBeer";
+import MyBeerList from "../components/MyBeer";
+
+
 
 class MyAccount extends Component {
   constructor(props) {
     super(props);
-
-//console.log(PROCESS.env.PUBLIC_URL, ' process env')
-    //this.onFormSubmit = this.onFormSubmit.bind(this);
-    //this.onChange = this.onChange.bind(this);
 
     this.state = {
       image: this.props.user.image,
@@ -70,8 +71,9 @@ handleLogout() {
     this.setState({loggedOut: true});
     window.localStorage.clear();
     //this.props.setUser(null);
-}
 
+
+}
 
 
   render() {
@@ -86,6 +88,7 @@ handleLogout() {
     console.log(this.props.user, 'user')
     console.log(localStorage, 'local storage')
     console.log(this.state.loggedIn)
+
     return (
       <>
       <h2>hi {this.props.user.username}</h2>
@@ -108,12 +111,19 @@ handleLogout() {
     </form>
 
     <p> image here: </p>
-    <img src = {this.state.image}  />
+    <img className="profile-img" src = {this.state.image}  />
 
+    <>
+    <div className="beerList">
+      <MyBeerList />
+      <AddBeer />
+    </div>
+    </>
 
     </>
 
   )
+
 }
 }
 export default MyAccount;

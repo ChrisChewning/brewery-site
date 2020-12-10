@@ -5,30 +5,31 @@ class NavBar extends Component {
   constructor(props) {
      super(props);
      this.state = {
-       user: this.props.user,
-       loggedIn: false
+       //user: this.props.user,
+       loggedOut: true
      }
    }
 
-
-handleLogout() {
-  localStorage.clear();
-  this.setState({user: null})
+componentDidMount(){
+  if (this.props.user.username){
+    this.setState({loggedOut: false})
+  }
 }
 
 render() {
-  console.log(this.props.user, 'user in navbar') //props are being sent to navbar.
+
+  console.log(this.props.user, 'this.props.user')
   let buttons;
-  if (this.props.user){
+  if (this.props.user.username){
     buttons = (
   <li className="nav-pages" id="account">
-    <Link to="/MyAccount">Account</Link>
+    <Link to="/myaccount">Account</Link>
   </li>
 )
 } else {
   buttons = (
   <li className="nav-pages" id="account">
-    <Link to="/Login">Login</Link>
+    <Link to="/login">Login</Link>
   </li>
 )
 }
@@ -51,7 +52,6 @@ return (
         <Link to="/About">About</Link>
       </li>
       {buttons}
-
     </ul>
   </nav>
   </header>

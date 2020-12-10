@@ -39,11 +39,13 @@ const postsRouter = require('../routes/posts');
 const commentsRouter = require('../routes/comments');
 const breweriesRouter = require('../routes/breweries');
 const authRouter = require('../routes/auth');
+const mybeersRouter = require('../routes/mybeers');
 
 app.use('/users', usersRouter); // means /users is the base route
 app.use('/api/community', commentsRouter);
 app.use('/api/brewery', breweriesRouter);
 app.use('/api/community/posts', postsRouter);
 app.use('/api/login', authRouter);
+app.use('/api/mybeers', mybeersRouter);
 
 app.listen(port, () => console.log('Listening on port 8000'));  //argument to specify which port to listen on. then a callback
