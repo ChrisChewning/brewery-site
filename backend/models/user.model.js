@@ -35,7 +35,7 @@ const userSchema = new Schema({
   image: {
     data: Buffer,
     type: String,
-    required: true
+    //required: true
   },
   register_date: {
     type: Date,
@@ -43,9 +43,14 @@ const userSchema = new Schema({
   },
  modified_date: {
    type: String
+ },
+ beers: {
+   type: Array
+ },
+ future_beers: {
+   type: Array
  }
 });
-
 
 
 //Custom error msg for 11000

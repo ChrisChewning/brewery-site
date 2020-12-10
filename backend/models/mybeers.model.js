@@ -3,20 +3,20 @@ const Schema = mongoose.Schema;
 
 const commentSchema = new Schema({
   brewery: {
-    type: String,
-    required: true,
+    type: String
+    //required: true,
   },
   beer: {
-    type: String,
-    required: true,
+    type: String
+    //required: true,
   },
   rating: {
-    type: Number,
-    required: true,
+    type: Number
+    //required: true,
   },
   notes: {
-    type: String,
-    required: true,
+    type: String
+    //required: true,
   }
 });
 
