@@ -8,28 +8,26 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-class MyBeer extends Component {
+class MyFutureBeer extends Component {
 
 constructor(){
   super()
     this.state = {
-      mybeers: []
+      future_beers: []
     }
     this.user = window.localStorage.getItem('user'); //this.user allows it to be accessible instead of const user
 
   }
 
 
-//http://localhost:8000/api/mybeers/5fd1b2af334a5f1231c7967e/my-future-beers
 componentDidMount(){
-
-  fetch(`http://localhost:8000/api/mybeers/${this.user}/mybeers`)
+  fetch(`http://localhost:8000/api/mybeers/${this.user}/my-future-beers`)
   .then((response) => response.json())
   .then((result) => {
-    const savedBeers = result.map((beer) => {
+    const futurebeers = result.map((beer) => {
       return beer
     })
-    this.setState({mybeers: savedBeers })
+    this.setState({future_beers: futurebeers })
   })
 }
 
@@ -42,29 +40,25 @@ onSubmit(){
 
 render(){
 
-  const listBeers = this.state.mybeers.map(beer => (
+  const listBeers = this.state.future_beers.map(future_beer => (
     <>
-    <TableRow key={beer.beer}>
-     <TableCell>{beer.brewery}</TableCell>
-     <TableCell align="right">{beer.beer}</TableCell>
-     <TableCell align="right">{beer.rating}</TableCell>
-     <TableCell align="right">{beer.notes}</TableCell>
+    <TableRow key={future_beer.beer}>
+     <TableCell>{future_beer.brewery}</TableCell>
+     <TableCell align="right">{future_beer.beer}</TableCell>
+     <TableCell align="right">{future_beer.notes}</TableCell>
    </TableRow>
     </>
 ))
-  console.log(this.user, ' < user')
-console.log(this.state.mybeers)
-  return(
 
+  return(
     <div>
-        <p>My Beers</p>
+        <p>My Future Beers</p>
       <TableContainer component={Paper}>
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell>Brewery</TableCell>
                 <TableCell align="right">Beer</TableCell>
-                <TableCell align="right">Rating</TableCell>
                 <TableCell align="right">Notes</TableCell>
               </TableRow>
             </TableHead>
@@ -78,4 +72,4 @@ console.log(this.state.mybeers)
 }
 
 }
-export default MyBeer;
+export default MyFutureBeer;

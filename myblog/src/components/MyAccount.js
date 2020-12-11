@@ -5,8 +5,8 @@ import Login from "../components/Login";
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import NavBar from "../../src/NavBar";
-import AddBeer from "../components/AddBeer";
-import MyBeerList from "../components/MyBeer";
+import MyBeer from "../components/MyBeer";
+import MyFutureBeer from "../components/MyFutureBeer";
 
 
 
@@ -115,8 +115,8 @@ handleLogout() {
 
     <>
     <div className="beerList">
-      <MyBeerList />
-      <AddBeer />
+      <MyBeer />
+      <MyFutureBeer />
     </div>
     </>
 
