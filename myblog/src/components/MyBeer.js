@@ -7,6 +7,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { without } from 'lodash';
+
 
 class MyBeer extends Component {
 
@@ -16,7 +18,7 @@ constructor(){
       mybeers: []
     }
     this.user = window.localStorage.getItem('user'); //this.user allows it to be accessible instead of const user
-
+    this.deleteMyBeers = this.deleteMyBeers.bind(this);
   }
 
 
@@ -39,21 +41,29 @@ onSubmit(){
 
 }
 
+deleteMyBeers(beer){
+  let tempBeer = this.state.mybeers;
+  tempBeer = without(tempBeer, beer)
+
+  this.setState({ myBeers: tempBeer })
+}
 
 render(){
-
+  console.log(this.state.mybeers, ' state my beers')
   const listBeers = this.state.mybeers.map(beer => (
     <>
-    <TableRow key={beer.beer}>
+    <TableRow key={beer._id}>
      <TableCell>{beer.brewery}</TableCell>
      <TableCell align="right">{beer.beer}</TableCell>
      <TableCell align="right">{beer.rating}</TableCell>
      <TableCell align="right">{beer.notes}</TableCell>
+     <button className="my-beers-delete" onClick={() => this.deleteMyBeers(beer)}>X</button>
    </TableRow>
     </>
 ))
   console.log(this.user, ' < user')
 console.log(this.state.mybeers)
+console.log(this.beer_id, ' beer id')
   return(
 
     <div>

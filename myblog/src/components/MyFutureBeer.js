@@ -42,13 +42,16 @@ render(){
 
   const listBeers = this.state.future_beers.map(future_beer => (
     <>
-    <TableRow key={future_beer.beer}>
+    <TableRow key={future_beer._id}>
+      <TableCell>{future_beer._id}</TableCell>
      <TableCell>{future_beer.brewery}</TableCell>
      <TableCell align="right">{future_beer.beer}</TableCell>
      <TableCell align="right">{future_beer.notes}</TableCell>
    </TableRow>
     </>
 ))
+console.log(this.future_beer, ' future beer')
+console.log(this.state.future_beers, ' this state future beers')
 
   return(
     <div>
