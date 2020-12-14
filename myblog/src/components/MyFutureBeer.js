@@ -7,6 +7,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import axios from "axios";
+
+
 
 class MyFutureBeer extends Component {
 
@@ -33,8 +36,17 @@ componentDidMount(){
 
 
 
-onSubmit(){
 
+deleteMyBeers(future_beer){
+  axios.delete(`http://localhost:8000/api/mybeers/${this.user}/my-future-beers/delete/${future_beer}`)
+.then(response => {
+  console.log(response.data, "RESPONSE.data")
+  this.setState({future_beers: response.data})
+
+})
+.catch(error => {
+  console.log(error.response)
+})
 }
 
 
@@ -43,10 +55,10 @@ render(){
   const listBeers = this.state.future_beers.map(future_beer => (
     <>
     <TableRow key={future_beer._id}>
-      <TableCell>{future_beer._id}</TableCell>
      <TableCell>{future_beer.brewery}</TableCell>
      <TableCell align="right">{future_beer.beer}</TableCell>
      <TableCell align="right">{future_beer.notes}</TableCell>
+     <button className="my-beers-delete" onClick={() => this.deleteMyBeers(future_beer._id)}>X</button>
    </TableRow>
     </>
 ))

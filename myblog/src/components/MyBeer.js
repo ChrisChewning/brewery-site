@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { without } from 'lodash';
+import axios from "axios";
 
 
 class MyBeer extends Component {
@@ -42,10 +42,14 @@ onSubmit(){
 }
 
 deleteMyBeers(beer){
-  let tempBeer = this.state.mybeers;
-  tempBeer = without(tempBeer, beer)
-
-  this.setState({ myBeers: tempBeer })
+  console.log(beer, ' delete beer ')
+  axios.delete(`http://localhost:8000/api/mybeers/${this.user}/my-beers/delete/${beer}`)
+.then(response => {
+  this.setState({ mybeers: response.data })
+})
+.catch(error => {
+  console.log(error.response)
+})
 }
 
 render(){
@@ -57,13 +61,13 @@ render(){
      <TableCell align="right">{beer.beer}</TableCell>
      <TableCell align="right">{beer.rating}</TableCell>
      <TableCell align="right">{beer.notes}</TableCell>
-     <button className="my-beers-delete" onClick={() => this.deleteMyBeers(beer)}>X</button>
+     <button className="my-beers-delete" onClick={() => this.deleteMyBeers(beer._id)}>X</button>
    </TableRow>
     </>
 ))
   console.log(this.user, ' < user')
 console.log(this.state.mybeers)
-console.log(this.beer_id, ' beer id')
+console.log(this.beer, ' this beer')
   return(
 
     <div>
