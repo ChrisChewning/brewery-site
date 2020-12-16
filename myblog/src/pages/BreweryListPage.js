@@ -1,11 +1,12 @@
 import React from "react";
 import BreweryList from "../components/BreweryList";
-import breweriesContent from "./brewery-content";
+import BreweryIndex from "../components/BreweryIndex";
 
 const BreweryListPage = () => (
   <>
     <h1>Breweries List!</h1>
-    <BreweryList breweries={breweriesContent} />
+    <BreweryIndex breweriesList={breweries} /> //send BreweryList component the breweries prop.
+      //the prop takes in breweriesContent
   </>
 );
 

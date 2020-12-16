@@ -3,8 +3,9 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Community from "./pages/CommunityPage";
 import CommunityPost from "./pages/CommunityPost";
-import BreweryIndex from "./pages/BreweryIndex";
-import BreweryListPage from "./pages/BreweryListPage";
+import BreweryIndex from "./components/BreweryIndex";
+//import BreweryListPage from "./pages/BreweryListPage";
+import BreweryList from "./components/BreweryList";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import NavBar from "./NavBar";
 import NotFound from "./pages/NotFound";
@@ -72,7 +73,7 @@ class App extends Component {
           <div id="page-body">
             <Switch>
               <Route path="/" component={Index} exact />
-              <Route path="/breweries" component={BreweryListPage} />
+              <Route path="/breweries" component={BreweryList} />
               <Route path="/brewery/:name" component={BreweryIndex} />
               <Route path="/community" component={Community} exact />
               <Route path="/community/posts/:id" component={CommunityPost} />

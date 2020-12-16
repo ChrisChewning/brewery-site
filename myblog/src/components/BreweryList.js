@@ -1,24 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
-const BreweryList = ({ breweries }) => (
-  <>
-    {breweries.map((brewery, key) => (
-      <>
-        <Link
-          className="brewery-list-item"
-          key={key}
-          to={`/brewery/${brewery.name}`}
-        >
-          <h3>{brewery.name}</h3>
-        </Link>
-        <p>{brewery.content[0].substring(0, 10)}...</p>
-      </>
-    ))}
-  </>
-);
+function BreweryList() {
+       const [breweries, setBreweries] = useState([])
+
+       useEffect(() => {
+         const fetchBreweries = async () => {
+           await axios.get("http://localhost:8000/api/brewery/breweries")
+      .then(res => {
+        setBreweries(res.data)
+   });
+}
+fetchBreweries();
+}, []) //without [] here it calls it indefinitely.
+console.log(breweries)
+
+       return (
+           <>
+
+           {breweries.map((brewery, i) => (
+             <Link
+         className="brewery-list-item"
+         key={i}
+         to={`/brewery/${brewery.name}`}
+       >
+             <p>{brewery.name}</p>
+            </Link>
+         )
+        )}
+           </>
+       )
+   }
 
 export default BreweryList;
-
-//
