@@ -5,7 +5,7 @@ import BreweryIndex from "../components/BreweryIndex";
 const BreweryListPage = () => (
   <>
     <h1>Breweries List!</h1>
-    <BreweryIndex breweriesList={breweries} /> //send BreweryList component the breweries prop.
+    <BreweryIndex breweries={breweries} /> //send BreweryList component the breweries prop.
       //the prop takes in breweriesContent
   </>
 );

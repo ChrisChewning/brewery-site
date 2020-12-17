@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import BreweryIndex from '../components/BreweryIndex';
 
 function BreweryList() {
        const [breweries, setBreweries] = useState([])
@@ -19,7 +19,6 @@ console.log(breweries)
 
        return (
            <>
-
            {breweries.map((brewery, i) => (
              <Link
          className="brewery-list-item"
