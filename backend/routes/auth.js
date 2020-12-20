@@ -3,7 +3,7 @@ require('dotenv').config(); //env variables can be in the dotenv file.
 let User = require('../models/user.model');
 const Bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const token = process.env.JWT_SECRET;
+//const token = process.env.JWT_SECRET;
 
 
 //LOGIN USER
@@ -12,8 +12,8 @@ router.route('/').post((req, res, user) => {
   const payload = { id: user._id };
   const options = {expiresIn: 3600};
   const secret = process.env.JWT_SECRET;
-  const token = jwt.sign(payload, secret, options);
-  console.log(token, ' login token')
+  //const token = jwt.sign(payload, secret, options);
+  //console.log(token, ' login token')
 
   User.findOne({ username })
   //VALIDATION CHECKS
@@ -27,7 +27,7 @@ router.route('/').post((req, res, user) => {
      if(!isMatch) return res.status(400).json({msg: 'Invalid credentials'});
      console.log(password, ' pw')
      console.log(user.password, ' user pw')
-  res.json({success: true, message: "here's your token", token: token, user: user})
+  res.json({success: true,  user: user})
 
   console.log(password, ' pw')
   console.log(user.password, ' user pw')

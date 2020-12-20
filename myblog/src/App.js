@@ -14,6 +14,7 @@ import "./App.css";
 import CreateUser from "./components/CreateUser";
 import Login from "./components/Login";
 import MyAccount from "./components/MyAccount";
+import AddBeerModal from "./components/AddBeer";
 import axios from "axios";
 import { withRouter } from 'react-router'
 
@@ -70,6 +71,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <NavBar user= {this.state.user} setUser={this.setUser} />
+          <AddBeerModal user={this.state.user} setUser={this.setUser} />
           <div id="page-body">
             <Switch>
               <Route path="/" component={Index} exact />

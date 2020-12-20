@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import NavBar from "../../src/NavBar";
 import MyBeer from "../components/MyBeer";
 import MyFutureBeer from "../components/MyFutureBeer";
+import Modal from '@material-ui/core/Modal';
+import AddBeerModal from "../components/AddBeer";
 
 
 
@@ -40,6 +42,13 @@ componentDidMount(){
 console.log(this.state.user, 'user')
 }
 
+// handleOpen = () => {
+//       setOpen(true);
+//   };
+//
+// handleClose = () => {
+//       setOpen(false);
+//   };
 
 
   onSubmit = e => {
@@ -112,6 +121,8 @@ handleLogout() {
 
     <p> image here: </p>
     <img className="profile-img" src = {this.state.image}  />
+
+    <AddBeerModal user={this.props.user} />
 
     <>
     <div className="beerList">

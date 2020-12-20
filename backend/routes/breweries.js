@@ -1,6 +1,7 @@
 const router = require('express').Router();
 let Breweries = require('../models/brewery.model');
 
+//GET ALL BREWERIES (Breweries list Page)
 router.route('/breweries').get((req, res) => {
   Breweries.find()
   .then(breweries => res.json(breweries))
