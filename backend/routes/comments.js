@@ -36,18 +36,20 @@ router.route('/brewery-meetup/test').get((req, res) => {
 
 
 //UPDATE A POST WITH A COMMENT
-router.route('/:id/add-comment').post(auth, async (req, res) => {
+router.route('/:id/add-comment').post(async (req, res) => {
+const todayDate = new Date();
 const {username, votes, comment } = req.body;
 try {
 const postId = req.params.id; //set the req id to a variable
   const saveCommentToPost = await Post.findById({_id: postId})//.populate(User)//  //.populate(User) later
     const post = await Post.updateOne({ _id : postId }, { //update the id that matches req.params.id (ex: brewery-meetup id)
     '$set': {
-      comments: saveCommentToPost.comments.concat({ username, votes, comment })
+      comments: saveCommentToPost.comments.concat({ username, votes, comment, todayDate })
     },
   })
   res.send(post)
 }catch(err){
+  console.log(err)
   res.status(400).send(err);
 }
 })

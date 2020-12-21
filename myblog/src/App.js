@@ -71,7 +71,6 @@ class App extends Component {
       <Router>
         <div className="App">
           <NavBar user= {this.state.user} setUser={this.setUser} />
-          <AddBeerModal user={this.state.user} setUser={this.setUser} />
           <div id="page-body">
             <Switch>
               <Route path="/" component={Index} exact />
