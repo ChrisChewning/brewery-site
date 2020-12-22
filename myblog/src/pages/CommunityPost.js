@@ -4,10 +4,13 @@ import UpvotesSection from "../components/UpvotesSection";
 import CommentsList from "../components/CommentsList";
 import AddComments from "../components/AddComments";
 import AddComment from "../components/AddComments";
-
 import axios from "axios";
+import { withRouter } from 'react-router-dom';
+
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
+import Card from "@material-ui/core/Card";
+import Moment from "react-moment";
 
 class CommunityPost extends Component {
   constructor(props) {
@@ -67,12 +70,13 @@ class CommunityPost extends Component {
     this.setState({ votes: newTotal });
   };
 
-
-
   render() {
+    console.log(this.props, ' THIS PROPS ')
+    console.log(this.state.user, ' this is props user')
+
     const id = this.props.match.params.id;
     const comments = this.state.comments;
-    console.log(id, 'line 71')
+    console.log(id, "line 71"); //IF ID IS NOT NULL SHOW ADDCOMMENT. IF IT IS NULL SHOW A MESSAGE
     return (
       <>
         <div className="post-parent">
@@ -81,19 +85,29 @@ class CommunityPost extends Component {
             <ThumbUpIcon onClick={this.upvotePost} />
             <p> {this.state.votes} </p>
             <ThumbDownIcon onClick={this.downvotePost} />
-              </div>
-            <p className="post-content">{this.state.content}</p>
-
+          </div>
+          <p className="post-content">{this.state.content}</p>
         </div>
-        <AddComment id = {this.state.id} comments= {this.state.comments}/>
+
+
+        <AddComment id={this.state.id} comments={this.state.comments} />
         <p>Comments</p>
-        {this.state.comments.map((comment, i) => (
-          <p key={i}>{comment.username} | <i>need time here</i> <br></br><br></br> {comment.comment}</p>
-      )
-     )}
+
+    {this.state.comments.map((comment, i) => (
+          <p key={i}>
+            <Card>
+              {comment.username} |{" "}
+              <Moment format="MMMM Do YYYY, h:mm:ss a">
+                <i>{comment.todayDate.toString()}</i>
+              </Moment>
+              <br></br>
+              <br></br> {comment.comment}
+            </Card>
+          </p>
+        ))}
       </>
     );
   }
 }
 
-export default CommunityPost;
+export default withRouter(CommunityPost);

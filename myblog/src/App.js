@@ -62,10 +62,6 @@ class App extends Component {
 
   render() {
 
-    // if (this.state.user){
-    //   return <Redirect to="/" />
-    // }
-
     console.log(this.state.user, ' app js user')
     return (
       <Router>
@@ -77,7 +73,14 @@ class App extends Component {
               <Route path="/breweries" component={BreweryList} />
               <Route path="/brewery/:name" component={BreweryIndex} />
               <Route path="/community" component={Community} exact />
-              <Route path="/community/posts/:id" component={CommunityPost} />
+
+              <Route path="/community/posts/:id" render={(matchProps) =>
+
+                  <CommunityPost {...matchProps}
+                    {...this.props}
+                    user={this.state.user}
+                  />
+                }/>
               <Route path="/about" component={About} />
               <Route path="/login" component={() => <Login setUser={this.setUser} />} />
               <Route path="/register" component={CreateUser} />

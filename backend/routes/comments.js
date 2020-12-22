@@ -3,6 +3,7 @@ let Comment = require('../models/comment.model');
 let Post = require('../models/post.model');
 const auth = require('../middleware/auth');
 
+
 //GET COMMENTS
 router.route('/brewery-meetup').get(async (req, res) => {
   try {

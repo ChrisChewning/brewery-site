@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import posts from './community-content';
 import axios from 'axios';
 
 
