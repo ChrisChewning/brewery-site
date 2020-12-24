@@ -2,6 +2,7 @@ import React from 'react';
 import EventsCalendar from '../components/Calendar-Events';
 import NewsEvents from "../components/NewsEvents"; //component
 import newsEventsContent from "./news-events-content"; //data
+import TwitterIframe from "../components/TwitterIframe";
 
 const Index = () => (
       <>
@@ -12,6 +13,7 @@ const Index = () => (
       <EventsCalendar />
       <div className="sidenav">
       <NewsEvents dates= { newsEventsContent } />
+      <TwitterIframe />
       </div>
       </>
 )

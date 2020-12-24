@@ -89,8 +89,8 @@ class CommunityPost extends Component {
           <p className="post-content">{this.state.content}</p>
         </div>
 
-
-        <AddComment id={this.state.id} comments={this.state.comments} />
+        { this.props.user.username ? <AddComment id={this.state.id} comments={this.state.comments} username={this.props.user.username} />
+      : <p>You  must be logged in to post a comment </p> }
         <p>Comments</p>
 
     {this.state.comments.map((comment, i) => (

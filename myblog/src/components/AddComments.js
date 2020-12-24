@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import { FormControl } from '@material-ui/core';
 import CommunityPost from '../pages/CommunityPost';
 
-const AddComments = ({ id, comments }) => { //id is coming from communitypost. setpostinfo from ?
-  const [username, setUsername] = useState(""); //set user's username here.
+const AddComments = ({ id, comments, username }) => { //id is coming from communitypost. setpostinfo from ?
+  //const username = "Chris"; //set user's username here.
   const [commentText, setCommentText] = useState("");
   //const [postInfo, setPostInfo] = useState({ comments: [] });
 
@@ -19,30 +19,17 @@ console.log(comments, 'this is comments')
     });
     //update UI
     const body = await result.json(); //get body of response to update UI
-  //  setPostInfo({comments})
-
-  //set username and comment state back to empty strings.
-  setUsername('');
-//  setCommentText('');
-  //  console.log(commentText, ' this is comments')
-  //  console.log(setPostInfo, ' this is setPostInfo')
     console.log(body, ' this is body')
-
-    //something needs to go here to call the data to the UI to populate.
-
+    const emptyComment = "";
+  //promise that keeps repeating:  setCommentText(AddComment);
+  //never ends AddComment()
   };
 
-  console.log(username)
+  console.log(username, " ADD COMMENT username")
   console.log(commentText)
   return (
-
-
     <div id="add-comment">
       <h3>Add a Comment</h3>
-        <label>
-                    Name:
-                    <input type="text" value={username} onChange={(event) => setUsername(event.target.value)} />
-                </label>
                 <label>
                     Comment:
                     <textarea rows="4" cols="50" value={commentText} onChange={(event) => setCommentText(event.target.value)} />
