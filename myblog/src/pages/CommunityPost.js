@@ -1,12 +1,7 @@
-import React, { useState, useEffect, Component } from "react";
-import { Redirect } from "react-router-dom";
-import UpvotesSection from "../components/UpvotesSection";
-import CommentsList from "../components/CommentsList";
-import AddComments from "../components/AddComments";
+import React, { Component } from "react";
 import AddComment from "../components/AddComments";
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
-
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import Card from "@material-ui/core/Card";
@@ -16,33 +11,40 @@ class CommunityPost extends Component {
   constructor(props) {
     super(props);
 
+
     this.state = {
       name: "",
       post: [],
       content: "",
       votes: "",
       comments: [],
+      commentsLength: 0,
       id: this.props.match.params.id,
     };
+
+    this.handler = this.handler.bind(this)
   }
 
+  handler() {
+   this.setState({
+     commentsLength: this.state.commentsLength + 1
+   })
+   const id = this.props.match.params.id;
+   axios.get(`http://localhost:8000/api/community/posts/`).then((res) => {
+     const posts = res.data.map((post, key) => {
+       if (post._id == id) {
+         this.setState({ name: post.name });
+         this.setState({ content: post.content });
+         this.setState({ votes: post.votes });
+         this.setState({ comments: post.comments });
+         this.setState({ commentsLength: post.comments.length})
+       }
+     });
+   });
+ }
+
   componentDidMount() {
-    const id = this.props.match.params.id;
-
-    console.log(`http://localhost:8000/api/community/posts/${id}`);
-    console.log(id);
-    axios.get(`http://localhost:8000/api/community/posts/`).then((res) => {
-      const post = res.data;
-
-      const posts = res.data.map((post, key) => {
-        if (post._id == id) {
-          this.setState({ name: post.name });
-          this.setState({ content: post.content });
-          this.setState({ votes: post.votes });
-          this.setState({ comments: post.comments });
-        }
-      });
-    });
+    this.handler();
   }
 
   upvotePost = async () => {
@@ -71,6 +73,8 @@ class CommunityPost extends Component {
   };
 
   render() {
+    console.log(this.state.newComment, ' new comment state parent')
+    console.log(this.state.commentsLength, ' commentsLength test')
     console.log(this.props, ' THIS PROPS ')
     console.log(this.state.user, ' this is props user')
 
@@ -89,10 +93,12 @@ class CommunityPost extends Component {
           <p className="post-content">{this.state.content}</p>
         </div>
 
-        { this.props.user.username ? <AddComment id={this.state.id} comments={this.state.comments} username={this.props.user.username} />
+        { this.props.user.username ? <AddComment key={this.state.commentsLength}  id={this.state.id} comments={this.state.comments} username={this.props.user.username} newComment={this.handler}/>
       : <p>You  must be logged in to post a comment </p> }
-        <p>Comments</p>
 
+      //NEED A PARENT DIV HERE.
+      <div clasName="comments-parent">
+        <p>Comments ({this.state.commentsLength})</p>
     {this.state.comments.map((comment, i) => (
           <p key={i}>
             <Card>
@@ -105,6 +111,7 @@ class CommunityPost extends Component {
             </Card>
           </p>
         ))}
+          </div>
       </>
     );
   }
