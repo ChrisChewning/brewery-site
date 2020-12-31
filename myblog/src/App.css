@@ -32,19 +32,60 @@ p {
 
 
 
-/*horizontal nav bar*/
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.flex-child:first-child {
+    margin-right: 20px;
 }
+
+.card {
+  margin: 20px;
+  align-items: "center";
+}
+
+.post-list{
+  display: flex;
+  flex-direction: row;
+}
+.username{
+  flex: 1;
+  border: 2px solid yellow;
+}
+.post-content{
+  flex: 1;
+  border: 2px solid yellow;
+}
+
+.vertical-divider {
+  border-left: '1px solid lightgrey';
+    height:'3em';
+    color: black;
+    margin-left: '2em';
+}
+
+.brewery-list-item{
+
+}
+
+.post-item-parent{
+flex-direction: column;
+}
+
+.post-username-date {
+border-color: black;
+}
+.post-comments-recent{
+  flex-direction: column;
+  border-color: black;
+}
+
+/*horizontal nav bar*/
+
 
 li {
   display: inline;
   float: left;
 }
 
-ul {
+.navbar-ul {
   list-style-type: none;
   margin: 0;
   padding: 0;

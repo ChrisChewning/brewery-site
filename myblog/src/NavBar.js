@@ -37,7 +37,7 @@ class NavBar extends Component {
       <>
         <header>
           <nav className="navbar">
-            <ul>
+            <ul className="navbar-ul">
               <li className="nav-pages">
                 <Link to="/">Home</Link>
               </li>

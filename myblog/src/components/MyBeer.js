@@ -18,7 +18,6 @@ class MyBeer extends Component {
     this.deleteMyBeers = this.deleteMyBeers.bind(this);
   }
 
-  //http://localhost:8000/api/mybeers/5fd1b2af334a5f1231c7967e/my-future-beers
   componentDidMount() {
     fetch(`http://localhost:8000/api/mybeers/${this.user}/mybeers`)
       .then((response) => response.json())
