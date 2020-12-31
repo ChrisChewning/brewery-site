@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { isEmail } from "validator";
+import React, { Component } from "react";
 import axios from "axios";
 
 class CreateUser extends Component {
@@ -7,12 +6,12 @@ class CreateUser extends Component {
     super(props);
 
     this.state = {
-      username: '',
-      email: '',
-      password: '',
-      passwordConfirm: '',
-      errorMessage: '',
-      customError: '',
+      username: "",
+      email: "",
+      password: "",
+      passwordConfirm: "",
+      errorMessage: "",
+      customError: "",
     };
   }
 
@@ -43,48 +42,54 @@ class CreateUser extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-
     const register = {
       username: this.state.username,
       email: this.state.email,
       password: this.state.password,
-      passwordConfirm: this.state.password
+      passwordConfirm: this.state.password,
     };
 
-    console.log(register, ' this is register');
+    console.log(register, " this is register");
 
+    //before creating user
 
+    axios
+      .post("http://localhost:8000/users/adduser", register)
+      .then((response) => {
+        console.log(response);
+        if (response.data.status == "created") {
+          this.props.handleSuccessAuth(response.data);
+        }
+      })
+      .catch((error) => {
+        this.setState({ errorMessage: error.response.data.msg });
+        this.setState({ customError: error.response.data.toString() });
+      });
 
-//before creating user
-
-  axios.post('http://localhost:8000/users/adduser', register)
-.then(response => {
-  console.log(response)
-  if (response.data.status === 'created'){
-  this.props.handleSuccessAuth(response.data);
-  console.log(this.props.handleSuccessAuth)
-}
-})
-.catch(error => {
-  console.log(error.response)
-  this.setState({errorMessage: error.response.data.msg})
-  this.setState({customError: error.response.data.toString()})
-  console.log(this.state.errorMessage)
-})
-
-
-    this.setState({ username:'', email: '', password: '', passwordConfirm: '', errorMessage: '', customError: ''  });
+    this.setState({
+      username: "",
+      email: "",
+      password: "",
+      passwordConfirm: "",
+      errorMessage: "",
+      customError: "",
+    });
   };
 
-
   render() {
-    console.log(this.state.password, 'password')
-//    console.log(this.state.customError, ' custom error')
 
     return (
       <>
-      <p>{this.state.errorMessage}</p>
-      <p className={`${this.state.customError == '[object Object]' ? "hideCustomError": "showCustomError" }`}>{this.state.customError}</p>
+        <p>{this.state.errorMessage}</p>
+        <p
+          className={`${
+            this.state.customError == "[object Object]"
+              ? "hideCustomError"
+              : "showCustomError"
+          }`}
+        >
+          {this.state.customError}
+        </p>
         <h3>Create New User</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
@@ -95,7 +100,6 @@ class CreateUser extends Component {
               className="form-control"
               value={this.state.username}
               onChange={this.onChangeUsername}
-
             />
           </div>
           <label>Email: </label>
@@ -133,7 +137,10 @@ class CreateUser extends Component {
             />
           </div>
         </form>
-        <p>Passwords need to be at least 8 characters, have one capitalized letter, and one special character</p>
+        <p>
+          Passwords need to be at least 8 characters, have one capitalized
+          letter, and one special character
+        </p>
       </>
     );
   }

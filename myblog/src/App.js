@@ -6,7 +6,12 @@ import CommunityPost from "./pages/CommunityPost";
 import BreweryIndex from "./components/BreweryIndex";
 //import BreweryListPage from "./pages/BreweryListPage";
 import BreweryList from "./components/BreweryList";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import NavBar from "./NavBar";
 import NotFound from "./pages/NotFound";
 import AddComments from "./components/AddComments";
@@ -16,57 +21,51 @@ import Login from "./components/Login";
 import MyAccount from "./components/MyAccount";
 import AddBeerModal from "./components/AddBeer";
 import axios from "axios";
-import { withRouter } from 'react-router'
-
-
-
+import { withRouter } from "react-router";
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
 
     this.state = {
       loggedIn: false,
-      user: {}
-    }
+      user: {},
+    };
 
-    this.user = window.localStorage.getItem('user'); //this.user allows it to be accessible instead of const user
-  //  this.handleLogout = this.handleLogout.bind(this);
+    this.user = window.localStorage.getItem("user"); //this.user allows it to be accessible instead of const user
+    //  this.handleLogout = this.handleLogout.bind(this);
   }
 
-//get user, including token
+  //get user, including token
   componentDidMount = () => {
     const config = {
       headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token')
-      }
-    }
-    //get user
-    axios.get(`http://localhost:8000/users/${this.user}`, config)
-        .then(
-          res => {
-            this.setUser(res.data)
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
-      err => {
-        console.log(err)
+    };
+    //get user
+    axios.get(`http://localhost:8000/users/${this.user}`, config).then(
+      (res) => {
+        this.setUser(res.data);
+      },
+      (err) => {
+        console.log(err);
       }
-    )
-  }
+    );
+  };
 
- setUser = user => {
-  this.setState({
-    user: user
-   })
- }
-
+  setUser = (user) => {
+    this.setState({
+      user: user,
+    });
+  };
 
   render() {
-
-    console.log(this.state.user, ' app js user')
+    console.log(this.state.user, " app js user");
     return (
       <Router>
         <div className="App">
-          <NavBar user= {this.state.user} setUser={this.setUser} />
+          <NavBar user={this.state.user} setUser={this.setUser} />
           <div id="page-body">
             <Switch>
               <Route path="/" component={Index} exact />
@@ -74,17 +73,28 @@ class App extends Component {
               <Route path="/brewery/:name" component={BreweryIndex} />
               <Route path="/community" component={Community} exact />
 
-              <Route path="/community/posts/:id" render={(matchProps) =>
-
-                  <CommunityPost {...matchProps}
+              <Route
+                path="/community/posts/:id"
+                render={(matchProps) => (
+                  <CommunityPost
+                    {...matchProps}
                     {...this.props}
                     user={this.state.user}
                   />
-                }/>
+                )}
+              />
               <Route path="/about" component={About} />
-              <Route path="/login" component={() => <Login setUser={this.setUser} />} />
+              <Route
+                path="/login"
+                component={() => <Login setUser={this.setUser} />}
+              />
               <Route path="/register" component={CreateUser} />
-              <Route path="/MyAccount" component={() => <MyAccount user={this.state.user} setUser={this.setUser} />} />
+              <Route
+                path="/MyAccount"
+                component={() => (
+                  <MyAccount user={this.state.user} setUser={this.setUser} />
+                )}
+              />
               <Route component={NotFound} />
             </Switch>
           </div>

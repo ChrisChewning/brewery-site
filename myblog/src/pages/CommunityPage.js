@@ -23,7 +23,7 @@ render() {
         <ul>
         <li key={post._id}>{post.name}</li>
         <br></br>
-        <li>{post.content}</li>
+        <li key={key}>{post.content}</li>
         <Link className="brewery-list-item"
           key={key}
           to= {`/community/posts/${post._id}`}

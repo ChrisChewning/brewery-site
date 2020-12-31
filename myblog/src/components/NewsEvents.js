@@ -1,7 +1,6 @@
 import React from "react";
 
 class NewsEvents extends React.Component {
-
   render() {
     const dates = this.props.dates;
     var now = new Date();
@@ -23,16 +22,21 @@ class NewsEvents extends React.Component {
     //display the three closeset future events to today.
     return (
       <>
-      <h2>Upcoming Events</h2>
-        {upcomingEvents.map((upcomingEvent, key) => (
+        <h2>Upcoming Events</h2>
+
+        {upcomingEvents.map((upcomingEvent, i) => (
           <>
-            <h3>{upcomingEvent.title}</h3>
-            <p className="event-paragraph">
-              {upcomingEvent.month}.{upcomingEvent.day}.{upcomingEvent.year}
-            </p>
-            <p className="event-paragraph">
-              {upcomingEvent.event} at {upcomingEvent.location}
-            </p>
+            <div className={"events-list"} key={i}>
+              <li key={i}>
+              <h3>{upcomingEvent.title}</h3>
+              <p className="event-paragraph">
+                {upcomingEvent.month}.{upcomingEvent.day}.{upcomingEvent.year}
+              </p>
+              <p className="event-paragraph">
+                {upcomingEvent.event} at {upcomingEvent.location}
+              </p>
+              </li>
+            </div>
           </>
         ))}
       </>

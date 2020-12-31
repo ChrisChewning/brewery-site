@@ -1,79 +1,73 @@
-import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import React, { Component } from "react";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
 import axios from "axios";
 
-
 class MyBeer extends Component {
-
-constructor(){
-  super()
+  constructor() {
+    super();
     this.state = {
-      mybeers: []
-    }
-    this.user = window.localStorage.getItem('user'); //this.user allows it to be accessible instead of const user
+      mybeers: [],
+    };
+    this.user = window.localStorage.getItem("user"); //this.user allows it to be accessible instead of const user
     this.deleteMyBeers = this.deleteMyBeers.bind(this);
   }
 
+  //http://localhost:8000/api/mybeers/5fd1b2af334a5f1231c7967e/my-future-beers
+  componentDidMount() {
+    fetch(`http://localhost:8000/api/mybeers/${this.user}/mybeers`)
+      .then((response) => response.json())
+      .then((result) => {
+        const savedBeers = result.map((beer) => {
+          return beer;
+        });
+        this.setState({ mybeers: savedBeers });
+      });
+  }
 
-//http://localhost:8000/api/mybeers/5fd1b2af334a5f1231c7967e/my-future-beers
-componentDidMount(){
+  onSubmit() {}
 
-  fetch(`http://localhost:8000/api/mybeers/${this.user}/mybeers`)
-  .then((response) => response.json())
-  .then((result) => {
-    const savedBeers = result.map((beer) => {
-      return beer
-    })
-    this.setState({mybeers: savedBeers })
-  })
-}
+  deleteMyBeers(beer) {
+    axios
+      .delete(
+        `http://localhost:8000/api/mybeers/${this.user}/my-beers/delete/${beer}`
+      )
+      .then((response) => {
+        this.setState({ mybeers: response.data });
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }
 
+  render() {
+    const listBeers = this.state.mybeers.map((beer) => (
+      <>
+        <TableRow key={beer._id}>
+          <TableCell>{beer.brewery}</TableCell>
+          <TableCell align="right">{beer.beer}</TableCell>
+          <TableCell align="right">{beer.rating}</TableCell>
+          <TableCell align="right">{beer.notes}</TableCell>
+          <button
+            className="my-beers-delete"
+            onClick={() => this.deleteMyBeers(beer._id)}
+          >
+            X
+          </button>
+        </TableRow>
+      </>
+    ));
 
-
-onSubmit(){
-
-}
-
-deleteMyBeers(beer){
-  console.log(beer, ' delete beer ')
-  axios.delete(`http://localhost:8000/api/mybeers/${this.user}/my-beers/delete/${beer}`)
-.then(response => {
-  this.setState({ mybeers: response.data })
-})
-.catch(error => {
-  console.log(error.response)
-})
-}
-
-render(){
-  console.log(this.state.mybeers, ' state my beers')
-  const listBeers = this.state.mybeers.map(beer => (
-    <>
-    <TableRow key={beer._id}>
-     <TableCell>{beer.brewery}</TableCell>
-     <TableCell align="right">{beer.beer}</TableCell>
-     <TableCell align="right">{beer.rating}</TableCell>
-     <TableCell align="right">{beer.notes}</TableCell>
-     <button className="my-beers-delete" onClick={() => this.deleteMyBeers(beer._id)}>X</button>
-   </TableRow>
-    </>
-))
-  console.log(this.user, ' < user')
-console.log(this.state.mybeers)
-console.log(this.beer, ' this beer')
-  return(
-
-    <div>
+    return (
+      <div>
         <p>My Beers</p>
-      <TableContainer component={Paper}>
-          <Table aria-label="simple table">
+        <TableContainer component={Paper}>
+          <Table aria-label="simple-table">
             <TableHead>
               <TableRow>
                 <TableCell>Brewery</TableCell>
@@ -82,14 +76,11 @@ console.log(this.beer, ' this beer')
                 <TableCell align="right">Notes</TableCell>
               </TableRow>
             </TableHead>
-                <TableBody>  {listBeers} </TableBody>
+            <TableBody>{listBeers}</TableBody>
           </Table>
         </TableContainer>
-
-
-    </div>
-  )
-}
-
+      </div>
+    );
+  }
 }
 export default MyBeer;
