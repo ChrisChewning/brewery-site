@@ -36,22 +36,29 @@ p {
     margin-right: 20px;
 }
 
+
+/* POSTS LIST */
 .card {
   margin: 20px;
-  align-items: "center";
+  padding: 10px;
 }
 
 .post-list{
   display: flex;
   flex-direction: row;
+  align-items: center;
+  padding: 50px;
+  margin: 200px;
 }
 .username{
   flex: 1;
+  padding: 100px;
   border: 2px solid yellow;
 }
 .post-content{
   flex: 1;
   border: 2px solid yellow;
+  margin: 0% 5%;
 }
 
 .vertical-divider {
@@ -76,6 +83,8 @@ border-color: black;
   flex-direction: column;
   border-color: black;
 }
+
+
 
 /*horizontal nav bar*/
 

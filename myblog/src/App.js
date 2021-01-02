@@ -20,6 +20,7 @@ import CreateUser from "./components/CreateUser";
 import Login from "./components/Login";
 import MyAccount from "./components/MyAccount";
 import AddBeerModal from "./components/AddBeer";
+import AddPosts from "./components/AddPosts";
 import axios from "axios";
 import { withRouter } from "react-router";
 
@@ -66,16 +67,17 @@ class App extends Component {
       <Router>
         <div className="App">
           <NavBar user={this.state.user} setUser={this.setUser} />
+          <AddPosts username={this.state.user.username} image={this.state.user.image} setUser={this.setUser} />
+
           <div id="page-body">
             <Switch>
               <Route path="/" component={Index} exact />
               <Route path="/breweries" component={BreweryList} />
               <Route path="/brewery/:name" component={BreweryIndex} />
-              <Route path="/community" component={Community} exact />
 
-              <Route
-                path="/community/posts/:id"
-                render={(matchProps) => (
+              <Route path="/community" component={() => (
+                  <Community user={this.state.user} setUser={this.setUser} exact /> )} />
+              <Route path="/community/posts/:id" render={(matchProps) => (
                   <CommunityPost
                     {...matchProps}
                     {...this.props}
@@ -89,9 +91,7 @@ class App extends Component {
                 component={() => <Login setUser={this.setUser} />}
               />
               <Route path="/register" component={CreateUser} />
-              <Route
-                path="/MyAccount"
-                component={() => (
+              <Route path="/MyAccount" component={() => (
                   <MyAccount user={this.state.user} setUser={this.setUser} />
                 )}
               />

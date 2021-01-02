@@ -1,16 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import AddPosts from '../components/AddPosts';
 import axios from 'axios';
 import Card from "@material-ui/core/Card";
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 
+
 export default class Community extends React.Component {
   state = {
     posts: []
   }
-
 
 
 componentDidMount() {
@@ -21,9 +22,17 @@ componentDidMount() {
   })
 }
 
+
+
+
 render() {
+
+console.log(this.props.user)
+
   return (
       <>
+
+
       { this.state.posts.map((post, key) => (
         <Card className="card">
         <List className="post-list">
