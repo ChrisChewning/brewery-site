@@ -6,7 +6,7 @@ import Card from "@material-ui/core/Card";
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
-
+import Moment from 'react-moment';
 
 export default class Community extends React.Component {
   state = {
@@ -36,22 +36,26 @@ console.log(this.props.user)
       { this.state.posts.map((post, key) => (
         <Card className="card">
         <List className="post-list">
-        <p>USERNAME IMAGE HERE</p>
+        <img className="post-img" src={post.image} alt="username image for post"/>
         <div className="post-item-parent">
           <Link className="brewery-list-item"
             key={key}
             to= {`/community/posts/${post._id}`}
             >
-          <h3>{post.name}</h3>
+          <h3 className="post-name">{post.name}</h3>
           <div className= "vertical-divider" />
       </Link>
-        <div className="post-username-date">
-          <ListItem className="username">{post.username} * {post.createdAt}</ListItem>
+          <ListItem className="username">{post.username} * <Moment format=" MMM D, YYYY">
+             {post.createdAt}
+          </Moment>
+        </ListItem>
         </div>
-        </div>
-      <div className="post-comments-recent">
+
+      <div className="post-comments-parent">
       <ListItem key={key} className="post-content">Comments: {post.comments.length}  </ListItem>
-      <ListItem className="post-content">Most Recent: {post.updatedAt}</ListItem>
+      <ListItem className="post-content">Most Recent:   <Moment format="MMM D, YYYY h:mm a">
+        {post.updatedAt}
+      </Moment></ListItem>
       </div>
   </List>
 

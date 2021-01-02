@@ -68,9 +68,20 @@ p {
     margin-left: '2em';
 }
 
+.post-img{
+  width: 10%;
+  height: 10%;
+}
+
+
+
+
+
 .brewery-list-item{
 
 }
+
+
 
 .post-item-parent{
 flex-direction: column;
@@ -79,9 +90,13 @@ flex-direction: column;
 .post-username-date {
 border-color: black;
 }
-.post-comments-recent{
+.post-comments-parent{
   flex-direction: column;
   border-color: black;
+}
+
+.post-content-parent{
+  align-items: center;
 }
 
 

@@ -67,7 +67,6 @@ class App extends Component {
       <Router>
         <div className="App">
           <NavBar user={this.state.user} setUser={this.setUser} />
-          <AddPosts username={this.state.user.username} image={this.state.user.image} setUser={this.setUser} />
 
           <div id="page-body">
             <Switch>
@@ -75,8 +74,7 @@ class App extends Component {
               <Route path="/breweries" component={BreweryList} />
               <Route path="/brewery/:name" component={BreweryIndex} />
 
-              <Route path="/community" component={() => (
-                  <Community user={this.state.user} setUser={this.setUser} exact /> )} />
+              <Route path="/community" component={Community} exact />
               <Route path="/community/posts/:id" render={(matchProps) => (
                   <CommunityPost
                     {...matchProps}

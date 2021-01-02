@@ -20,9 +20,7 @@ router.route("posts/:id").get((req, res) => {
 //ADD POST
 router.route("/add-post").post((req, res) => {
   //Set variables
-  const username = req.body.username;
-  const name = req.body.name; //destructure to const { name, comment } = req.body;  ?
-  const content = req.body.content;
+  const { username, name, content, image } = req.body;
   const votes = 0;
 
   const newPost = new Post({
@@ -30,6 +28,7 @@ router.route("/add-post").post((req, res) => {
     name,
     content,
     votes,
+    image
   });
 
   newPost

@@ -18,6 +18,10 @@ const postSchema = new Schema({
     type: Number,
     default: 0,
   },
+  image: {
+    data: Buffer,
+    type: String,
+  },
   comments: {
     type: Array,
   }

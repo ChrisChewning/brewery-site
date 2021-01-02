@@ -12,7 +12,7 @@ const AddPosts = ({ username, image }) => {
       {
         //options object for method, body, and headers.
         method: "post",
-        body: JSON.stringify({ name: postTitle, content: postText, username: username  }), //JSON object turned into string for server to parse. comment is in the post req. you stringify to commentText here.
+        body: JSON.stringify({ name: postTitle, content: postText, username: username, image: image  }), //JSON object turned into string for server to parse. comment is in the post req. you stringify to commentText here.
         headers: { //when sending post req's w a json body to the server, we need to include a header.
           "Content-Type": "application/json", //Content-Type is case-sensitive. This tells the server what data we're passing along.
         },
