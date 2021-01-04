@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AddPosts = ({ username, image }) => {
+const AddPosts = ({ username, image, newPost }) => {
   console.log(username)
   console.log(image)
   const [postTitle, setPostTitle] = useState("");
@@ -21,7 +21,7 @@ const AddPosts = ({ username, image }) => {
     //update UI
   setPostTitle("");
   setPostText(""); //updates form but doesn't re-render the page.
-  //  newComment(); //calls this from the parent component
+  newPost(); //calls this from the parent component
   };
 
   return (

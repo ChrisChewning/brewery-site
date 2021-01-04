@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Index from "./pages/Index";
 import About from "./pages/About";
-import Community from "./pages/CommunityPage";
+import CommunityPage from "./pages/CommunityPage";
 import CommunityPost from "./pages/CommunityPost";
 import BreweryIndex from "./components/BreweryIndex";
 //import BreweryListPage from "./pages/BreweryListPage";
@@ -74,7 +74,7 @@ class App extends Component {
               <Route path="/breweries" component={BreweryList} />
               <Route path="/brewery/:name" component={BreweryIndex} />
 
-              <Route path="/community" component={Community} exact />
+              <Route path="/community" component= {() => <CommunityPage user={this.state.user} setUser={this.setUser} />}  exact />
               <Route path="/community/posts/:id" render={(matchProps) => (
                   <CommunityPost
                     {...matchProps}
@@ -84,15 +84,9 @@ class App extends Component {
                 )}
               />
               <Route path="/about" component={About} />
-              <Route
-                path="/login"
-                component={() => <Login setUser={this.setUser} />}
-              />
+              <Route path="/login" component={() => <Login setUser={this.setUser} />} />
               <Route path="/register" component={CreateUser} />
-              <Route path="/MyAccount" component={() => (
-                  <MyAccount user={this.state.user} setUser={this.setUser} />
-                )}
-              />
+              <Route path="/MyAccount" component={() => (<MyAccount user={this.state.user} setUser={this.setUser} />)} />
               <Route component={NotFound} />
             </Switch>
           </div>

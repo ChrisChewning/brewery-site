@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component} from 'react';
 import { Link } from 'react-router-dom';
 import AddPosts from '../components/AddPosts';
 import axios from 'axios';
@@ -8,30 +8,38 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import Moment from 'react-moment';
 
-export default class Community extends React.Component {
-  state = {
+class CommunityPage extends Component {
+  constructor(props) {
+    super(props);
+
+  this.state = {
     posts: []
   }
+}
 
-
-componentDidMount() {
+handler = () => {
   axios.get(`http://localhost:8000/api/community/posts`)
   .then(res => {
     const posts = res.data;
     this.setState({ posts });
   })
+
+}
+
+componentDidMount() {
+    this.handler();
 }
 
 
 
 
 render() {
-
+console.log(this.state.posts)
 console.log(this.props.user)
 
   return (
       <>
-
+      <AddPosts username={this.props.user.username} image={this.props.user.image} newPost={this.handler} posts={this.state.posts}/>
 
       { this.state.posts.map((post, key) => (
         <Card className="card">
@@ -67,3 +75,5 @@ console.log(this.props.user)
 
 }
 }
+
+export default CommunityPage;

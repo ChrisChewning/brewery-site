@@ -20,11 +20,9 @@ class CommunityPost extends Component {
       commentsLength: 0,
       id: this.props.match.params.id,
     };
-
-    this.handler = this.handler.bind(this);
   }
 
-  handler() {
+  handler = () => {
     this.setState({
       commentsLength: this.state.commentsLength + 1,
     });
@@ -105,7 +103,7 @@ class CommunityPost extends Component {
               <p key={i}>
                 {comment.username} |{" "}
                 <i>
-                  <Moment format="YYYY/MM/DD/h:mm a">
+                  <Moment format="MMM DD, YYYY/h:mm a">
                     {comment.todayDate}
                   </Moment>
                 </i>
