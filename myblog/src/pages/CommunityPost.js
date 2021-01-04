@@ -93,7 +93,7 @@ class CommunityPost extends Component {
             newComment={this.handler}
           />
         ) : (
-          <p>You must be logged in to post a comment </p>
+          <p>You must be logged in to comment </p>
         )}
 
         <div className="comments-parent">

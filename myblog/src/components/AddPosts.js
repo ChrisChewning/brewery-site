@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { TextField } from '@material-ui/core';
+import {Button} from '@material-ui/core';
 
 const AddPosts = ({ username, image, newPost }) => {
   console.log(username)
@@ -25,22 +27,22 @@ const AddPosts = ({ username, image, newPost }) => {
   };
 
   return (
-    <div id="add-comment">
+    <div>
       <h3>Add a Post</h3>
-      <label>
-      Post Title:
-      <textarea rows="1" cols="20" value={postTitle} onChange={(e) => setPostTitle(e.target.value)} />
-      </label>
-      <label>
-        Post:
-        <textarea
-          rows="4"
-          cols="50"
+      <form>
+      <TextField
+      label="Post Title:"
+      value={postTitle}
+      onChange={(e) => setPostTitle(e.target.value)}
+      /> 
+      <TextField
+      label="Post:"
           value={postText}
           onChange={(e) => setPostText(e.target.value)}
-        />
-      </label>
-      <button onClick={() => AddPost()}>Add Post</button>
+/>
+<Button variant="contained" color="primary"
+onClick={() => AddPost()}>Add Post </Button>
+    </form>
     </div>
   );
 };

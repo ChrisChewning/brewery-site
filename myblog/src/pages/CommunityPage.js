@@ -37,9 +37,15 @@ render() {
 console.log(this.state.posts)
 console.log(this.props.user)
 
+
+
   return (
       <>
-      <AddPosts username={this.props.user.username} image={this.props.user.image} newPost={this.handler} posts={this.state.posts}/>
+      {this.props.user.username ? (
+        <AddPosts username={this.props.user.username} image={this.props.user.image} newPost={this.handler} posts={this.state.posts}/>
+      ) : (
+        <p>You must be logged in to post </p>
+      )}
 
       { this.state.posts.map((post, key) => (
         <Card className="card">
