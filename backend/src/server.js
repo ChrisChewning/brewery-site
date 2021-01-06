@@ -1,6 +1,4 @@
 import express from 'express';
-//import bodyParser from 'body-parser'; don't need b.c of the new version of express.
-//import { MongoClient } from 'mongodb'; //can connect to local db
 const mongoose = require('mongoose'); //helps us connect to mongodb database
 const config = require('config');
 const app = express();
@@ -14,16 +12,12 @@ var session = require('express-session');
 app.use(cors());
 app.use(express.json());
 app.use(session({secret:"hello", resave: false, saveUninitialized: true}))
-//app.use(bodyParser.json());
-//app.use(path.join(_dirname, '/uploads')', express.static('./uploads/images/'));
 
 app.use('/public/uploads/images', express.static('public/uploads/images'))
 app.use('/public/breweries/images', express.static('public/breweries/images'))
 
 const uri = process.env.ATLAS_URI;
 const jwt = process.env.JWT_SECRET;
-console.log(uri);
-//mongoose.connect(uri, { useNewUrlParser: true; useCreateIndex: true; }); //FLAGS: mongodb nodejs driver parses the connection string. useCreateIndex: mongodb deprecating ensure index fn
 
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true,  useUnifiedTopology: true });
 const client = mongoose.connection;

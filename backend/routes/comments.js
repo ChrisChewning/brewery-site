@@ -30,8 +30,8 @@ router.route("/brewery-meetup/test").get((req, res) => {
 
 //UPDATE A POST WITH A COMMENT
 router.route("/:id/add-comment").post(async (req, res) => {
-  const todayDate = new Date();
-  const { username, votes, comment } = req.body;
+  const addDate = new Date();
+  const { username, votes, comment, image } = req.body;
   try {
     const postId = req.params.id;
     const saveCommentToPost = await Post.findById({ _id: postId });
@@ -44,7 +44,8 @@ router.route("/:id/add-comment").post(async (req, res) => {
             username,
             votes,
             comment,
-            todayDate,
+            image,
+            addDate,
           }),
         },
       }

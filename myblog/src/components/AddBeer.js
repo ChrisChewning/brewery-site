@@ -54,9 +54,6 @@ const AddBeerModal = (props) => {
           notes: notes
         };
 
-        console.log(addBeer, ' this is addBeer');
-
-
       axios.post(`/api/mybeers/${props.user._id}/add-beer`, addBeer)
       .then(response => {
       console.log(response)
@@ -76,11 +73,7 @@ const AddBeerModal = (props) => {
         setOpen(false);
     };
 
-    console.log(props.user._id)
-    // email)
-    // console.log(props.user.id, ' .id')
-    // console.log(propser._id, ' ._id')
-    //
+  
     return (
         <div>
 

@@ -20,6 +20,8 @@ console.log(breweries)
        return (
            <>
            {breweries.map((brewery, i) => (
+             <>
+             <img className="image-brewery" src={brewery.image} alt="brewery image" />
              <Link
          className="brewery-list-item"
          key={i}
@@ -27,6 +29,7 @@ console.log(breweries)
        >
              <p>{brewery.name}</p>
             </Link>
+            </>
          )
         )}
            </>

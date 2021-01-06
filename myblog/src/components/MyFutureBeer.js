@@ -34,11 +34,10 @@ class MyFutureBeer extends Component {
         `http://localhost:8000/api/mybeers/${this.user}/my-future-beers/delete/${future_beer}`
       )
       .then((response) => {
-        console.log(response.data, "RESPONSE.data");
         this.setState({ future_beers: response.data });
       })
-      .catch((error) => {
-        console.log(error.response);
+      .catch((response, error) => {
+        response.status(500).json({ message: "Error", error });
       });
   }
 
@@ -58,9 +57,7 @@ class MyFutureBeer extends Component {
         </TableRow>
       </>
     ));
-    console.log(this.future_beer, " future beer");
-    console.log(this.state.future_beers, " this state future beers");
-
+    
     return (
       <div>
         <p>My Future Beers</p>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AddComments = ({ id, comments, username, newComment }) => {
+const AddComments = ({ id, comments, username, image, newComment }) => {
   const [commentText, setCommentText] = useState(""); //form comment
 
   const AddComment = async () => {
@@ -9,7 +9,7 @@ const AddComments = ({ id, comments, username, newComment }) => {
       {
         //options object for method, body, and headers.
         method: "post",
-        body: JSON.stringify({ username, comment: commentText }), //JSON object turned into string for server to parse. comment is in the post req. you stringify to commentText here.
+        body: JSON.stringify({ username, comment: commentText, image: "/" + image }), //JSON object turned into string for server to parse. comment is in the post req. you stringify to commentText here.
         headers: { //when sending post req's w a json body to the server, we need to include a header.
           "Content-Type": "application/json", //Content-Type is case-sensitive. This tells the server what data we're passing along.
         },

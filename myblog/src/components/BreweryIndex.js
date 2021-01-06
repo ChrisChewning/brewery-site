@@ -32,7 +32,7 @@ console.log(this.state.image)
       <>
       <div className="brewery-image">
 
-        <img className="brewery-profile-img" src= {this.state.image} alt="brewery-image" />
+        <img className="brewery-profile-img" src= {this.state.image} alt="brewery" />
       </div>
       <h1>{this.state.name}</h1>
       <p>Beers offered: {this.state.beers}</p>

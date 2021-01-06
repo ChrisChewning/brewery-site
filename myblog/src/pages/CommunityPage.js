@@ -34,11 +34,6 @@ componentDidMount() {
 
 
 render() {
-console.log(this.state.posts)
-console.log(this.props.user)
-
-
-
   return (
       <>
       {this.props.user.username ? (

@@ -29,7 +29,7 @@ class CommunityPost extends Component {
     const id = this.props.match.params.id;
     axios.get(`http://localhost:8000/api/community/posts/`).then((res) => {
       const posts = res.data.map((post, key) => {
-        if (post._id == id) {
+        if (post._id === id) {
           this.setState({ name: post.name });
           this.setState({ content: post.content });
           this.setState({ votes: post.votes });
@@ -70,8 +70,7 @@ class CommunityPost extends Component {
   };
 
   render() {
-    const id = this.props.match.params.id;
-    const comments = this.state.comments;
+  
     return (
       <>
         <div className="post-parent">
@@ -90,6 +89,7 @@ class CommunityPost extends Component {
             id={this.state.id}
             comments={this.state.comments}
             username={this.props.user.username}
+            image={this.props.user.image}
             newComment={this.handler}
           />
         ) : (
@@ -101,10 +101,11 @@ class CommunityPost extends Component {
           {this.state.comments.map((comment, i) => (
             <Card>
               <p key={i}>
+                <img className="post-img" src={comment.image} alt="username for comment"/>
                 {comment.username} |{" "}
                 <i>
                   <Moment format="MMM DD, YYYY/h:mm a">
-                    {comment.todayDate}
+                    {comment.addDate}
                   </Moment>
                 </i>
                 <br></br>

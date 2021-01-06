@@ -57,7 +57,7 @@ class CreateUser extends Component {
       .post("http://localhost:8000/users/adduser", register)
       .then((response) => {
         console.log(response);
-        if (response.data.status == "created") {
+        if (response.data.status === "created") {
           this.props.handleSuccessAuth(response.data);
         }
       })
@@ -83,7 +83,7 @@ class CreateUser extends Component {
         <p>{this.state.errorMessage}</p>
         <p
           className={`${
-            this.state.customError == "[object Object]"
+            this.state.customError === "[object Object]"
               ? "hideCustomError"
               : "showCustomError"
           }`}

@@ -6,9 +6,11 @@ const brewerySchema = new Schema({
   beers: { type: String },
   image: { data: Buffer, type: String },
   location: {type: String},
+  location_image: {data: Buffer, type: String},
   website: {type: String},
   hours: {type: String},
   content: {type: String},
+
 })
 
 const Brewery = mongoose.model('Brewery', brewerySchema); //arg 1 could be anything

@@ -3,13 +3,11 @@ import { TextField } from '@material-ui/core';
 import {Button} from '@material-ui/core';
 
 const AddPosts = ({ username, image, newPost }) => {
-  console.log(username)
-  console.log(image)
   const [postTitle, setPostTitle] = useState("");
   const [postText, setPostText] = useState(""); //form comment
 
   const AddPost = async () => {
-    const result = await fetch(
+    await fetch(
       `http://localhost:8000/api/community/posts/add-post`,
       {
         //options object for method, body, and headers.
@@ -34,7 +32,7 @@ const AddPosts = ({ username, image, newPost }) => {
       label="Post Title:"
       value={postTitle}
       onChange={(e) => setPostTitle(e.target.value)}
-      /> 
+      />
       <TextField
       label="Post:"
           value={postText}

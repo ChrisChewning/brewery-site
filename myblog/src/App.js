@@ -10,19 +10,19 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect,
+  //Redirect,
 } from "react-router-dom";
 import NavBar from "./NavBar";
 import NotFound from "./pages/NotFound";
-import AddComments from "./components/AddComments";
+//import AddComments from "./components/AddComments";
 import "./App.css";
 import CreateUser from "./components/CreateUser";
 import Login from "./components/Login";
 import MyAccount from "./components/MyAccount";
-import AddBeerModal from "./components/AddBeer";
-import AddPosts from "./components/AddPosts";
+//import AddBeerModal from "./components/AddBeer";
+//import AddPosts from "./components/AddPosts";
 import axios from "axios";
-import { withRouter } from "react-router";
+//import { withRouter } from "react-router";
 
 class App extends Component {
   constructor() {
@@ -62,7 +62,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.user, " app js user");
     return (
       <Router>
         <div className="App">

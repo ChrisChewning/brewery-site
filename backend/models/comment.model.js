@@ -12,6 +12,10 @@ const commentSchema = new Schema({
   comments: {  //replies on this comment will go here. you'll need to push into this.
     type: String,
     required: true,
+  },
+  image: {
+    data: Buffer,
+    type: String,
   }
 },
   {

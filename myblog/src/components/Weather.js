@@ -17,11 +17,7 @@ function getWeather(){
   })
 
   };
-//  .then(response => response.json())
-//        .then(response => {
-//            setResponseObj(response)
-//        })
-// }
+
 
 return (
 
