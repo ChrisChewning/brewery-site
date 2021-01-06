@@ -14,7 +14,7 @@ const TwitterIframe = () => {
           className="twitter-timeline"
           data-theme="dark"
           data-chrome="noheader nofooter"
-          href="https://twitter.com/cl_chewning"
+          href="https://twitter.com/atxbrews/lists/brews-35388?ref_src=twsrc%5Etfw"
         >
           Tweets by Brews
         </a>
