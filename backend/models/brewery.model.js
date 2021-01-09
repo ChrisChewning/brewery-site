@@ -7,6 +7,8 @@ const brewerySchema = new Schema({
   image: { data: Buffer, type: String },
   location: {type: String},
   location_image: {data: Buffer, type: String},
+  patio: {type: Boolean},
+  big_indoors: {type: Boolean},
   website: {type: String},
   hours: {type: String},
   content: {type: String},
