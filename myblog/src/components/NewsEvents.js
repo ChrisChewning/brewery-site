@@ -1,8 +1,12 @@
 import React from "react";
+import axios from 'axios';
+
+//const NewsEvents = () => {
 
 class NewsEvents extends React.Component {
+
   render() {
-    const dates = this.props.dates;
+    let dates = this.props.dates;
     var now = new Date();
 
     //loop through dates to add a key value pair for distance of time.

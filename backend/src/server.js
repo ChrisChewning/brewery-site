@@ -35,6 +35,7 @@ const commentsRouter = require('../routes/comments');
 const breweriesRouter = require('../routes/breweries');
 const authRouter = require('../routes/auth');
 const mybeersRouter = require('../routes/mybeers');
+const eventsRouter = require('../routes/events');
 const apisRouter = require('../routes/apis');
 
 
@@ -44,6 +45,7 @@ app.use('/api/brewery', breweriesRouter);
 app.use('/api/community/posts', postsRouter);
 app.use('/api/login', authRouter);
 app.use('/api/mybeers', mybeersRouter);
+app.use('/api/events', eventsRouter);
 app.use('/apis', apisRouter);
 
 
