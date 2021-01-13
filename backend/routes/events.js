@@ -12,12 +12,15 @@ router.route("/").get((req, res) => {
 
 //UPVOTE ENDPOINT
 router.route("/add-event").post((req, res) => {
-  const { title, date, event, location, url } = req.body;
+  const { title, year, month, day, time, event, location, url } = req.body;
   const votes = 0;
 
   const newEvent = new Events({
     title,
-    date,
+    year,
+    month,
+    day,
+    time,
     event,
     location,
     url

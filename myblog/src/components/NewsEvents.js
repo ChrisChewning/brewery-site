@@ -3,7 +3,7 @@ import axios from 'axios';
 
 //const NewsEvents = () => {
 
-class NewsEvents extends React.Component {
+class NewsEvents2 extends React.Component {
 
   render() {
     let dates = this.props.dates;
@@ -14,6 +14,7 @@ class NewsEvents extends React.Component {
       dates[date].distance =
         now - new Date(dates[date].year, dates[date].month, dates[date].day);
     }
+    console.log(dates)
     //get the three closest future events to today.
     const upcomingEvents = dates
       .filter((date) => date.distance < -2600000000)
@@ -48,4 +49,4 @@ class NewsEvents extends React.Component {
   }
 }
 
-export default NewsEvents;
+export default NewsEvents2;

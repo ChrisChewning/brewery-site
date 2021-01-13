@@ -3,8 +3,11 @@ const Schema = mongoose.Schema;
 
 const brewerySchema = new Schema({
   title: String,
-  date: Date,
-  event: String, //2nd
+  year: Number,
+  month: Number,
+  day: Number,
+  time: Number,
+  event: String,
   location: String,
   url: String
 })
