@@ -117,7 +117,6 @@ updateBeers = () => {
         <>
           <div className="beerList">
             <MyBeer user={this.props.user} addBeer={this.handler} />
-            <MyFutureBeer />
           </div>
         </>
       </>

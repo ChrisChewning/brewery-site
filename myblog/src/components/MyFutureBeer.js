@@ -13,6 +13,9 @@ class MyFutureBeer extends Component {
     super();
     this.state = {
       future_beers: [],
+      brewery: "",
+      beer: "",
+      notes: "",
     };
     this.user = window.localStorage.getItem("user"); //this.user allows it to be accessible instead of const user
   }
@@ -41,6 +44,20 @@ class MyFutureBeer extends Component {
       });
   }
 
+
+  //MODAL
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const addBeer = {
+      brewery: this.state.brewery,
+      beer: this.state.beer,
+      notes: this.state.notes,
+    };
+
+}
+
+
+
   render() {
     const listBeers = this.state.future_beers.map((future_beer) => (
       <>
@@ -57,8 +74,9 @@ class MyFutureBeer extends Component {
         </TableRow>
       </>
     ));
-    
+
     return (
+
       <div>
         <p>My Future Beers</p>
         <TableContainer component={Paper}>

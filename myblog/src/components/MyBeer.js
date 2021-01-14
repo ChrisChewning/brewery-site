@@ -16,7 +16,9 @@ class MyBeer extends Component {
     super();
     this.state = {
       mybeers: [],
-      open: true,
+      myfuturebeers: [],
+      openPast: false,
+      openFuture: false,
       brewery: "",
       beer: "",
       rating: "",
@@ -26,7 +28,7 @@ class MyBeer extends Component {
     this.deleteMyBeers = this.deleteMyBeers.bind(this);
   }
 
-  //GET BEERS
+  //GET PAST BEERS
   handler = () => {
     fetch(`http://localhost:8000/api/mybeers/${this.user}/mybeers`)
       .then((response) => response.json())
@@ -39,12 +41,27 @@ class MyBeer extends Component {
     this.setState({ open: false });
   };
 
-  componentDidMount() {
-    this.handler();
+
+  getFutureBeers = () => {
+    fetch(`http://localhost:8000/api/mybeers/${this.user}/my-future-beers`)
+      .then((response) => response.json())
+      .then((result) => {
+        const futurebeers = result.map((beer) => {
+          return beer;
+        });
+        this.setState({ myfuturebeers: futurebeers });
+      });
   }
 
-  //MODAL
-  handleSubmit = (e) => {
+
+
+  componentDidMount() {
+    this.handler();
+    this.getFutureBeers();
+  }
+
+  //MODAL FUTURE BEERS
+  handleSubmitMyBeers = (e) => {
     e.preventDefault();
     const addBeer = {
       brewery: this.state.brewery,
@@ -60,34 +77,33 @@ class MyBeer extends Component {
       .catch((error) => {
         console.log(error.response);
       });
-    this.setState({ open: false });
+    this.setState({ openPast: false });
   };
 
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+//MODAL FUTURE BEERS
+  handleSubmitFutureBeers = (e) => {
+    e.preventDefault();
+    const addBeer = {
+      brewery: this.state.brewery,
+      beer: this.state.beer,
+      rating: this.state.rating,
+      notes: this.state.notes,
+    };
 
-  onChangeBrewery = (e) => {
-    this.setState({ brewery: e.target.value });
-  };
+    axios
+      .post(`/api/mybeers/${this.props.user._id}/add-future-beer`, addBeer)
+      .then((response) => this.getFutureBeers())
+      .catch((error) => {
+        console.log(error.response);
+      });
+    this.setState({ openFuture: false });
+    };
 
-  onChangeBeer = (e) => {
-    this.setState({ beer: e.target.value });
-  };
 
-  onChangeRating = (e) => {
-    this.setState({ rating: e.target.value });
-  };
 
-  onChangeNotes = (e) => {
-    this.setState({ notes: e.target.value });
-  };
-
-  deleteMyBeers(beer) {
+//DELETE BEER
+  deleteMyBeers = (beer) => {
     axios
       .delete(
         `http://localhost:8000/api/mybeers/${this.user}/my-beers/delete/${beer}`
@@ -100,8 +116,60 @@ class MyBeer extends Component {
       });
   }
 
+
+deleteMyFutureBeers = (beer) => {
+  axios
+    .delete(
+      `http://localhost:8000/api/mybeers/${this.user}/my-future-beers/delete/${beer}`
+    )
+    .then((response) => {
+      this.setState({ myfuturebeers: response.data });
+    })
+    .catch((error) => {
+      console.log(error.response);
+    });
+}
+
+
+//ONCHANGES, OPEN, CLOSE
+handleOpenPast = () => {
+  this.setState({ openPast: true });
+};
+
+handleOpenFuture = () => {
+  this.setState({ openFuture: true });
+};
+
+handleClosePast = () => {
+  this.setState({ openPast: false });
+};
+
+handleCloseFuture = () => {
+  this.setState({ openFuture: false });
+};
+
+onChangeBrewery = (e) => {
+  this.setState({ brewery: e.target.value });
+};
+
+onChangeBeer = (e) => {
+  this.setState({ beer: e.target.value });
+};
+
+onChangeRating = (e) => {
+  this.setState({ rating: e.target.value });
+};
+
+onChangeNotes = (e) => {
+  this.setState({ notes: e.target.value });
+};
+
+
+
+
   render() {
     console.log(this.props, " PROPS MY BEERS");
+    console.log(this.state.mybeers, ' my beers')
 
     const listBeers = this.state.mybeers.map((beer) => (
       <>
@@ -120,22 +188,40 @@ class MyBeer extends Component {
       </>
     ));
 
+    const listFutureBeers = this.state.myfuturebeers.map((beer) => (
+      <>
+        <TableRow key={beer._id}>
+          <TableCell>{beer.brewery}</TableCell>
+          <TableCell align="right">{beer.beer}</TableCell>
+          <TableCell align="right">{beer.rating}</TableCell>
+          <TableCell align="right">{beer.notes}</TableCell>
+          <button
+            className="my-beers-delete"
+            onClick={() => this.deleteMyFutureBeers(beer._id)}
+          >
+            X
+          </button>
+        </TableRow>
+      </>
+    ));
+
+
     return (
       <div>
-        <Button variant="contained" color="primary" onClick={this.handleOpen}>
+        <Button variant="contained" color="primary" onClick={this.handleOpenPast}>
           Add Past Beers
         </Button>
 
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
-          open={this.state.open}
-          onClose={this.handleClose}
+          open={this.state.openPast}
+          onClose={this.handleClosePast}
         >
           <div className="modalStyle">
-            <h2 className="modalTitle">Simple React Modal</h2>
+            <h2 className="modalTitle">My Beers</h2>
             <>
-              <form onSubmit={this.handleSubmit} className="modalContent">
+              <form onSubmit={this.handleSubmitMyBeers} className="modalContent">
                 <div className="modalInputs">
                   <label>
                     Brewery:
@@ -196,7 +282,79 @@ class MyBeer extends Component {
             </Table>
           </TableContainer>
         </div>
+
+        <Button variant="contained" color="primary" onClick={this.handleOpenFuture} className="round-button">
+          +
+        </Button>
+        <Modal
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          open={this.state.openFuture}
+          onClose={this.handleCloseFuture}
+        >
+          <div className="modalStyle">
+            <h2 className="modalTitle">My Future Beers</h2>
+            <>
+              <form onSubmit={this.handleSubmitFutureBeers} className="modalContent">
+                <div className="modalInputs">
+                  <label>
+                    Brewery:
+                    <input
+                      type="text"
+                      value={this.state.brewery}
+                      value={this.state.password}
+                      onChange={this.onChangeBrewery}
+                    />
+                  </label>
+                </div>
+
+                <label>
+                  Beer:
+                  <input
+                    type="text"
+                    value={this.state.beer}
+                    onChange={this.onChangeBeer}
+                  />
+                </label>
+                <label>
+                  Notes:
+                  <input
+                    type="text"
+                    value={this.state.notes}
+                    onChange={this.onChangeNotes}
+                  />
+                </label>
+                <button type="submit" value="Submit" className="modalButton">
+                  Submit
+                </button>
+              </form>
+            </>
+          </div>
+        </Modal>
+
+        <div>
+          <p>My Future Beers</p>
+          <TableContainer component={Paper}>
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Brewery</TableCell>
+                  <TableCell align="right">Beer</TableCell>
+                  <TableCell align="right">Notes</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>{listFutureBeers}</TableBody>
+            </Table>
+          </TableContainer>
+        </div>
+
+
+
       </div>
+
+
+
+
     );
   }
 }

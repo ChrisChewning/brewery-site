@@ -7,6 +7,7 @@ p {
   font-size: 24px;
 }
 
+
 /*HOME PAGE */
 
 
@@ -107,6 +108,10 @@ border-color: black;
 li {
   display: inline;
   float: left;
+}
+
+.navbar{
+  background-color: white;
 }
 
 .navbar-ul {
@@ -350,4 +355,11 @@ box-sizing: border-box;
   float: left;
   padding-right: 20px;
   margin-right: 5px;
+}
+
+
+
+
+body {
+  background-color: #f1f3f4;
 }
