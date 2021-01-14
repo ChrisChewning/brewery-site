@@ -16,6 +16,7 @@ class MyAccount extends Component {
       file: null,
       loggedOut: false,
       user: {},
+      updateBeers: false
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -24,9 +25,20 @@ class MyAccount extends Component {
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({ user: this.props.user, image: this.props.user.image });
-  }
+
+handler = () => {
+  this.setState({ user: this.props.user, image: this.props.user.image });
+}
+
+componentDidMount() {
+  this.handler();
+}
+
+updateBeers = () => {
+  this.setState({updateBeers: true})
+}
+
+
 
   onSubmit = (e) => {
     const formData = new FormData();
@@ -63,6 +75,7 @@ class MyAccount extends Component {
 
   render() {
     console.log(this.props.user.image)
+    console.log(this.state.user, ' user state')
     if (!this.user) {
       this.setState({ loggedOut: true });
     }
@@ -100,11 +113,10 @@ class MyAccount extends Component {
         </form>
 
         <img className="profile-img" src={this.state.image} alt="profile image" />
-        <AddBeerModal user={this.props.user} />
 
         <>
           <div className="beerList">
-            <MyBeer />
+            <MyBeer user={this.props.user} addBeer={this.handler} />
             <MyFutureBeer />
           </div>
         </>

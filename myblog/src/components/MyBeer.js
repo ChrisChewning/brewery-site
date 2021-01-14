@@ -7,18 +7,30 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import axios from "axios";
+import Button from '@material-ui/core/Button';
+import Modal from '@material-ui/core/Modal';
+import { makeStyles } from '@material-ui/core/styles';
+
+
+
 
 class MyBeer extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
       mybeers: [],
+      open: true,
+      brewery: "",
+      beer: "",
+      rating: "",
+      notes: ""
     };
     this.user = window.localStorage.getItem("user"); //this.user allows it to be accessible instead of const user
     this.deleteMyBeers = this.deleteMyBeers.bind(this);
   }
 
-  componentDidMount() {
+  //GET BEERS
+  handler = () => {
     fetch(`http://localhost:8000/api/mybeers/${this.user}/mybeers`)
       .then((response) => response.json())
       .then((result) => {
@@ -27,9 +39,67 @@ class MyBeer extends Component {
         });
         this.setState({ mybeers: savedBeers });
       });
+      this.setState({open: false})
   }
 
-  onSubmit() {}
+    componentDidMount() {
+      this.handler();
+    }
+
+//MODAL
+  handleSubmit = (e) => {
+      e.preventDefault();
+        const addBeer = {
+          brewery: this.state.brewery,
+          beer: this.state.beer,
+          rating: this.state.rating,
+          notes: this.state.notes
+        };
+
+      axios.post(`/api/mybeers/${this.props.user._id}/add-beer`, addBeer)
+        .then((response) => response.json())
+        .then((result) => {
+          this.handler()
+          this.props.addBeer();
+        })
+      .catch(error => {
+      console.log(error.response)
+      })
+      this.props.addBeer();
+      this.handler();
+      this.setState({open: false})
+      };
+
+
+    handleOpen = () => {
+        this.setState({open: true});
+    };
+
+    handleClose = () => {
+      this.setState({open: false});
+    };
+
+
+    onChangeBrewery = (e) => {
+      this.setState({ brewery: e.target.value });
+    };
+
+    onChangeBeer = (e) => {
+      this.setState({ beer: e.target.value });
+    };
+
+    onChangeRating = (e) => {
+      this.setState({ rating: e.target.value });
+    };
+
+    onChangeNotes = (e) => {
+      this.setState({ notes: e.target.value });
+    };
+
+
+
+
+
 
   deleteMyBeers(beer) {
     axios
@@ -44,7 +114,15 @@ class MyBeer extends Component {
       });
   }
 
+
+
+
+
+
+
   render() {
+    console.log(this.props, " PROPS MY BEERS")
+
     const listBeers = this.state.mybeers.map((beer) => (
       <>
         <TableRow key={beer._id}>
@@ -64,6 +142,64 @@ class MyBeer extends Component {
 
     return (
       <div>
+        <Button variant="contained" color="primary" onClick={this.handleOpen}>
+            Add Past Beers
+        </Button>
+
+        <Modal
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            open={this.state.open}
+            onClose={this.handleClose}
+        >
+            <div className= "modalStyle">
+                <h2 className="modalTitle">Simple React Modal</h2>
+                <>
+                <form onSubmit={this.handleSubmit} className="modalContent">
+                  <div className="modalInputs">
+                  <label>
+                    Brewery:
+                    <input
+                      type="text"
+                      value={this.state.brewery}
+                      value={this.state.password}
+                      onChange={this.onChangeBrewery}
+                    />
+                  </label>
+                  </div>
+
+                  <label>
+                    Beer:
+                    <input
+                      type="text"
+                      value={this.state.beer}
+                      onChange={this.onChangeBeer}
+                    />
+                  </label>
+                  <label>
+                    Rating:
+                    <input
+                      type="text"
+                      value={this.state.rating}
+                      onChange={this.onChangeRating}
+                    />
+                  </label>
+                  <label>
+                    Notes:
+                    <input
+                      type="text"
+                      value={this.state.notes}
+                      onChange={this.onChangeNotes}
+                    />
+                  </label>
+                  <button type="submit" value="Submit" className="modalButton">Submit</button>
+                </form>
+            </>
+            </div>
+        </Modal>
+
+
+        <div>
         <p>My Beers</p>
         <TableContainer component={Paper}>
           <Table aria-label="simple-table">
@@ -78,6 +214,8 @@ class MyBeer extends Component {
             <TableBody>{listBeers}</TableBody>
           </Table>
         </TableContainer>
+      </div>
+
       </div>
     );
   }

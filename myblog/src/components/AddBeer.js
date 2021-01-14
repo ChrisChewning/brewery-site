@@ -4,6 +4,7 @@ import Modal from '@material-ui/core/Modal';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 
+
 function rand() {
     return Math.round(Math.random() * 20) - 10;
 }
@@ -43,10 +44,11 @@ const AddBeerModal = (props) => {
     const [rating, setRating] = useState("");
     const [notes, setNotes] = useState("");
 
+console.log(props, "PROPS")
+//console.log(props.addBeer())
 
-  const handleSubmit = (evt) => {
-      evt.preventDefault();
-
+  const handleSubmit = (e) => {
+      e.preventDefault();
         const addBeer = {
           brewery: brewery,
           beer: beer,
@@ -58,10 +60,13 @@ const AddBeerModal = (props) => {
       .then(response => {
       console.log(response)
       })
+      //.then())
       .catch(error => {
       console.log(error.response)
       })
-
+      handleClose(); //close modal
+      props.user.beers.push()
+      console.log(props.user.beers)
       };
 
 
@@ -73,12 +78,12 @@ const AddBeerModal = (props) => {
         setOpen(false);
     };
 
-  
+
     return (
         <div>
 
             <Button variant="contained" color="primary" onClick={handleOpen}>
-                Open Modal
+                Add Past Beer
             </Button>
 
             <Modal
