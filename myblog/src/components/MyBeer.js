@@ -9,7 +9,8 @@ import Paper from "@material-ui/core/Paper";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
-import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import AddCircleSharpIcon from '@material-ui/icons/AddCircleSharp';
 
 class MyBeer extends Component {
   constructor(props) {
@@ -168,9 +169,6 @@ onChangeNotes = (e) => {
 
 
   render() {
-    console.log(this.props, " PROPS MY BEERS");
-    console.log(this.state.mybeers, ' my beers')
-
     const listBeers = this.state.mybeers.map((beer) => (
       <>
         <TableRow key={beer._id}>
@@ -207,11 +205,8 @@ onChangeNotes = (e) => {
 
 
     return (
-      <div>
-        <Button variant="contained" color="primary" onClick={this.handleOpenPast}>
-          Add Past Beers
-        </Button>
-
+      <div className="card-parent">
+      <Card>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
@@ -267,8 +262,13 @@ onChangeNotes = (e) => {
         </Modal>
 
         <div>
-          <p>My Beers</p>
-          <TableContainer component={Paper}>
+          <div className="my-beers-title-parent">
+            <div className="my-beers-title-btn">
+          <p className="my-beers-title">My Beers </p>
+            <AddCircleSharpIcon variant="contained" color="primary" onClick={this.handleOpenPast} className="modal-plus-btn" />
+          </div>
+          </div>
+          <TableContainer component={Paper} className="table-parent">
             <Table aria-label="simple-table">
               <TableHead>
                 <TableRow>
@@ -282,10 +282,17 @@ onChangeNotes = (e) => {
             </Table>
           </TableContainer>
         </div>
+  </Card>
 
-        <Button variant="contained" color="primary" onClick={this.handleOpenFuture} className="round-button">
-          +
-        </Button>
+  <Card>
+        <div className="my-beers-title-parent">
+          <div className="my-beers-title-btn">
+        <p className="my-beers-title">My Future Beers </p>
+          <AddCircleSharpIcon variant="contained" color="primary" onClick={this.handleOpenFuture} className="modal-plus-btn" />
+        </div>
+        </div>
+
+
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
@@ -333,8 +340,7 @@ onChangeNotes = (e) => {
         </Modal>
 
         <div>
-          <p>My Future Beers</p>
-          <TableContainer component={Paper}>
+          <TableContainer component={Paper} className="table-parent">
             <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
@@ -347,14 +353,8 @@ onChangeNotes = (e) => {
             </Table>
           </TableContainer>
         </div>
-
-
-
+      </Card>
       </div>
-
-
-
-
     );
   }
 }

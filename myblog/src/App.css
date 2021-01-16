@@ -394,6 +394,46 @@ box-sizing: border-box;
   display: block;
 }
 
+.my-beers-title-parent{
+  display: inline-block;
+  width: 55%;
+  position: relative;
+}
+
+.my-beers-title{
+  display: inline-block;
+  margin-right: 2%;
+}
+
+.my-beers-title-btn{
+  display: inline-block;
+  padding-right: 15px;
+  margin: auto;
+  width: 50%;
+}
+
+.modal-plus-btn{
+  margin: 0;
+  display: inline-block;
+  margin: 0;
+ position: absolute;
+ top: 50%;
+ -ms-transform: translateY(-50%);
+ transform: translateY(-50%);
+}
+
+.table-parent{
+  margin-top: 2%;
+  margin-bottom: 5%;
+}
+
+.MuiCard-root {
+margin-top: 5%;
+}
+
+.MuiCard-root {
+    overflow: inherit;
+}
 
 body {
   background-color: #f1f3f4;
