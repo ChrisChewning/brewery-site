@@ -39,9 +39,9 @@ p {
 
 
 /* POSTS LIST */
-.card {
+.card-post {
   margin: 20px;
-  padding: 10px;
+  width: 40%;
 }
 
 .post-list{
@@ -54,12 +54,16 @@ p {
 .username{
   flex: 1;
   padding: 100px;
-  border: 2px solid yellow;
 }
-.post-content{
+
+/* .post-content{
   flex: 1;
   border: 2px solid yellow;
-  margin: 0% 5%;
+  margin: 0% 5%; */
+/* } */
+
+.most-recent-comment, .date-posted-comment{
+  font-style: italic;
 }
 
 .vertical-divider {
@@ -69,10 +73,6 @@ p {
     margin-left: '2em';
 }
 
-.post-img{
-  width: 10%;
-  height: 10%;
-}
 
 
 
@@ -85,10 +85,44 @@ p {
 
 
 .post-item-parent{
-flex-direction: column;
+  display: flex;
+/*flex-direction: column;*/
 }
 
-.post-username-date {
+
+.post-parent-img-content{
+  display: flex;
+  flex-direction: column;
+  margin-top: 50%;
+}
+
+.post-parent-content{
+  margin: auto;
+  width: 50%;
+  flex-direction: row;
+}
+
+
+.post-img{
+  flex-direction: column;
+  display: flex;
+  width: 5em;
+  height: 10em;
+  margin-right: -10%;
+  margin-left: 10%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.img-test{
+  width: 20%;
+  margin: auto;
+}
+
+
+
+/* .post-username-date {
 border-color: black;
 }
 .post-comments-parent{
@@ -97,8 +131,8 @@ border-color: black;
 }
 
 .post-content-parent{
-  align-items: center;
-}
+  align-items: center; */
+/* } */
 
 
 
@@ -238,10 +272,10 @@ div#upvotes-section{
   margin-right: 10%;
 }
 
-.post-content{
+/* .post-content{
 width: 15%;
 display: inline-block;
-}
+} */
 
 
 /* COMMENTS */
@@ -262,7 +296,6 @@ display: inline-block;
   border-radius: 8px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 18px;
-  border: 2px solid black;
   margin-bottom: 16px;
 }
 
@@ -357,7 +390,9 @@ box-sizing: border-box;
   margin-right: 5px;
 }
 
-
+#MultiListItem-root{
+  display: block;
+}
 
 
 body {

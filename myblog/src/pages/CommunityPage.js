@@ -7,6 +7,8 @@ import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import Moment from 'react-moment';
+import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
+import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
 
 class CommunityPage extends Component {
   constructor(props) {
@@ -43,29 +45,44 @@ render() {
       )}
 
       { this.state.posts.map((post, key) => (
-        <Card className="card">
+        <Card className="card-post">
         <List className="post-list">
-        <img className="post-img" src={post.image} alt="username image for post"/>
         <div className="post-item-parent">
-          <Link className="brewery-list-item"
+
+          <div className="img-test">
+        <img className="post-img" src={post.image} alt="username image for post"/>
+        </div>
+          <div className="post-parent-content">
+        <div className="post-parent-title">
+          <Link className="post-content"
             key={key}
             to= {`/community/posts/${post._id}`}
             >
-          <h3 className="post-name">{post.name}</h3>
-          <div className= "vertical-divider" />
-      </Link>
-          <ListItem className="username">{post.username} * <Moment format=" MMM D, YYYY">
+          <h3 className="post-parent-img-comment">{post.name}</h3>
+          </Link>
+          <ListItem className="username" id="MultiListItem-root">
+            <CreateOutlinedIcon id="create-id" />
+            {post.username}
+            <div className="date-posted-comment">
+            Posted on <Moment format=" MMM D, YYYY">
              {post.createdAt}
           </Moment>
+          </div>
         </ListItem>
-        </div>
 
-      <div className="post-comments-parent">
-      <ListItem key={key} className="post-content">Comments: {post.comments.length}  </ListItem>
-      <ListItem className="post-content">Most Recent:   <Moment format="MMM D, YYYY h:mm a">
+      <ListItem id="MultiListItem-root" key={key} className="post-content">
+        <ChatOutlinedIcon />
+         {post.comments.length} Comments
+      <div className="most-recent-comment"> Latest: <Moment format="MMM D, YYYY h:mm a">
         {post.updatedAt}
-      </Moment></ListItem>
-      </div>
+      </Moment>
+    </div></ListItem>
+
+</div>
+  </div>
+
+
+  </div>
   </List>
 
 </Card>
