@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Card from "@material-ui/core/Card";
 import axios from "axios";
 
 const Weather = () => {
@@ -37,10 +38,10 @@ const Weather = () => {
 
   return (
     <div>
-
+      <Card>
       <h2>The weather in Austin is {weatherData} degrees; {advice[0]} has a {advice[1]}</h2>
-      <div></div>
       <button onClick={getWeather}>Get Weather</button>
+      </Card>
     </div>
   );
 };

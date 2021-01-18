@@ -185,8 +185,7 @@ li {
 
 /*SITE WIDE STYLING */
 #page-body {
-  width: 80%;
-  float: left;
+  width: 50%;
   margin: auto;
   text-align: center;
   /* padding: 64px; */
@@ -195,12 +194,11 @@ li {
 
 /* SIDE NAV */
 
-.sidenav {
+.sidenav-index{
   height: auto;
   width: 15%;
   float: right;
   position: absolute;
-  border-left: solid 1px black;
   padding: 2%;
 
 /*  z-index: 1;*/
@@ -339,6 +337,11 @@ h4.comment-username {
   width: 5%;
 }
 
+/* MY BEERS CARD */
+.my-beers-parent{
+  margin: 5% auto;
+}
+
 
 /* MODAL */
 
@@ -422,17 +425,14 @@ box-sizing: border-box;
  transform: translateY(-50%);
 }
 
-.table-parent{
-  margin-top: 2%;
-  margin-bottom: 5%;
-}
+
 
 .MuiCard-root {
-margin-top: 5%;
+  overflow: initial !important;
+  width: 100%;
 }
-
 .MuiCard-root {
-    overflow: inherit;
+    /* overflow: hidden; */
 }
 
 body {

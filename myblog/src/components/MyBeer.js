@@ -11,6 +11,9 @@ import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import Card from "@material-ui/core/Card";
 import AddCircleSharpIcon from '@material-ui/icons/AddCircleSharp';
+import CreateIcon from '@material-ui/icons/Create';
+import CloseIcon from '@material-ui/icons/Close';
+
 
 class MyBeer extends Component {
   constructor(props) {
@@ -102,8 +105,33 @@ class MyBeer extends Component {
     };
 
 
+//EDIT BEERS
+  editMyBeers = (beer) => {
+    axios.put(
+      `http://localhost:8000/api/mybeers/${this.user}/my-beers/update/${beer}`
+    )
+    .then((response)=>{
+      this.setState({ mybeers: response.data });
+    })
+    .catch((error) => {
+      console.log(error.response)
+    })
+  }
 
-//DELETE BEER
+
+  editMyFutureBeers = (beer) => {
+    axios.put(
+      `http://localhost:8000/api/mybeers/${this.user}/my-future-beers/update/${beer}`
+    )
+    .then((response)=>{
+      this.setState({ mybeers: response.data });
+    })
+    .catch((error) => {
+      console.log(error.response)
+    })
+  }
+
+//DELETE BEERS
   deleteMyBeers = (beer) => {
     axios
       .delete(
@@ -130,6 +158,8 @@ deleteMyFutureBeers = (beer) => {
       console.log(error.response);
     });
 }
+
+
 
 
 //ONCHANGES, OPEN, CLOSE
@@ -176,12 +206,15 @@ onChangeNotes = (e) => {
           <TableCell align="right">{beer.beer}</TableCell>
           <TableCell align="right">{beer.rating}</TableCell>
           <TableCell align="right">{beer.notes}</TableCell>
-          <button
-            className="my-beers-delete"
-            onClick={() => this.deleteMyBeers(beer._id)}
-          >
-            X
-          </button>
+          <TableCell align="right">
+        <div className="my-beers-edit-del">
+            <CreateIcon>
+            </CreateIcon>
+          <CloseIcon
+            onClick={() => this.deleteMyBeers(beer._id)}>
+          </CloseIcon>
+          </div>
+          </TableCell>
         </TableRow>
       </>
     ));
@@ -193,12 +226,10 @@ onChangeNotes = (e) => {
           <TableCell align="right">{beer.beer}</TableCell>
           <TableCell align="right">{beer.rating}</TableCell>
           <TableCell align="right">{beer.notes}</TableCell>
-          <button
-            className="my-beers-delete"
+          <CloseIcon
             onClick={() => this.deleteMyFutureBeers(beer._id)}
           >
-            X
-          </button>
+        </CloseIcon>
         </TableRow>
       </>
     ));
@@ -261,7 +292,7 @@ onChangeNotes = (e) => {
           </div>
         </Modal>
 
-        <div>
+        <div className="my-beers-parent">
           <div className="my-beers-title-parent">
             <div className="my-beers-title-btn">
           <p className="my-beers-title">My Beers </p>
@@ -276,6 +307,8 @@ onChangeNotes = (e) => {
                   <TableCell align="right">Beer</TableCell>
                   <TableCell align="right">Rating</TableCell>
                   <TableCell align="right">Notes</TableCell>
+                  <TableCell align="right"></TableCell>
+
                 </TableRow>
               </TableHead>
               <TableBody>{listBeers}</TableBody>
@@ -284,14 +317,13 @@ onChangeNotes = (e) => {
         </div>
   </Card>
 
-  <Card>
+  <Card className= "my-beers-parent">
         <div className="my-beers-title-parent">
           <div className="my-beers-title-btn">
         <p className="my-beers-title">My Future Beers </p>
           <AddCircleSharpIcon variant="contained" color="primary" onClick={this.handleOpenFuture} className="modal-plus-btn" />
         </div>
         </div>
-
 
         <Modal
           aria-labelledby="simple-modal-title"
@@ -347,6 +379,8 @@ onChangeNotes = (e) => {
                   <TableCell>Brewery</TableCell>
                   <TableCell align="right">Beer</TableCell>
                   <TableCell align="right">Notes</TableCell>
+                    <TableCell align="right"></TableCell>
+
                 </TableRow>
               </TableHead>
               <TableBody>{listFutureBeers}</TableBody>

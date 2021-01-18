@@ -9,10 +9,9 @@ const Index = () => (
   <>
     <h1>Welcome!</h1>
     <p>Thank you for coming.</p>
-    <EventsCalendar />
-    <div className="sidenav">
       <Weather />
       <Events />
+    <div className="sidenav-index">
       <TwitterIframe />
     </div>
   </>

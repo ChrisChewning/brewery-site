@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Card from "@material-ui/core/Card";
 import axios from "axios";
 
 const Events = () => {
@@ -37,11 +38,10 @@ console.log(events)
 
   return (
     <>
+      <Card>
       <h2>Upcoming Events</h2>
-
       {upcomingEvents.map((upcomingEvent, i) => (
-        <>
-          <div className={"events-list"} key={i}>
+          <div key={i}>
             <li key={i}>
             <h3>{upcomingEvent.title}</h3>
             <p className="event-paragraph">
@@ -53,9 +53,10 @@ console.log(events)
             </p>
             </li>
           </div>
-        </>
   ))
+
 }
+</Card>
 </>
 );
 
