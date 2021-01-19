@@ -224,12 +224,14 @@ onChangeNotes = (e) => {
         <TableRow key={beer._id}>
           <TableCell>{beer.brewery}</TableCell>
           <TableCell align="right">{beer.beer}</TableCell>
-          <TableCell align="right">{beer.rating}</TableCell>
           <TableCell align="right">{beer.notes}</TableCell>
+          <TableCell align="right">
+          <CreateIcon></CreateIcon>
           <CloseIcon
             onClick={() => this.deleteMyFutureBeers(beer._id)}
           >
         </CloseIcon>
+      </TableCell>
         </TableRow>
       </>
     ));
@@ -237,7 +239,6 @@ onChangeNotes = (e) => {
 
     return (
       <div className="card-parent">
-      <Card>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
@@ -292,35 +293,35 @@ onChangeNotes = (e) => {
           </div>
         </Modal>
 
-        <div className="my-beers-parent">
+        <Card className="my-beers-parent">
           <div className="my-beers-title-parent">
             <div className="my-beers-title-btn">
-          <p className="my-beers-title">My Beers </p>
+          <p className="account-page-titles">My Beers </p>
+          <div className="modal-plus-btn-parent">
             <AddCircleSharpIcon variant="contained" color="primary" onClick={this.handleOpenPast} className="modal-plus-btn" />
+            </div>
           </div>
           </div>
           <TableContainer component={Paper} className="table-parent">
             <Table aria-label="simple-table">
               <TableHead>
                 <TableRow>
-                  <TableCell>Brewery</TableCell>
-                  <TableCell align="right">Beer</TableCell>
-                  <TableCell align="right">Rating</TableCell>
-                  <TableCell align="right">Notes</TableCell>
-                  <TableCell align="right"></TableCell>
-
+                  <TableCell align="center">Brewery</TableCell>
+                  <TableCell align="center">Beer</TableCell>
+                  <TableCell align="center">Rating</TableCell>
+                  <TableCell align="center">Notes</TableCell>
+                  <TableCell align="center"></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>{listBeers}</TableBody>
             </Table>
           </TableContainer>
-        </div>
   </Card>
 
   <Card className= "my-beers-parent">
         <div className="my-beers-title-parent">
           <div className="my-beers-title-btn">
-        <p className="my-beers-title">My Future Beers </p>
+        <p className="account-page-titles">My Future Beers </p>
           <AddCircleSharpIcon variant="contained" color="primary" onClick={this.handleOpenFuture} className="modal-plus-btn" />
         </div>
         </div>
@@ -341,7 +342,6 @@ onChangeNotes = (e) => {
                     <input
                       type="text"
                       value={this.state.brewery}
-                      value={this.state.password}
                       onChange={this.onChangeBrewery}
                     />
                   </label>
@@ -379,8 +379,6 @@ onChangeNotes = (e) => {
                   <TableCell>Brewery</TableCell>
                   <TableCell align="right">Beer</TableCell>
                   <TableCell align="right">Notes</TableCell>
-                    <TableCell align="right"></TableCell>
-
                 </TableRow>
               </TableHead>
               <TableBody>{listFutureBeers}</TableBody>

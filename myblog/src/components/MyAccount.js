@@ -3,8 +3,18 @@ import axios from "axios";
 import { Redirect } from "react-router-dom";
 import MyBeer from "../components/MyBeer";
 import MyFutureBeer from "../components/MyFutureBeer";
+import Moment from "react-moment";
 import Modal from "@material-ui/core/Modal";
 import AddBeerModal from "../components/AddBeer";
+import Card from "@material-ui/core/Card";
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
+import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
+
+
 
 class MyAccount extends Component {
   constructor(props) {
@@ -16,7 +26,7 @@ class MyAccount extends Component {
       file: null,
       loggedOut: false,
       user: {},
-      updateBeers: false
+      uploadImg: false
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -34,8 +44,8 @@ componentDidMount() {
   this.handler();
 }
 
-updateBeers = () => {
-  this.setState({updateBeers: true})
+uploadImg = () => {
+  this.setState({uploadImg: true})
 }
 
 
@@ -70,12 +80,12 @@ updateBeers = () => {
   handleLogout() {
     this.setState({ loggedOut: true });
     window.localStorage.clear();
-    //this.props.setUser(null);
   }
 
   render() {
     console.log(this.props.user.image)
     console.log(this.state.user, ' user state')
+    console.log(this.state.uploadImg, ' upload img')
     if (!this.user) {
       this.setState({ loggedOut: true });
     }
@@ -84,19 +94,16 @@ updateBeers = () => {
     }
 
     return (
-      <>
-        <h2>hi {this.props.user.username}</h2>
-        <h3>email address: {this.props.user.email}</h3>
-        <h3>Member since: {this.props.user.register_date}</h3>
-        <button onClick={this.handleLogout}>Logout</button>
+  <>
 
-        <form
-          encType="multipart/form-data"
-          name="image"
-          onSubmit={this.onSubmit}
-        >
+
+      <Card className="my-account-parent">
+          <p className="account-page-titles">My Account</p>
+          <div className="img-username-changeimg-email">
+        <img className="profile-img" src={this.state.image} alt="profile image" />
+          <p>{this.props.user.username}</p>
           <div className="form-group">
-            <label htmlFor="image">Upload image</label>
+            <label htmlFor="image" onClick={this.uploadImg} className={this.state.uploadImg ? 'img-btn-hide-save' : 'account-label'}>Upload Image</label>
             <input
               type="file"
               name="image"
@@ -104,15 +111,45 @@ updateBeers = () => {
               className="form-control-file"
               onChange={this.onChange}
             ></input>
+            <form
+              encType="multipart/form-data"
+              name="image"
+              onSubmit={this.onSubmit}
+            >
+              <div className="form-group">
+                <button type="submit" name="image" id="img-save-btn" className={this.state.uploadImg ? 'account-label' : 'img-btn-hide-save'}>
+                  Save
+                </button>
+              </div>
+            </form>
           </div>
-          <div className="form-group">
-            <button type="submit" name="image" className="btn btn-primary">
-              Save
-            </button>
-          </div>
-        </form>
+        </div>
+        <div className="img-username-changeimg-email">
+          <MailOutlineIcon className="email-outline" />
+        <p>{this.props.user.email}</p>
+        <div className="form-group">
+          <label onClick="" className="account-label">Update Email</label>
+        </div>
+      </div>
+        </Card>
 
-        <img className="profile-img" src={this.state.image} alt="profile image" />
+    <Card className="mbr-posts-comments-card">
+        <div className="member-posts-comments">
+          <PersonOutlineIcon className="person-outline" />
+        <p className="member-since">Member Since: <Moment format=" MMM D, YYYY">{this.props.user.register_date}</Moment></p>
+        </div>
+      <div className="user-comments-parent">
+        <CreateOutlinedIcon className="posts-outline" />
+        <p className="user-posts-total">Posts: {} </p>
+        <ChatOutlinedIcon className="comments-outline" />
+        <p className="user-comments-total">Comments: {} </p>
+        </div>
+      </Card>
+
+
+      <Card>
+
+        </Card>
 
         <>
           <div className="beerList">
