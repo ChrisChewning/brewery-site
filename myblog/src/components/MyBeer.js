@@ -202,10 +202,10 @@ onChangeNotes = (e) => {
     const listBeers = this.state.mybeers.map((beer) => (
       <>
         <TableRow key={beer._id}>
-          <TableCell>{beer.brewery}</TableCell>
-          <TableCell align="right">{beer.beer}</TableCell>
-          <TableCell align="right">{beer.rating}</TableCell>
-          <TableCell align="right">{beer.notes}</TableCell>
+          <TableCell align="center">{beer.brewery}</TableCell>
+          <TableCell align="center">{beer.beer}</TableCell>
+          <TableCell align="center">{beer.rating}</TableCell>
+          <TableCell align="center">{beer.notes}</TableCell>
           <TableCell align="right">
         <div className="my-beers-edit-del">
             <CreateIcon>
@@ -222,9 +222,9 @@ onChangeNotes = (e) => {
     const listFutureBeers = this.state.myfuturebeers.map((beer) => (
       <>
         <TableRow key={beer._id}>
-          <TableCell>{beer.brewery}</TableCell>
-          <TableCell align="right">{beer.beer}</TableCell>
-          <TableCell align="right">{beer.notes}</TableCell>
+          <TableCell align="center">{beer.brewery}</TableCell>
+          <TableCell align="center">{beer.beer}</TableCell>
+          <TableCell align="center">{beer.notes}</TableCell>
           <TableCell align="right">
           <CreateIcon></CreateIcon>
           <CloseIcon
@@ -247,9 +247,8 @@ onChangeNotes = (e) => {
         >
           <div className="modalStyle">
             <h2 className="modalTitle">My Beers</h2>
-            <>
               <form onSubmit={this.handleSubmitMyBeers} className="modalContent">
-                <div className="modalInputs">
+                  <div>
                   <label>
                     Brewery:
                     <input
@@ -259,8 +258,6 @@ onChangeNotes = (e) => {
                       onChange={this.onChangeBrewery}
                     />
                   </label>
-                </div>
-
                 <label>
                   Beer:
                   <input
@@ -269,7 +266,7 @@ onChangeNotes = (e) => {
                     onChange={this.onChangeBeer}
                   />
                 </label>
-                <label>
+                <label className="modalRating">
                   Rating:
                   <input
                     type="text"
@@ -277,7 +274,7 @@ onChangeNotes = (e) => {
                     onChange={this.onChangeRating}
                   />
                 </label>
-                <label>
+                <label className="modalNotes">
                   Notes:
                   <input
                     type="text"
@@ -285,11 +282,11 @@ onChangeNotes = (e) => {
                     onChange={this.onChangeNotes}
                   />
                 </label>
+              </div>
                 <button type="submit" value="Submit" className="modalButton">
                   Submit
                 </button>
               </form>
-            </>
           </div>
         </Modal>
 
@@ -297,7 +294,7 @@ onChangeNotes = (e) => {
           <div className="my-beers-title-parent">
             <div className="my-beers-title-btn">
           <p className="account-page-titles">My Beers </p>
-          <div className="modal-plus-btn-parent">
+          <div className="form-group">
             <AddCircleSharpIcon variant="contained" color="primary" onClick={this.handleOpenPast} className="modal-plus-btn" />
             </div>
           </div>
@@ -322,8 +319,10 @@ onChangeNotes = (e) => {
         <div className="my-beers-title-parent">
           <div className="my-beers-title-btn">
         <p className="account-page-titles">My Future Beers </p>
+          <div className="form-group">
           <AddCircleSharpIcon variant="contained" color="primary" onClick={this.handleOpenFuture} className="modal-plus-btn" />
         </div>
+      </div>
         </div>
 
         <Modal
@@ -336,7 +335,7 @@ onChangeNotes = (e) => {
             <h2 className="modalTitle">My Future Beers</h2>
             <>
               <form onSubmit={this.handleSubmitFutureBeers} className="modalContent">
-                <div className="modalInputs">
+                <div className="modalBreweryBeerRating">
                   <label>
                     Brewery:
                     <input
@@ -345,8 +344,6 @@ onChangeNotes = (e) => {
                       onChange={this.onChangeBrewery}
                     />
                   </label>
-                </div>
-
                 <label>
                   Beer:
                   <input
@@ -355,17 +352,23 @@ onChangeNotes = (e) => {
                     onChange={this.onChangeBeer}
                   />
                 </label>
-                <label>
+              </div>
+              <div className="">
+                <label className="modalNotes">
                   Notes:
                   <input
                     type="text"
                     value={this.state.notes}
                     onChange={this.onChangeNotes}
+                    className="modalNotes"
                   />
                 </label>
+              </div>
+              <div className="">
                 <button type="submit" value="Submit" className="modalButton">
                   Submit
                 </button>
+                </div>
               </form>
             </>
           </div>
@@ -376,9 +379,10 @@ onChangeNotes = (e) => {
             <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>Brewery</TableCell>
-                  <TableCell align="right">Beer</TableCell>
-                  <TableCell align="right">Notes</TableCell>
+                  <TableCell align="center">Brewery</TableCell>
+                  <TableCell align="center">Beer</TableCell>
+                  <TableCell align="center">Notes</TableCell>
+                  <TableCell></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>{listFutureBeers}</TableBody>
