@@ -23,6 +23,7 @@ class MyBeer extends Component {
       myfuturebeers: [],
       openPast: false,
       openFuture: false,
+      editBtn: false,
       beer_id: "",
       brewery: "",
       beer: "",
@@ -30,7 +31,6 @@ class MyBeer extends Component {
       notes: "",
     };
     this.user = window.localStorage.getItem("user"); //this.user allows it to be accessible instead of const user
-    this.deleteMyBeers = this.deleteMyBeers.bind(this);
   }
 
   //GET PAST BEERS
@@ -43,10 +43,12 @@ class MyBeer extends Component {
         });
         this.setState({ mybeers: savedBeers });
       });
-    this.setState({ open: false, openPast: false });
+    this.setState({ open: false, openPast: false, openFuture: false, beer: "", brewery: "", notes: "", rating: "", editBtn: false });
   };
 
 
+
+//GET FUTURE BEERS
   getFutureBeers = () => {
     fetch(`http://localhost:8000/api/mybeers/${this.user}/my-future-beers`)
       .then((response) => response.json())
@@ -59,14 +61,35 @@ class MyBeer extends Component {
   }
 
 
-
   componentDidMount() {
     this.handler();
     this.getFutureBeers();
   }
 
+
+  //EDIT PAST BEERS (OPEN MODAL with pencil icon)
+    editMyPastBeers = (beer) => {
+      this.setState({ brewery: beer.brewery, beer: beer.beer, rating: beer.rating, notes: beer.notes, beer_id: beer._id, openPast: true, editBtn: true })
+      console.log(beer, 'beer')
+  }
+
+  //DELETE PAST BEERS (x icon)
+    deleteMyPastBeers = (beer) => {
+      axios
+        .delete(
+          `http://localhost:8000/api/mybeers/${this.user}/my-beers/delete/${beer}`
+        )
+        .then((response) => {
+          this.setState({ mybeers: response.data });
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    }
+
+
   //MODAL ADD PAST BEERS
-  handleSubmitMyBeers = (e) => {
+  handleSubmitPastBeers = (e) => {
     e.preventDefault();
     const addBeer = {
       brewery: this.state.brewery,
@@ -74,8 +97,6 @@ class MyBeer extends Component {
       rating: this.state.rating,
       notes: this.state.notes,
     };
-
-    //ADD BEER
     axios
       .post(`/api/mybeers/${this.props.user._id}/add-beer`, addBeer)
       .then((response) => this.handler())
@@ -86,10 +107,9 @@ class MyBeer extends Component {
   };
 
 //MODAL EDIT PAST BEERS
-
-//EDIT BEERS
   handleSubmitEditPastBeers = (e, beer) => {
     e.preventDefault();
+    this.setState({editBtn: true})
     const editBeer = {
       brewery: this.state.brewery,
       beer: this.state.beer,
@@ -99,16 +119,19 @@ class MyBeer extends Component {
     console.log(editBeer, ' EDIT BEER')
     axios.put(
       `http://localhost:8000/api/mybeers/${this.props.user._id}/my-beers/edit/${this.state.beer_id}`, editBeer) //can put in beer id directly. but not working w ${beer}
-    .then((response)=> this.handler())
+    .then((response)=>this.handler())
     .catch((error) => {
       console.log(error.response)
     })
   }
 
 
-//MODAL FUTURE BEERS
+
+
+//MODAL ADD FUTURE BEERS
   handleSubmitFutureBeers = (e) => {
     e.preventDefault();
+    this.setState({editBtn: true})
     const addBeer = {
       brewery: this.state.brewery,
       beer: this.state.beer,
@@ -128,37 +151,35 @@ class MyBeer extends Component {
 
 
 
-  editMyFutureBeers = (beer) => {
+
+//MODAL EDIT FUTURE BEERS
+  handleSubmitEditFutureBeers = (e, beer) => {
+    e.preventDefault();
+    const editBeer = {
+      brewery: this.state.brewery,
+      beer: this.state.beer,
+      notes: this.state.notes,
+    };
     axios.put(
-      `http://localhost:8000/api/mybeers/${this.user}/my-future-beers/update/${beer}`
+      `http://localhost:8000/api/mybeers/${this.props.user._id}/my-future-beers/edit/${this.state.beer_id}`, editBeer
     )
-    .then((response)=>{
-      this.setState({ mybeers: response.data });
-    })
+    .then((response)=>this.setState({ myfuturebeers: response.data }))
+    .then((response)=>this.handler())
     .catch((error) => {
       console.log(error.response)
     })
   }
 
-//EDIT BEERS
-  editMyPastBeers = (beer) => {
-    this.setState({ brewery: beer.brewery, beer: beer.beer, rating: beer.rating, notes: beer.notes, beer_id: beer._id, openPast: true })
+//EDIT FUTURE BEERS
+  editMyFutureBeers = (beer) => {
+    this.setState({ brewery: beer.brewery, beer: beer.beer, notes: beer.notes, beer_id: beer._id, openFuture: true, editBtn: true })
     console.log(beer, 'beer')
+    console.log(beer._id, 'beer id')
+    console.log(this.state.beer_id, ' state')
+    console.log(this.state.note)
 }
 
-//DELETE BEERS
-  deleteMyBeers = (beer) => {
-    axios
-      .delete(
-        `http://localhost:8000/api/mybeers/${this.user}/my-beers/delete/${beer}`
-      )
-      .then((response) => {
-        this.setState({ mybeers: response.data });
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-  }
+
 
 
 deleteMyFutureBeers = (beer) => {
@@ -215,6 +236,7 @@ onChangeNotes = (e) => {
 
   render() {
     console.log(this.state.brewery)
+    console.log(this.state.beer._id)
     const listBeers = this.state.mybeers.map((beer) => (
       <>
         <TableRow key={beer._id}>
@@ -225,7 +247,7 @@ onChangeNotes = (e) => {
           <TableCell align="right">
         <div className="my-beers-edit-del">
           <CreateIcon onClick={() => this.editMyPastBeers(beer)} />
-          <CloseIcon onClick={() => this.deleteMyBeers(beer._id)} />
+          <CloseIcon onClick={() => this.deleteMyPastBeers(beer._id)} />
           </div>
           </TableCell>
         </TableRow>
@@ -239,7 +261,7 @@ onChangeNotes = (e) => {
           <TableCell align="center">{beer.beer}</TableCell>
           <TableCell align="center">{beer.notes}</TableCell>
           <TableCell align="right">
-          <CreateIcon></CreateIcon>
+          <CreateIcon onClick={() => this.editMyFutureBeers(beer)}></CreateIcon>
           <CloseIcon
             onClick={() => this.deleteMyFutureBeers(beer._id)}
           >
@@ -260,7 +282,9 @@ onChangeNotes = (e) => {
         >
           <div className="modalStyle">
             <h2 className="modalTitle">My Beers</h2>
-              <form onSubmit={this.handleSubmitEditPastBeers} className="modalContent">
+
+
+              <form className="modalContent">
                   <div>
                   <label>
                     Brewery:
@@ -294,10 +318,15 @@ onChangeNotes = (e) => {
                     onChange={this.onChangeNotes}
                   />
                 </label>
+
               </div>
-                <button type="submit" value="Submit" className="modalButton">
-                  Submit
-                </button>
+                {this.state.editBtn == false ? (
+                  <button type="submit" value="Submit" className="modalButton" onClick={this.handleSubmitPastBeers}>Submit</button>
+                ) : (
+                  <button type="submit" value="Submit" className="modalButton" onClick={this.handleSubmitEditPastBeers}>
+                    Update
+                  </button>
+                )}
               </form>
           </div>
         </Modal>
@@ -346,7 +375,7 @@ onChangeNotes = (e) => {
           <div className="modalStyle">
             <h2 className="modalTitle">My Future Beers</h2>
             <>
-              <form onSubmit={this.handleSubmitFutureBeers} className="modalContent">
+              <form className="modalContent">
                 <div className="modalBreweryBeerRating">
                   <label>
                     Brewery:
@@ -377,9 +406,13 @@ onChangeNotes = (e) => {
                 </label>
               </div>
               <div className="">
-                <button type="submit" value="Submit" className="modalButton">
-                  Submit
-                </button>
+                {this.state.editBtn == false ? (
+                  <button type="submit" value="Submit" className="modalButton" onClick={this.handleSubmitFutureBeers}>Submit</button>
+                ) : (
+                  <button type="submit" value="Submit" className="modalButton" onClick={this.handleSubmitEditFutureBeers}>
+                    Update
+                  </button>
+                )}
                 </div>
               </form>
             </>
