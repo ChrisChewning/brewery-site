@@ -29,6 +29,35 @@ router.route("/:id/add-beer").post(async (req, res) => {
   }
 });
 
+//EDIT MT BEERS
+router.route("/:id/my-beers/edit/:beerId").put(async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const beerId = ObjectID(req.params.beerId); //can't be string representation
+
+    const beersInfo = await User.findOneAndUpdate(
+      { _id : userId, "beers._id": beerId },
+      {
+        $set: {
+          "beers.$.brewery": req.body.brewery,
+          "beers.$.beer" : req.body.beer,
+          "beers.$.rating" : req.body.rating,
+          "beers.$.notes" : req.body.notes,
+        },
+      },
+    { new: true } //without this, you have to send it twice.
+  )
+     res.status(200).json(beersInfo.beers); //instead of send, use json since we are working with json.
+
+  } catch (error) {
+    if (error) {
+      console.log(error);
+    }
+    res.status(500).json({ 'message': 'Error', error })
+  }
+});
+
+
 //GET MYBEERS
 router.route("/:id/mybeers").get(async (req, res) => {
   try {
@@ -63,6 +92,9 @@ router.route("/:id/my-beers/delete/:beerId").delete(async (req, res) => {
   }
 });
 
+
+
+
 ///
 //FUTURE BEERS SECTION
 ///
@@ -93,6 +125,36 @@ router.route("/:id/add-future-beer").post(async (req, res) => {
     res.status(400).send(err);
   }
 });
+
+//EDIT FUTURE BEERS
+router.route("/:id/my-future-beers/edit/:beerId").put(async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const beerId = ObjectID(req.params.beerId); //can't be string representation
+
+    const beersInfo = await User.findOneAndUpdate(
+      { _id : userId, "future_beers._id": beerId },
+      {
+        $set: {
+          "future_beers.$.brewery": req.body.brewery,
+          "future_beers.$.beer" : req.body.beer,
+          "future_beers.$.notes" : req.body.notes
+        },
+      },
+    { new: true } //without this, you have to send it twice.
+  )
+     res.status(200).json(beersInfo.future_beers); //instead of send, use json since we are working with json.
+
+  } catch (error) {
+    if (error) {
+      console.log(error);
+    }
+    res.status(500).json({ 'message': 'Error', error })
+  }
+});
+
+
+
 
 //GET FUTURE BEERS
 router.route("/:id/my-future-beers").get(async (req, res) => {
