@@ -23,6 +23,7 @@ class MyBeer extends Component {
       myfuturebeers: [],
       openPast: false,
       openFuture: false,
+      beer_id: "",
       brewery: "",
       beer: "",
       rating: "",
@@ -42,7 +43,7 @@ class MyBeer extends Component {
         });
         this.setState({ mybeers: savedBeers });
       });
-    this.setState({ open: false });
+    this.setState({ open: false, openPast: false });
   };
 
 
@@ -64,7 +65,7 @@ class MyBeer extends Component {
     this.getFutureBeers();
   }
 
-  //MODAL FUTURE BEERS
+  //MODAL ADD PAST BEERS
   handleSubmitMyBeers = (e) => {
     e.preventDefault();
     const addBeer = {
@@ -83,6 +84,26 @@ class MyBeer extends Component {
       });
     this.setState({ openPast: false });
   };
+
+//MODAL EDIT PAST BEERS
+
+//EDIT BEERS
+  handleSubmitEditPastBeers = (e, beer) => {
+    e.preventDefault();
+    const editBeer = {
+      brewery: this.state.brewery,
+      beer: this.state.beer,
+      rating: this.state.rating,
+      notes: this.state.notes,
+    };
+    console.log(editBeer, ' EDIT BEER')
+    axios.put(
+      `http://localhost:8000/api/mybeers/${this.props.user._id}/my-beers/edit/${this.state.beer_id}`, editBeer) //can put in beer id directly. but not working w ${beer}
+    .then((response)=> this.handler())
+    .catch((error) => {
+      console.log(error.response)
+    })
+  }
 
 
 //MODAL FUTURE BEERS
@@ -105,18 +126,6 @@ class MyBeer extends Component {
     };
 
 
-//EDIT BEERS
-  editMyBeers = (beer) => {
-    axios.put(
-      `http://localhost:8000/api/mybeers/${this.user}/my-beers/update/${beer}`
-    )
-    .then((response)=>{
-      this.setState({ mybeers: response.data });
-    })
-    .catch((error) => {
-      console.log(error.response)
-    })
-  }
 
 
   editMyFutureBeers = (beer) => {
@@ -130,6 +139,12 @@ class MyBeer extends Component {
       console.log(error.response)
     })
   }
+
+//EDIT BEERS
+  editMyPastBeers = (beer) => {
+    this.setState({ brewery: beer.brewery, beer: beer.beer, rating: beer.rating, notes: beer.notes, beer_id: beer._id, openPast: true })
+    console.log(beer, 'beer')
+}
 
 //DELETE BEERS
   deleteMyBeers = (beer) => {
@@ -199,6 +214,7 @@ onChangeNotes = (e) => {
 
 
   render() {
+    console.log(this.state.brewery)
     const listBeers = this.state.mybeers.map((beer) => (
       <>
         <TableRow key={beer._id}>
@@ -208,11 +224,8 @@ onChangeNotes = (e) => {
           <TableCell align="center">{beer.notes}</TableCell>
           <TableCell align="right">
         <div className="my-beers-edit-del">
-            <CreateIcon>
-            </CreateIcon>
-          <CloseIcon
-            onClick={() => this.deleteMyBeers(beer._id)}>
-          </CloseIcon>
+          <CreateIcon onClick={() => this.editMyPastBeers(beer)} />
+          <CloseIcon onClick={() => this.deleteMyBeers(beer._id)} />
           </div>
           </TableCell>
         </TableRow>
@@ -247,14 +260,13 @@ onChangeNotes = (e) => {
         >
           <div className="modalStyle">
             <h2 className="modalTitle">My Beers</h2>
-              <form onSubmit={this.handleSubmitMyBeers} className="modalContent">
+              <form onSubmit={this.handleSubmitEditPastBeers} className="modalContent">
                   <div>
                   <label>
                     Brewery:
                     <input
                       type="text"
                       value={this.state.brewery}
-                      value={this.state.password}
                       onChange={this.onChangeBrewery}
                     />
                   </label>
