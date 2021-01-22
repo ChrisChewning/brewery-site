@@ -35,6 +35,53 @@ p {
 
 .flex-child:first-child {
     margin-right: 20px;
+    margin: auto;
+}
+
+
+/* POSTS FORM */
+
+#post-label{
+display: inline-block;
+color: #0550c8;
+border-bottom: 1px solid #0550c8;
+margin-left: auto;
+}
+
+#post-entry{
+  text-align: left;
+  margin-left: 10%;
+}
+
+#post-title{
+  text-align: left;
+  display: block;
+}
+
+#post-content{
+  text-align: left;
+  display: block;
+}
+
+.post-content-parent{
+  display: block;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  overflow:
+}
+
+.MuiOutlinedInput-root {
+  width: 60%;
+}
+
+
+#post-btn{
+  display: block;
+  margin-top: 5%;
+  text-align: center;
+  margin: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 
@@ -257,8 +304,6 @@ li {
   background-color: gray;
   clear: both;
   overflow: auto;
-
-
 }
 
 .post-parent:group{
@@ -455,16 +500,25 @@ box-sizing: border-box;
 
 .MuiCard-root {
   width: 100%;
+  margin-left: 0%;
+  margin-right: 0%;
 }
-.MuiCard-root {
-    /* overflow: hidden; */
+
+
+#add-post-parent-card{
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
 }
 
 body {
   background-color: #f1f3f4;
 }
 
-
+.MuiFormControl-root{
+  flex-direction: inherit !important;
+  width: 150%;
+}
 
 
 

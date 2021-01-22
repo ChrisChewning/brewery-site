@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import Card from "@material-ui/core/Card";
 import { TextField } from '@material-ui/core';
 import {Button} from '@material-ui/core';
 
 const AddPosts = ({ username, image, newPost }) => {
   const [postTitle, setPostTitle] = useState("");
   const [postText, setPostText] = useState(""); //form comment
+  const [showPostHeading, setPostHeading] = useState(false);
 
   const AddPost = async () => {
     await fetch(
@@ -22,26 +24,45 @@ const AddPosts = ({ username, image, newPost }) => {
   setPostTitle("");
   setPostText(""); //updates form but doesn't re-render the page.
   newPost(); //calls this from the parent component
+  setPostHeading(false);
   };
 
+  const addPostTitle = () => {
+    console.log('clicked')
+    setPostHeading(true);
+  }
+
   return (
-    <div>
-      <h3>Add a Post</h3>
-      <form>
-      <TextField
+    <>
+    <h3 onClick={() => addPostTitle()} id="post-label">Add a Post</h3>
+    {showPostHeading ? (
+      <Card id="add-post-parent-card">
+      <form id="post-entry">
+      <TextField id="post-title"
       label="Post Title:"
       value={postTitle}
       onChange={(e) => setPostTitle(e.target.value)}
+
       />
-      <TextField
+    <div class="post-content-parent">
+    <TextField
       label="Post:"
+      variant="outlined"
+        defaultValue="Success"
+        multiline={true}
+        rows={3}
           value={postText}
           onChange={(e) => setPostText(e.target.value)}
+          id="post-content"
 />
-<Button variant="contained" color="primary"
-onClick={() => AddPost()}>Add Post </Button>
+</div>
+<Button variant="contained" color="primary" id="post-btn"
+onClick={() => AddPost()}>Submit</Button>
     </form>
-    </div>
+    </Card>
+  ) : (<div></div>)
+}
+    </>
   );
 };
 
