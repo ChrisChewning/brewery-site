@@ -5,33 +5,50 @@ class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //user: this.props.user,
+      user: this.props.user,
       loggedOut: true,
     };
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
-  componentDidMount() {
-    if (this.props.user.username) {
-      this.setState({ loggedOut: false });
-    }
+
+
+
+
+  handleLogout = () => {
+    localStorage.clear();
+    this.props.setUser(null);
+    this.setState({loggedOut: true})
   }
 
   render() {
     console.log(this.props.user, "this.props.user");
+    console.log(this.state.loggedOut, "loggedOut")
     let buttons;
-    if (this.props.user.username) {
-      buttons = (
-        <li className="nav-pages" id="account">
-          <Link to="/myaccount">Account</Link>
-        </li>
-      );
-    } else {
+
+
+    if ((!this.props.user) || (this.props.user.username == undefined)){
       buttons = (
         <li className="nav-pages" id="account">
           <Link to="/login">Login</Link>
         </li>
       );
+    } else {
+      buttons = (
+        <>
+        <li className="nav-pages" id="logout">
+          <Link to={"/"} onClick={this.handleLogout}>Logout</Link>
+        </li>
+
+        <li className="nav-pages" id="account">
+          <Link to="/myaccount">Account</Link>
+        </li>
+        </>
+      );
     }
+
+
+
 
     return (
       <>
@@ -49,6 +66,7 @@ class NavBar extends Component {
               </li>
               <li className="nav-pages" id="about">
                 <Link to="/About">About</Link>
+
               </li>
               {buttons}
             </ul>

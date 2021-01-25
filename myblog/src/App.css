@@ -41,7 +41,7 @@ p {
 
 /* POSTS FORM */
 
-#post-label{
+.post-comment-label{
 display: inline-block;
 color: #0550c8;
 border-bottom: 1px solid #0550c8;
@@ -75,7 +75,7 @@ margin-left: auto;
 }
 
 
-#post-btn{
+.post-comment-btn{
   display: block;
   margin-top: 5%;
   text-align: center;
@@ -86,7 +86,7 @@ margin-left: auto;
 
 
 /* POSTS LIST */
-.card-post {
+.card-post, .card-comment {
   margin: 20px;
   width: 40%;
 }
@@ -131,7 +131,7 @@ margin-left: auto;
 
 
 
-.post-item-parent{
+.post-item-parent, .comment-item-parent{
   display: flex;
 /*flex-direction: column;*/
 }
@@ -143,7 +143,7 @@ margin-left: auto;
   margin-top: 50%;
 }
 
-.post-parent-content{
+.post-parent-content, .post-comment-content{
   margin: auto;
   width: 50%;
   flex-direction: row;
@@ -162,7 +162,7 @@ margin-left: auto;
   border-radius: 50%;
 }
 
-.img-test{
+.post-img-parent, .votes-parent{
   width: 20%;
   margin: auto;
 }
@@ -314,6 +314,11 @@ div#upvotes-section{
   display: inline-block;
   margin-right: 10%;
 }
+
+.post-votes-section{
+
+}
+
 
 /* .post-content{
 width: 15%;
@@ -505,7 +510,7 @@ box-sizing: border-box;
 }
 
 
-#add-post-parent-card{
+.add-post-parent-card{
   width: 80%;
   text-align: center;
   margin: 0 auto;

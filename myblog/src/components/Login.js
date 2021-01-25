@@ -43,12 +43,14 @@ class Login extends Component {
         console.log(res, " RES token");
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", res.data.user._id);
+        this.props.setUser(res.data.user);
+
         this.setState({
           username: res.data.user.username,
           user: res.data,
           loggedIn: true,
         });
-        this.props.setUser(res.data.user);
+
       })
       .catch((err) => {
         console.log(err, " ERR");
@@ -71,9 +73,12 @@ class Login extends Component {
   };
 
   render() {
-    if (this.state.loggedIn) {
-      return <Redirect to={"/myaccount"} />;
-    }
+    console.log(this.state.loggedIn, ' logged in state')
+    console.log(this.props, ' login props')
+    if(localStorage.user){
+      return <Redirect to={"/myaccount"} />
+    } 
+
     return (
       <>
         {this.renderRedirect()}

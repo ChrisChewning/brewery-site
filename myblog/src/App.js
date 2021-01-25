@@ -34,7 +34,6 @@ class App extends Component {
     };
 
     this.user = window.localStorage.getItem("user"); //this.user allows it to be accessible instead of const user
-    //  this.handleLogout = this.handleLogout.bind(this);
   }
 
   //get user, including token
@@ -62,10 +61,11 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.user, ' state user app')
     return (
       <Router>
         <div className="App">
-          <NavBar user={this.state.user} setUser={this.setUser} />
+          <NavBar user={this.state.user} setUser={this.setUser}/>
 
           <div id="page-body">
             <Switch>
@@ -83,7 +83,7 @@ class App extends Component {
                 )}
               />
               <Route path="/about" component={About} />
-              <Route path="/login" component={() => <Login setUser={this.setUser} />} />
+              <Route path="/login" component={() => <Login setUser={this.setUser} user={this.state.user}/>} />
               <Route path="/register" component={CreateUser} />
               <Route path="/MyAccount" component={() => (<MyAccount user={this.state.user} setUser={this.setUser} />)} />
               <Route component={NotFound} />

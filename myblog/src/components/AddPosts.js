@@ -34,7 +34,7 @@ const AddPosts = ({ username, image, newPost }) => {
 
   return (
     <>
-    <h3 onClick={() => addPostTitle()} id="post-label">Add a Post</h3>
+    <h3 onClick={() => addPostTitle()} className="post-comment-label">Add a Post</h3>
     {showPostHeading ? (
       <Card id="add-post-parent-card">
       <form id="post-entry">
@@ -56,7 +56,7 @@ const AddPosts = ({ username, image, newPost }) => {
           id="post-content"
 />
 </div>
-<Button variant="contained" color="primary" id="post-btn"
+<Button variant="contained" color="primary" className="post-comment-btn"
 onClick={() => AddPost()}>Submit</Button>
     </form>
     </Card>

@@ -83,9 +83,6 @@ uploadImg = () => {
   }
 
   render() {
-    console.log(this.props.user.image)
-    console.log(this.state.user, ' user state')
-    console.log(this.state.uploadImg, ' upload img')
     if (!this.user) {
       this.setState({ loggedOut: true });
     }

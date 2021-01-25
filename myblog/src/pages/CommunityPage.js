@@ -38,18 +38,18 @@ componentDidMount() {
 render() {
   return (
       <>
-      {this.props.user.username ? (
-        <AddPosts username={this.props.user.username} image={this.props.user.image} newPost={this.handler} posts={this.state.posts}/>
+
+      {!this.props.user || this.props.user.username == undefined ? (
+        <p>You  must be logged in to post </p>
       ) : (
-        <p>You must be logged in to post </p>
+        <AddPosts username={this.props.user.username} image={this.props.user.image} newPost={this.handler} posts={this.state.posts}/>
       )}
 
       { this.state.posts.map((post, key) => (
         <Card className="card-post">
         <List className="post-list">
         <div className="post-item-parent">
-
-          <div className="img-test">
+          <div className="post-img-parent">
         <img className="post-img" src={post.image} alt="username image for post"/>
         </div>
           <div className="post-parent-content">

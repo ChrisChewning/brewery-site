@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import Card from "@material-ui/core/Card";
+import { TextField } from '@material-ui/core';
+import {Button} from '@material-ui/core';
 
 const AddComments = ({ id, comments, username, image, newComment }) => {
   const [commentText, setCommentText] = useState(""); //form comment
+  const [showCommentHeading, setCommentHeading] = useState(false);
 
   const AddComment = async () => {
     const result = await fetch(
@@ -18,22 +22,37 @@ const AddComments = ({ id, comments, username, image, newComment }) => {
     //update UI
     setCommentText(""); //updates form but doesn't re-render the page.
     newComment(); //calls this from the parent component
+    setCommentHeading(false);
   };
 
+  const addCommentTitle = () => {
+    console.log('clicked')
+    setCommentHeading(true);
+  }
+
   return (
-    <div id="add-comment">
-      <h3>Add a Comment</h3>
-      <label>
-        Comment:
-        <textarea
-          rows="4"
-          cols="50"
-          value={commentText}
-          onChange={(e) => setCommentText(e.target.value)}
-        />
-      </label>
-      <button onClick={() => AddComment()}>Add Comment</button>
-    </div>
+    <>
+      <h3 onClick={() => addCommentTitle()} className="post-comment-label">Add a Comment</h3>
+    {showCommentHeading ? (
+    <Card className="add-post-parent-card">
+      <div class="post-content-parent">
+      <TextField
+        label="Comment:"
+        variant="outlined"
+          defaultValue="Success"
+          multiline={true}
+          rows={3}
+            value={commentText}
+            onChange={(e) => setCommentText(e.target.value)}
+            id="post-content"
+  />
+  </div>
+  <Button variant="contained" color="primary" className="post-comment-btn"
+      onClick={() => AddComment()}>Submit</Button>
+    </Card>
+  ) : (<div></div>)
+  }
+    </>
   );
 };
 

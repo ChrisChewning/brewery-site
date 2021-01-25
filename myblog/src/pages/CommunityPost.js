@@ -70,18 +70,26 @@ class CommunityPost extends Component {
   };
 
   render() {
-  
+
     return (
       <>
-        <div className="post-parent">
-          <h2 className="post-title">{this.state.name}</h2>
-          <div className="post-upvotes-content">
+        <Card className="card-comment">
+          <div className="comment-item-parent">
+          <div className="votes-parent">
             <ThumbUpIcon onClick={this.upvotePost} />
             <p> {this.state.votes} </p>
             <ThumbDownIcon onClick={this.downvotePost} />
           </div>
+          <div className="post-comment-content">
+          <div className="post-title-parent">
+          <h2 className="post-title">{this.state.name}</h2>
+          </div>
+          <div className="post-content-parent">
           <p className="post-content">{this.state.content}</p>
+          </div>
         </div>
+        </div>
+      </Card>
 
         {this.props.user.username ? (
           <AddComment
