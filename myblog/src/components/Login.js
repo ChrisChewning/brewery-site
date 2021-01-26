@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 class Login extends Component {
@@ -77,7 +78,7 @@ class Login extends Component {
     console.log(this.props, ' login props')
     if(localStorage.user){
       return <Redirect to={"/myaccount"} />
-    } 
+    }
 
     return (
       <>
@@ -122,6 +123,10 @@ class Login extends Component {
             <input type="submit" value="Login" className="btn btn-primary" />
           </div>
         </form>
+
+        <p classname="forgot-password">
+        <Link to={'/forgot-password'}>Forgot password?</Link>
+      </p>
       </>
     );
   }

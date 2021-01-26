@@ -17,6 +17,21 @@ router.route("posts/:id").get((req, res) => {
     .catch((err) => res.status(400).json("Error " + err));
 });
 
+
+//GET TOTAL POSTS FOR A SPECIFIC USER
+router.route("/posts/:username").get((req, res) => {
+  Post.find({"username": req.params.username}).count()
+  .then((posts) => res.json(posts))
+  .catch((err) => res.status(400).json("Error " + err));
+});
+
+//GET TOTAL COMMENTS FOR A SPECIFIC USER
+router.route("/comments/:username").get((req, res) => {
+  Post.find({"comments.username": req.params.username}).count()
+  .then((comments) => res.json(comments))
+  .catch((err) => res.status(400).json("Error " + err));
+});
+
 //ADD POST
 router.route("/add-post").post((req, res) => {
   //Set variables

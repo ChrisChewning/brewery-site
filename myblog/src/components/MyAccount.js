@@ -26,7 +26,9 @@ class MyAccount extends Component {
       file: null,
       loggedOut: false,
       user: {},
-      uploadImg: false
+      uploadImg: false,
+      posts: 0,
+      comments: 0,
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -42,10 +44,40 @@ handler = () => {
 
 componentDidMount() {
   this.handler();
+  this.getPosts();
+  this.getComments();
 }
 
 uploadImg = () => {
   this.setState({uploadImg: true})
+}
+
+
+
+//GET POSTS FOR USER
+getPosts = (posts) => {
+  axios
+    .get(
+      `http://localhost:3000/api/community/posts/posts/${this.props.user.username}`
+    )
+    .then((response) => {
+      this.setState({ posts: response.data });
+    })
+    .catch((error) => {
+      console.log(error.response);
+    });
+}
+
+getComments = (comments) => {
+  axios.get(
+    `http://localhost:3000/api/community/posts/comments/${this.props.user.username}`
+  )
+  .then((response) => {
+    this.setState({ comments: response.data });
+  })
+  .catch((error) => {
+    console.log(error.response);
+  });
 }
 
 
@@ -81,6 +113,9 @@ uploadImg = () => {
     this.setState({ loggedOut: true });
     window.localStorage.clear();
   }
+
+
+
 
   render() {
     if (!this.user) {
@@ -137,9 +172,9 @@ uploadImg = () => {
         </div>
       <div className="user-comments-parent">
         <CreateOutlinedIcon className="posts-outline" />
-        <p className="user-posts-total">Posts: {} </p>
+        <p className="user-posts-total">Posts: {this.state.posts} </p>
         <ChatOutlinedIcon className="comments-outline" />
-        <p className="user-comments-total">Comments: {} </p>
+        <p className="user-comments-total">Comments: {this.state.comments} </p>
         </div>
       </Card>
 

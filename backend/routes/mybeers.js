@@ -69,6 +69,8 @@ router.route("/:id/mybeers").get(async (req, res) => {
   }
 });
 
+
+
 //DELETE MYBEERS
 router.route("/:id/my-beers/delete/:beerId").delete(async (req, res) => {
   try {

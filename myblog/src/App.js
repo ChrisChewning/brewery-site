@@ -17,6 +17,7 @@ import NotFound from "./pages/NotFound";
 //import AddComments from "./components/AddComments";
 import "./App.css";
 import CreateUser from "./components/CreateUser";
+import ForgotPassword from "./components/ForgotPassword";
 import Login from "./components/Login";
 import MyAccount from "./components/MyAccount";
 //import AddBeerModal from "./components/AddBeer";
@@ -85,6 +86,8 @@ class App extends Component {
               <Route path="/about" component={About} />
               <Route path="/login" component={() => <Login setUser={this.setUser} user={this.state.user}/>} />
               <Route path="/register" component={CreateUser} />
+              <Route path="/forgot-password" component={ForgotPassword} />
+
               <Route path="/MyAccount" component={() => (<MyAccount user={this.state.user} setUser={this.setUser} />)} />
               <Route component={NotFound} />
             </Switch>

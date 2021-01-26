@@ -50,6 +50,9 @@ router.route("/:id").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+
+
+
 //ADD USER
 router.route("/adduser").post((req, res, user) => {
   const { username, email, password, passwordConfirm, image } = req.body;
@@ -109,25 +112,5 @@ router.route("/update-email/:id").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-//
-// router.post('/update-image:/idd', upload.single('image'), async (req, res) => {
-//   const id = req.params.id;
-//   const image = req.body;
-//   User.findByIdAndUpdate(id, image)
-//   .then(() => res.json('User updated'))
-//   .catch(err => res.status(400).json('Error' + err))
-// })
-
-//var upload = multer({ storage: storage }).single('myImage');
-
-// router.route('/update-image/:id').post((upload.single('image'), req, res) => {
-//   console.log(request.file);
-//   //img: request.file.filename;
-//   const id = req.params.id;
-//   const image = req.body;
-//   User.findByIdAndUpdate(id, image)
-//   .then(user => res.json('User updated'))
-//   .catch(err => res.status(400).json('Error: ' + err))
-// })
 
 module.exports = router;

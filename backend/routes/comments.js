@@ -14,6 +14,8 @@ router.route("/brewery-meetup").get(async (req, res) => {
   }
 });
 
+
+
 //GET ALL POSTS, COMMENTS AND UPVOTES
 //SEE EVERY COMMENT (working)
 router.route("/").get((req, res) => {
