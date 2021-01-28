@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import BreweryIndex from '../components/BreweryIndex';
+import { Card } from '@material-ui/core';
+import { CardMedia } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
+
 
 function BreweryList() {
        const [breweries, setBreweries] = useState([])
@@ -19,9 +24,12 @@ console.log(breweries)
 
        return (
            <>
+           <div className="brewery-index-parent">
            {breweries.map((brewery, i) => (
              <>
-             <img className="image-brewery" src={brewery.image} alt="brewery image" />
+             <Card className="brewery-index-card">
+             <CardMedia image={brewery.image} className="brewery-index-img"
+ />
              <Link
          className="brewery-list-item"
          key={i}
@@ -29,9 +37,14 @@ console.log(breweries)
        >
              <p>{brewery.name}</p>
             </Link>
+            <Divider variant="middle" className="brewery-index-divider" />
+            <Typography className="brewery-index-description">{brewery.description}</Typography>
+          </Card>
             </>
+
          )
         )}
+      </div>
            </>
        )
    }

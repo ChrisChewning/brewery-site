@@ -123,13 +123,48 @@ margin-left: auto;
 
 
 
+/* BREWERY INDEX PAGE */
+.brewery-index-parent{
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  -ms-box-orient: horizontal;
+ display: -webkit-box;
+ display: -moz-box;
+ display: -ms-flexbox;
+ display: -moz-flex;
+ display: -webkit-flex;
+ flex-wrap: wrap;
+ justify-content: space-evenly;
+ margin: 0 auto;
+}
 
-
-.brewery-list-item{
+.brewery-index-card{
+  margin: 2% !important;
+  max-width: 25%;
 
 }
 
+.brewery-index-img{
+  padding-top: 50%;
+}
 
+
+
+.brewery-index-flex{
+  display: flex;
+  flex-direction: row;
+}
+
+.brewery-index-divider{
+  width: 50%;
+  margin: 0 auto !important;
+  text-align: center;
+}
+
+.brewery-index-description{
+  padding: 7.5%;
+}
 
 .post-item-parent, .comment-item-parent{
   display: flex;
@@ -232,7 +267,6 @@ li {
 
 /*SITE WIDE STYLING */
 #page-body {
-  width: 50%;
   margin: auto;
   text-align: center;
   /* padding: 64px; */

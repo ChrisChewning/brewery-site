@@ -10,8 +10,9 @@ const brewerySchema = new Schema({
   patio: {type: Boolean},
   big_indoors: {type: Boolean},
   website: {type: String},
+  from_website: {type: String},
   hours: {type: String},
-  content: {type: String},
+  description: {type: String},
 
 })
 
