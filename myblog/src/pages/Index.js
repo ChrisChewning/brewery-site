@@ -4,16 +4,22 @@ import Events from "../components/Events";
 import Weather from "../components/Weather";
 import newsEventsContent from "./news-events-content"; //data
 import TwitterIframe from "../components/TwitterIframe";
+import News from "../components/News";
 
 const Index = () => (
   <>
-    <h1>Welcome!</h1>
-    <p>Thank you for coming.</p>
-      <Weather />
+  <div className="index-parent">
+    <div className="main-index-parent">
+    <div className="main-index">
       <Events />
-    <div className="sidenav-index">
+      <News />
+      </div>
+    </div>
+    <div className="sidenav-index-parent">
+      <Weather />
       <TwitterIframe />
     </div>
+</div>
   </>
 );
 

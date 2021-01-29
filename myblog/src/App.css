@@ -8,16 +8,34 @@ p {
 }
 
 
+
+/*INDEX PAGE*/
+
+.sidenav-index-parent{
+  width: 20% !important;
+  border: 1px solid red;
+}
+
+.main-index-parent{
+  width: 60% !important;
+  margin-right: 20%;
+  border: 1px solid green;
+}
+
+
+/*POST PAGE */
+
 .post-parent, .my-account-parent{
   width: 50%;
   margin: 2% auto 0px;
 }
 
-.brewery-index-parent{
+.brewery-index-parent, .index-parent {
   width: 80%;
   margin: 2% auto 0px;
   display: flex;
   flex-direction: row;
+  border: 1px solid blue;
 }
 
 .brewery-index-content-parent{
@@ -155,13 +173,13 @@ margin-left: auto;
   width: 40%;
 }
 
-.post-list{
+/* .post-list{
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 50px;
   margin: 200px;
-}
+} */
 .username{
   flex: 1;
   padding: 100px;
@@ -236,6 +254,22 @@ margin-left: auto;
 /*flex-direction: column;*/
 }
 
+.post-parent-title-content{
+  border: 1px solid blue;
+  width: 45%;
+  margin: 0% 5%;
+}
+
+.post-parent-detail-container{
+  border: 1px solid black;
+  width: 45%;
+  margin-right: 5%;
+}
+
+.post-parent-content{
+  display: flex;
+  justify-content: center;
+}
 
 .post-parent-img-content{
   display: flex;
@@ -243,28 +277,35 @@ margin-left: auto;
   margin-top: 50%;
 }
 
-.post-parent-content, .post-comment-content{
+.post-parent-details, .post-comment-content{
   margin: auto;
   width: 50%;
   flex-direction: row;
+  border: 1px solid red;
 }
 
 
 .post-img{
-  flex-direction: column;
-  display: flex;
   width: 5em;
   height: 10em;
-  margin-right: -10%;
-  margin-left: 10%;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
+  border-radius: 5px;
+  top: 50%;
+  margin: 0 auto;
 }
 
-.post-img-parent, .votes-parent{
+.post-img-parent{
+  height: 100%;
+  width: 25%;
+  border-radius: 50%;
+  margin: auto;
+  width: 10%;
+  margin-left: 1%;
+}
+
+.votes-parent{
   width: 20%;
   margin: auto;
+  border: 1px solid yellow;
 }
 
 
@@ -340,23 +381,7 @@ li {
 
 /* SIDE NAV */
 
-.sidenav-index{
-  height: auto;
-  width: 15%;
-  float: right;
-  position: absolute;
-  padding: 2%;
 
-/*  z-index: 1;*/
-  top: 15%;
-  right: 3%;
-  /*background-color: #111;*/
-  overflow-x: hidden;
-  overflow-y: hidden;
-  min-height: 100vh;
-  margin-left: -15rem;
-
-}
 
 
 /*CALENDAR */

@@ -36,6 +36,7 @@ componentDidMount() {
 
 
 render() {
+  console.log(this.state.posts, 'posts')
   return (
       <>
       <div className="post-parent">
@@ -52,15 +53,19 @@ render() {
           <div className="post-img-parent">
         <img className="post-img" src={post.image} alt="username image for post"/>
         </div>
-          <div className="post-parent-content">
-        <div className="post-parent-title">
-          <Link className="post-content"
-            key={key}
-            to= {`/community/posts/${post._id}`}
-            >
-          <h3 className="post-parent-img-comment">{post.name}</h3>
-          </Link>
-          <ListItem className="username" id="MultiListItem-root">
+            <div className="post-parent-title-content">
+            <Link className="post-content"
+              key={key}
+              to= {`/community/posts/${post._id}`}
+              >
+            <h3 className="post-parent-img-comment">{post.name}</h3>
+            </Link>
+            <p>{post.content}</p>
+          </div>
+
+          <div className="post-parent-detail-container">
+        <div className="post-parent-details">
+          <ListItem className="" id="MultiListItem-root">
             <CreateOutlinedIcon id="create-id" />
             {post.username}
             <div className="date-posted-comment">
@@ -69,7 +74,6 @@ render() {
           </Moment>
           </div>
         </ListItem>
-
       <ListItem id="MultiListItem-root" key={key} className="post-content">
         <ChatOutlinedIcon />
          {post.comments.length} Comments
@@ -77,9 +81,9 @@ render() {
         {post.updatedAt}
       </Moment>
     </div></ListItem>
+</div>
 
 </div>
-  </div>
 
 
   </div>
