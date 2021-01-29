@@ -8,6 +8,70 @@ p {
 }
 
 
+.post-parent, .my-account-parent{
+  width: 50%;
+  margin: 2% auto 0px;
+}
+
+.brewery-index-parent{
+  width: 80%;
+  margin: 2% auto 0px;
+  display: flex;
+  flex-direction: row;
+}
+
+.brewery-index-content-parent{
+  width: 40%;
+  margin-right: 5% !important;
+}
+
+.brewery-profile-img{
+  margin-top: 2%;
+  border-radius: 4%;
+}
+
+.brewery-index-beers-served, .brewery-index-hours{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 10%;
+}
+
+.brewery-index-content-subcontainer{
+  background-color: #F6F6F6;
+  padding: 2%;
+  margin: 1% 10%;
+  border-radius: 4%;
+}
+.brewery-index-from-website-content{
+  text-align: center;
+  font-style: italic;
+}
+
+.brewery-index-beer-icon, .brewery-index-hours-icon{
+  margin-right: 2%;
+}
+
+
+
+
+
+.brewery-index-map-parent{
+  width: 30% !important;
+  margin-left: 5% !important;
+}
+
+.brewery-index-map-img{
+  max-width:100%;
+  height: auto;
+  object-fit: cover;
+  border: 1px solid black;
+}
+
+.brewery-index-map-img:hover{
+  transform: scale(1.5);
+}
+
 /*HOME PAGE */
 
 
@@ -124,7 +188,8 @@ margin-left: auto;
 
 
 /* BREWERY INDEX PAGE */
-.brewery-index-parent{
+
+.brewery-list-parent{
   display: flex;
   flex-direction: row;
   width: 80%;
@@ -136,33 +201,33 @@ margin-left: auto;
  display: -webkit-flex;
  flex-wrap: wrap;
  justify-content: space-evenly;
- margin: 0 auto;
+ margin: 2% auto 0px;
 }
 
-.brewery-index-card{
-  margin: 2% !important;
-  max-width: 25%;
-
+.brewery-list-card{
+  margin: 1% !important;
+  max-width: 15%;
+  padding: 1%;
 }
 
-.brewery-index-img{
+.brewery-list-img{
   padding-top: 50%;
 }
 
 
 
-.brewery-index-flex{
+.brewery-list-flex{
   display: flex;
   flex-direction: row;
 }
 
-.brewery-index-divider{
+.brewery-list-divider{
   width: 50%;
   margin: 0 auto !important;
   text-align: center;
 }
 
-.brewery-index-description{
+.brewery-list-description{
   padding: 7.5%;
 }
 
@@ -334,11 +399,7 @@ li {
 
 
 /*UPVOTES */
-.post-parent {
-  background-color: gray;
-  clear: both;
-  overflow: auto;
-}
+
 
 .post-parent:group{
   clear: both;
@@ -563,7 +624,7 @@ body {
 
 
 /* MY ACCOUNT TOP MODAL  */
-.img-username-changeimg-email, .member-posts-comments, .user-comments-parent{
+.img-username-changeimg-email, .member-posts-comments, .user-comments-parent {
   display: flex;
   align-items: center;
   justify-content: flex-start;

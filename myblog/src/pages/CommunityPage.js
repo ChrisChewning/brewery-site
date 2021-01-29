@@ -38,7 +38,7 @@ componentDidMount() {
 render() {
   return (
       <>
-
+      <div className="post-parent">
       {!this.props.user || this.props.user.username == undefined ? (
         <p>You  must be logged in to post </p>
       ) : (
@@ -88,6 +88,7 @@ render() {
 </Card>
   ))
 }
+</div>
 </>
 )
 

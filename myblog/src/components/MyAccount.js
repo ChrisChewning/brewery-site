@@ -127,8 +127,7 @@ getComments = (comments) => {
 
     return (
   <>
-
-
+    <div className="my-account-parent">
       <Card className="my-account-parent">
           <p className="account-page-titles">My Account</p>
           <div className="img-username-changeimg-email">
@@ -188,6 +187,7 @@ getComments = (comments) => {
             <MyBeer user={this.props.user} addBeer={this.handler} />
           </div>
         </>
+      </div>
       </>
     );
   }

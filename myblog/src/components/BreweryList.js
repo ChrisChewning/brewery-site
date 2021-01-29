@@ -24,11 +24,11 @@ console.log(breweries)
 
        return (
            <>
-           <div className="brewery-index-parent">
+           <div className="brewery-list-parent">
            {breweries.map((brewery, i) => (
              <>
-             <Card className="brewery-index-card">
-             <CardMedia image={brewery.image} className="brewery-index-img"
+             <Card className="brewery-list-card">
+             <CardMedia image={brewery.image} className="brewery-list-img"
  />
              <Link
          className="brewery-list-item"
@@ -37,8 +37,8 @@ console.log(breweries)
        >
              <p>{brewery.name}</p>
             </Link>
-            <Divider variant="middle" className="brewery-index-divider" />
-            <Typography className="brewery-index-description">{brewery.description}</Typography>
+            <Divider variant="middle" className="brewery-list-divider" />
+            <Typography className="brewery-list-description">{brewery.description}</Typography>
           </Card>
             </>
 
