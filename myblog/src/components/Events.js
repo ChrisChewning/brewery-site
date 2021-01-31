@@ -48,7 +48,9 @@ console.log(events)
             {upcomingEvent.month}.{upcomingEvent.day}.{upcomingEvent.year}
             </p>
             <p className="event-paragraph">
-              {upcomingEvent.event} at {upcomingEvent.location} <br/>
+              <p dangerouslySetInnerHTML={{ __html: upcomingEvent.event }} />
+
+            at {upcomingEvent.location} <br/>
             <a href = {upcomingEvent.url}>{upcomingEvent.location}</a>
             </p>
             </li>

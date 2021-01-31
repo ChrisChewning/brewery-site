@@ -85,7 +85,7 @@ class CommunityPost extends Component {
           <h2 className="post-title">{this.state.name}</h2>
           </div>
           <div className="post-content-parent">
-          <p className="post-content">{this.state.content}</p>
+            <p className="post-content">{this.state.content}</p>
           </div>
         </div>
         </div>
@@ -117,7 +117,8 @@ class CommunityPost extends Component {
                   </Moment>
                 </i>
                 <br></br>
-                <br></br> {comment.comment}
+                <br></br>
+                  <p dangerouslySetInnerHTML={{ __html: comment.comment}} />
               </p>
             </Card>
           ))}

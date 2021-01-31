@@ -30,10 +30,7 @@ console.log(news)
             <li key={i}>
             <h3>{news.title}</h3>
 
-
-            <p dangerouslySetInnerHTML={_html: `news.content`}> </p>
-
-
+            <p dangerouslySetInnerHTML={{ __html: news.content }} />
             </li>
           </div>
   ))
