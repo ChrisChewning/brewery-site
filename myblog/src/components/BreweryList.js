@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import BreweryIndex from '../components/BreweryIndex';
 import { Card } from '@material-ui/core';
 import { CardMedia } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
@@ -20,7 +19,6 @@ function BreweryList() {
 }
 fetchBreweries();
 }, []) //without [] here it calls it indefinitely.
-console.log(breweries)
 
        return (
            <>

@@ -7,7 +7,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import axios from "axios";
-import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import Card from "@material-ui/core/Card";
 import AddCircleSharpIcon from '@material-ui/icons/AddCircleSharp';
@@ -320,7 +319,7 @@ onChangeNotes = (e) => {
                 </label>
 
               </div>
-                {this.state.editBtn == false ? (
+                {this.state.editBtn === false ? (
                   <button type="submit" value="Submit" className="modalButton" onClick={this.handleSubmitPastBeers}>Submit</button>
                 ) : (
                   <button type="submit" value="Submit" className="modalButton" onClick={this.handleSubmitEditPastBeers}>
@@ -406,7 +405,7 @@ onChangeNotes = (e) => {
                 </label>
               </div>
               <div className="">
-                {this.state.editBtn == false ? (
+                {this.state.editBtn === false ? (
                   <button type="submit" value="Submit" className="modalButton" onClick={this.handleSubmitFutureBeers}>Submit</button>
                 ) : (
                   <button type="submit" value="Submit" className="modalButton" onClick={this.handleSubmitEditFutureBeers}>

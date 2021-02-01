@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Card from "@material-ui/core/Card";
+import {Button} from '@material-ui/core';
 import axios from "axios";
 
 const Weather = () => {
   let [weatherData, setWeatherData] = useState("");
   let [weatherCondition, setWeatherCondition] = useState("");
-  let [advice, setAdvice] = useState("");
+  let [advice, setAdvice] = useState(false);
   let [icon, setIcon] = useState("");
 
   function getWeather() {
@@ -38,9 +39,12 @@ const Weather = () => {
 
   return (
     <div>
-      <Card>
-      <h2>The weather in Austin is {weatherData} degrees; {advice[0]} has a {advice[1]}</h2>
-      <button onClick={getWeather}>Get Weather</button>
+      <Card className="weather-index">
+        {advice ? (
+      <p>The weather in Austin is {weatherData} degrees; {advice[0]} has a {advice[1]}</p>
+    )   :(<p>Get a Brewery Rec!</p>)
+   }
+   <Button variant="contained" color="primary" onClick={getWeather}>Try Me</Button>
       </Card>
     </div>
   );

@@ -8,7 +8,7 @@ const AddComments = ({ id, comments, username, image, newComment }) => {
   const [showCommentHeading, setCommentHeading] = useState(false);
 
   const AddComment = async () => {
-    const result = await fetch(
+    await fetch(
       `http://localhost:8000/api/community/${id}/add-comment`,
       {
         //options object for method, body, and headers.

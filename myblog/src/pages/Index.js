@@ -1,10 +1,9 @@
 import React from "react";
-import EventsCalendar from "../components/Calendar-Events";
 import Events from "../components/Events";
 import Weather from "../components/Weather";
-import newsEventsContent from "./news-events-content"; //data
 import TwitterIframe from "../components/TwitterIframe";
 import News from "../components/News";
+
 
 const Index = () => (
   <>

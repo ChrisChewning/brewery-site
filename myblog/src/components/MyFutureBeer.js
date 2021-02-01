@@ -53,7 +53,6 @@ class MyFutureBeer extends Component {
       beer: this.state.beer,
       notes: this.state.notes,
     };
-
 }
 
 

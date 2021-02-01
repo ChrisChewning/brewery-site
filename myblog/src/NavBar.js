@@ -22,12 +22,10 @@ class NavBar extends Component {
   }
 
   render() {
-    console.log(this.props.user, "this.props.user");
-    console.log(this.state.loggedOut, "loggedOut")
     let buttons;
 
 
-    if ((!this.props.user) || (this.props.user.username == undefined)){
+    if ((!this.props.user) || (this.props.user.username === undefined)){
       buttons = (
         <li className="nav-pages" id="account">
           <Link to="/login">Login</Link>

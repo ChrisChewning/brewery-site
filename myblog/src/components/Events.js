@@ -38,7 +38,7 @@ console.log(events)
 
   return (
     <>
-      <Card>
+      <Card className="events-index">
       <h2>Upcoming Events</h2>
       {upcomingEvents.map((upcomingEvent, i) => (
           <div key={i}>

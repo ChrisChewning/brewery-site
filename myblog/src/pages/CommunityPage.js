@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import AddPosts from '../components/AddPosts';
 import axios from 'axios';
 import Card from "@material-ui/core/Card";
-import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import Moment from 'react-moment';
@@ -40,7 +39,7 @@ render() {
   return (
       <>
       <div className="post-parent">
-      {!this.props.user || this.props.user.username == undefined ? (
+      {!this.props.user || this.props.user.username === undefined ? (
         <p>You  must be logged in to post </p>
       ) : (
         <AddPosts username={this.props.user.username} image={this.props.user.image} newPost={this.handler} posts={this.state.posts}/>
@@ -51,7 +50,7 @@ render() {
         <List className="post-list">
         <div className="post-item-parent">
           <div className="post-img-parent">
-        <img className="post-img" src={post.image} alt="username image for post"/>
+        <img className="post-img" src={post.image} alt="username for post"/>
         </div>
             <div className="post-parent-title-content">
             <Link className="post-content"

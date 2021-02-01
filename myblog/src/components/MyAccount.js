@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import MyBeer from "../components/MyBeer";
-import MyFutureBeer from "../components/MyFutureBeer";
+//import MyFutureBeer from "../components/MyFutureBeer";
 import Moment from "react-moment";
 import Modal from "@material-ui/core/Modal";
-import AddBeerModal from "../components/AddBeer";
+//import AddBeerModal from "../components/AddBeer";
 import Card from "@material-ui/core/Card";
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
+//import List from '@material-ui/core/List'
+//import ListItem from '@material-ui/core/ListItem'
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
@@ -131,7 +131,7 @@ getComments = (comments) => {
       <Card className="my-account-parent">
           <p className="account-page-titles">My Account</p>
           <div className="img-username-changeimg-email">
-        <img className="profile-img" src={this.state.image} alt="profile image" />
+        <img className="profile" src={this.state.image} alt="profile" />
           <p>{this.props.user.username}</p>
           <div className="form-group">
             <label htmlFor="image" onClick={this.uploadImg} className={this.state.uploadImg ? 'img-btn-hide-save' : 'account-label'}>Upload Image</label>

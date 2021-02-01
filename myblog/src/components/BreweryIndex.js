@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import BreweryList from '../components/BreweryList';
 import { Card } from '@material-ui/core';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import LocalDrinkIcon from '@material-ui/icons/LocalDrink';

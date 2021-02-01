@@ -17,13 +17,11 @@ const News = () => {
   }, [])
 
 
-//const newsUpdate = news . map ...
-
 console.log(news)
 
   return (
     <>
-      <Card>
+      <Card className="news-index">
       <h2>Brews News</h2>
       {news.map((news, i) => (
           <div key={i}>

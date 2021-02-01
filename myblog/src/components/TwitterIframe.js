@@ -8,7 +8,7 @@ const TwitterIframe = () => {
   }, []);
 
   return (
-    <section className="twitterContainer">
+    <section className="twitter-container">
       <div className="twitter-embed">
         <a
           className="twitter-timeline"
