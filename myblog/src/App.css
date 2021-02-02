@@ -284,13 +284,11 @@ cursor: pointer;
 }
 
 .post-parent-title-content{
-  border: 1px solid blue;
   width: 45%;
   margin: 0% 5%;
 }
 
 .post-parent-detail-container{
-  border: 1px solid black;
   width: 45%;
   margin-right: 5%;
 }
@@ -306,11 +304,10 @@ cursor: pointer;
   margin-top: 50%;
 }
 
-.post-parent-details, .post-comment-content{
+.post-comment-content{
   margin: auto;
   width: 50%;
   flex-direction: row;
-  border: 1px solid red;
 }
 
 
@@ -408,48 +405,8 @@ li {
 }
 
 
-/* SIDE NAV */
 
 
-
-
-/*CALENDAR */
-.cal-parent{
-  position: relative;
-}
-
-.cal {
-  float: right;
-  position: fixed;
-  width: 20%;
-}
-
-
-.cal-parent {
-    background-color:red;
-    margin:0 auto;
-    position:relative
-}
-.cal {
-    width:20%;
-    border:1px solid white;
-    position:fixed; right:0
-}
-
-
-.react-calendar__tile {
-    height: 70px;
-    background-color: white;
-}
-
-.react-calendar__tile--active {
-    background-color: gray !important;
-}
-
-.react-calendar__tile2 {
-    background-color: blue !important;
-    color: black !important;
-}
 
 
 /*UPVOTES */
@@ -469,10 +426,6 @@ div#upvotes-section{
 }
 
 
-/* .post-content{
-width: 15%;
-display: inline-block;
-} */
 
 
 /* COMMENTS */
