@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import {withRouter} from 'react-router';
 import { Card } from '@material-ui/core';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
@@ -22,6 +24,7 @@ class BreweryIndex extends Component {
       image: "",
       coords: "",
       closestThree: [],
+      update: false,
     };
   }
 
@@ -34,20 +37,19 @@ class BreweryIndex extends Component {
   return axios.get(`http://localhost:8000/api/brewery/${this.state.name}/distance?lat=${brewery.location.coordinates[1]}&lng=${brewery.location.coordinates[0]}`)
 })
   .then((res) => {
-    const closestThree = res.data.breweries.slice(0,3).map((closest, key) => {
-      this.setState({closestThree: closest.name})
-      console.log(closest.name, 'closest name')
-    })
-  console.log(res.data.breweries.name)
-})
+    const closestThree = res.data.breweries.slice(1,4)
+    console.log(closestThree)
+    this.setState({closestThree: closestThree});
+  })
 }
 
 
 
 
 render() {
+console.log(this.state.name)
+console.log(this.state.update)
 console.log(this.state.closestThree)
-
   return (
       <>
       <div className="brewery-index-parent">
@@ -78,6 +80,21 @@ console.log(this.state.closestThree)
       <p className="closest-breweries-header">Make a day of it</p>
       <p className="closest-breweries-subheader">Three closest breweries:</p>
 
+      {this.state.closestThree.map((closest, i) => (
+          <>
+  <Link
+className="brewery-list-item"
+key={i}
+to={`/brewery/${closest.name}`}
+onClick={() =>
+  this.setState({name: closest.name}, this.componentDidMount)}
+><p>{closest.name}</p>
+</Link>
+ <p className="brewery-address">{closest.address}</p>
+ <img src={closest.image} />
+ </>
+      ))}
+
 
       </Card>
       </div>
@@ -87,4 +104,4 @@ console.log(this.state.closestThree)
 }
 
 
-export default BreweryIndex;
+export default withRouter(BreweryIndex);

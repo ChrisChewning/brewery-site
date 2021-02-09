@@ -5,6 +5,8 @@ import CommunityPage from "./pages/CommunityPage";
 import CommunityPost from "./pages/CommunityPost";
 import BreweryIndex from "./components/BreweryIndex";
 //import BreweryListPage from "./pages/BreweryListPage";
+import {withRouter} from 'react-router';
+
 import BreweryList from "./components/BreweryList";
 import {
   BrowserRouter as Router,
@@ -70,8 +72,9 @@ class App extends Component {
           <div id="page-body">
             <Switch>
               <Route path="/" component={Index} exact />
+                <Route path="/brewery/:name" exact component={BreweryIndex}  />
+
               <Route path="/breweries" component={BreweryList} />
-              <Route path="/brewery/:name" component={BreweryIndex} />
 
               <Route path="/community" component= {() => <CommunityPage user={this.state.user} setUser={this.setUser} />}  exact />
               <Route path="/community/posts/:id" render={(matchProps) => (
