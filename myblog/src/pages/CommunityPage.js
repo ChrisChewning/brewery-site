@@ -8,7 +8,7 @@ import ListItem from '@material-ui/core/ListItem'
 import Moment from 'react-moment';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
-import { convertFromRaw, EditorState, blocks } from 'draft-js';
+import { convertFromRaw, Editor, EditorState, blocks } from 'draft-js';
 
 class CommunityPage extends Component {
   constructor(props) {
@@ -16,7 +16,8 @@ class CommunityPage extends Component {
 
   this.state = {
     posts: [],
-    postsContent: []
+    postsContent: '',
+    editorState: EditorState.createEmpty(),
   }
 }
 
@@ -28,13 +29,16 @@ handler = () => {
   .then(res => {
     const posts = res.data
 
-    //const rawContent = res.data[0].content;
+    //attempt to convert to
+    const converted = EditorState.createWithContent( //convert from Editor State (raw)
+  convertFromRaw(JSON.parse(posts[0].content)))
 
-    const contentState = convertFromRaw(JSON.parse(res.data[0].content));
-    const editorState = EditorState.createWithContent(blocks);
 
-    console.log(editorState, ' maybe')
+
     this.setState({ posts });
+    this.setState({ editorState: converted}) //set converted text to postsContent
+    //Unhandled Rejection (TypeError): contentState.getBlockMap is not a function
+
     const postContent = res.data.content
     //this.setState({postsContent})
   })
@@ -49,11 +53,19 @@ componentDidMount() {
 
 
 render() {
-  console.log(this.state.postsContent)
+  const content = this.state.editorState.getCurrentContent()
+  console.log(content, 'CONTENT') //this is in content state
+  console.log(this.state.editorState, 'editor state')
+  console.log(this.state.postsContent, 'POSTS CONTENT')
   console.log(this.state.posts, 'posts')
+
+
   return (
+
       <>
+
       <div className="post-parent">
+        <Editor editorState={this.state.editorState} readOnly={true} />
       {!this.props.user || this.props.user.username === undefined ? (
         <p>You  must be logged in to post </p>
       ) : (
@@ -77,7 +89,6 @@ render() {
 <p>{post.content}</p>
 
           </div>
-
           <div className="post-parent-detail-container">
         <div className="post-parent-details">
           <ListItem className="" id="MultiListItem-root">
