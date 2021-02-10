@@ -8,21 +8,35 @@ import ListItem from '@material-ui/core/ListItem'
 import Moment from 'react-moment';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
+import { convertFromRaw, EditorState, blocks } from 'draft-js';
 
 class CommunityPage extends Component {
   constructor(props) {
     super(props);
 
   this.state = {
-    posts: []
+    posts: [],
+    postsContent: []
   }
 }
 
+
+
+//  convertFromRaw(JSON.parse({post.content}))
 handler = () => {
   axios.get(`http://localhost:8000/api/community/posts`)
   .then(res => {
-    const posts = res.data;
+    const posts = res.data
+
+    //const rawContent = res.data[0].content;
+
+    const contentState = convertFromRaw(JSON.parse(res.data[0].content));
+    const editorState = EditorState.createWithContent(blocks);
+
+    console.log(editorState, ' maybe')
     this.setState({ posts });
+    const postContent = res.data.content
+    //this.setState({postsContent})
   })
 
 }
@@ -35,6 +49,7 @@ componentDidMount() {
 
 
 render() {
+  console.log(this.state.postsContent)
   console.log(this.state.posts, 'posts')
   return (
       <>
@@ -59,7 +74,8 @@ render() {
               >
             <h3 className="post-parent-img-comment">{post.name}</h3>
             </Link>
-            <p>{post.content}</p>
+<p>{post.content}</p>
+
           </div>
 
           <div className="post-parent-detail-container">

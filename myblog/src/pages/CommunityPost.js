@@ -6,6 +6,8 @@ import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import Card from "@material-ui/core/Card";
 import Moment from "react-moment";
+import { convertFromRaw, EditorState } from 'draft-js';
+
 
 class CommunityPost extends Component {
   constructor(props) {

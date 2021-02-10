@@ -35,7 +35,7 @@ router.route("/breweries/:name").get((req, res) => {
 //ADD BREWERY
 router.route("/add-brewery").post((req, res) => {
   //Set variables
-  const { name, beers, image, location_image, patio, big_indoors, website, hours, content } = req.body;
+  const { name, beers, image, location, location_image, patio, big_indoors, website, hours, content } = req.body;
 
   const newBrewery = new Breweries({
     name,
