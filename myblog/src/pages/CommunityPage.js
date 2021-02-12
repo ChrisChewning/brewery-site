@@ -22,28 +22,43 @@ class CommunityPage extends Component {
 }
 
 
-
 //  convertFromRaw(JSON.parse({post.content}))
 handler = () => {
   axios.get(`http://localhost:8000/api/community/posts`)
   .then(res => {
-    const posts = res.data
+    const posts = res.data.map((item, key) => {
+      console.log(item, "RES DATA") //OBJECT
+        for (const [key, value] of Object.entries(item)){
+        if (key == 'content'){
+          //item[key] = 'CONTENT'
+          //item[key] = EditorState.createEmpty()
+          item[key] = EditorState.createWithContent( //convert from Editor State (raw)
+          convertFromRaw(JSON.parse(item[key])))
+          this.setState({editorState: item[key]})
 
-    //attempt to convert to
-    const converted = EditorState.createWithContent( //convert from Editor State (raw)
-  convertFromRaw(JSON.parse(posts[0].content)))
+          console.log(res.data)
+        }
+        this.setState({posts: res.data})
+      }
+})
+})
 
+// .then(convert => {  //set the the comment to EditorState.
+//   const posts = this.state.posts.map((contentItem, key) => {
+//     console.log(contentItem.content, ' posts map')
+//     const converted = EditorState.createWithContent( //convert from Editor State (raw)
+//     convertFromRaw(JSON.parse(contentItem.content)))
+//     console.log(converted)
+//     this.setState({ editorState: converted}) //set converted text to postsContent
+//     console.log(this.state.editorState, 'EDITOR STATE')
+//     //REPLACE this.state.posts.content, converted
+//   })
+//   //.then(change => {
+//
+//   //})
+// })
+  }
 
-
-    this.setState({ posts });
-    this.setState({ editorState: converted}) //set converted text to postsContent
-    //Unhandled Rejection (TypeError): contentState.getBlockMap is not a function
-
-    const postContent = res.data.content
-    //this.setState({postsContent})
-  })
-
-}
 
 componentDidMount() {
     this.handler();
@@ -53,9 +68,9 @@ componentDidMount() {
 
 
 render() {
+  console.log(this.state.editorState, 'editor state')
   const content = this.state.editorState.getCurrentContent()
   console.log(content, 'CONTENT') //this is in content state
-  console.log(this.state.editorState, 'editor state')
   console.log(this.state.postsContent, 'POSTS CONTENT')
   console.log(this.state.posts, 'posts')
 
@@ -65,7 +80,7 @@ render() {
       <>
 
       <div className="post-parent">
-        <Editor editorState={this.state.editorState} readOnly={true} />
+
       {!this.props.user || this.props.user.username === undefined ? (
         <p>You  must be logged in to post </p>
       ) : (
@@ -86,7 +101,8 @@ render() {
               >
             <h3 className="post-parent-img-comment">{post.name}</h3>
             </Link>
-<p>{post.content}</p>
+
+
 
           </div>
           <div className="post-parent-detail-container">
