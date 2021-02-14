@@ -8,55 +8,42 @@ import ListItem from '@material-ui/core/ListItem'
 import Moment from 'react-moment';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
-import { convertFromRaw, Editor, EditorState, blocks } from 'draft-js';
+import { convertFromRaw, Editor, EditorState } from 'draft-js';
+import {stateToHTML} from 'draft-js-export-html';
+
 
 class CommunityPage extends Component {
   constructor(props) {
     super(props);
 
   this.state = {
-    posts: [],
+    posts: [], //can't say posts: EditorState.createEmpty()
     postsContent: '',
-    editorState: EditorState.createEmpty(),
+    editorState: EditorState.createEmpty(), //creates default ContentState
   }
 }
 
-
+//have to use this.state.editorState
+//(editorState.getCurrentContent()))
 //  convertFromRaw(JSON.parse({post.content}))
 handler = () => {
+
   axios.get(`http://localhost:8000/api/community/posts`)
   .then(res => {
     const posts = res.data.map((item, key) => {
       console.log(item, "RES DATA") //OBJECT
+        item.test = EditorState.createEmpty()
         for (const [key, value] of Object.entries(item)){
         if (key == 'content'){
-          //item[key] = 'CONTENT'
-          //item[key] = EditorState.createEmpty()
-          item[key] = EditorState.createWithContent( //convert from Editor State (raw)
-          convertFromRaw(JSON.parse(item[key])))
-          this.setState({editorState: item[key]})
-
+          item.test =  //convert from Editor State (raw)
+            stateToHTML(convertFromRaw(JSON.parse(item[key])))
           console.log(res.data)
         }
         this.setState({posts: res.data})
       }
 })
-})
 
-// .then(convert => {  //set the the comment to EditorState.
-//   const posts = this.state.posts.map((contentItem, key) => {
-//     console.log(contentItem.content, ' posts map')
-//     const converted = EditorState.createWithContent( //convert from Editor State (raw)
-//     convertFromRaw(JSON.parse(contentItem.content)))
-//     console.log(converted)
-//     this.setState({ editorState: converted}) //set converted text to postsContent
-//     console.log(this.state.editorState, 'EDITOR STATE')
-//     //REPLACE this.state.posts.content, converted
-//   })
-//   //.then(change => {
-//
-//   //})
-// })
+})
   }
 
 
@@ -68,19 +55,10 @@ componentDidMount() {
 
 
 render() {
-  console.log(this.state.editorState, 'editor state')
-  const content = this.state.editorState.getCurrentContent()
-  console.log(content, 'CONTENT') //this is in content state
-  console.log(this.state.postsContent, 'POSTS CONTENT')
-  console.log(this.state.posts, 'posts')
-
-
   return (
-
       <>
-
       <div className="post-parent">
-
+        <p>{this.content}</p>
       {!this.props.user || this.props.user.username === undefined ? (
         <p>You  must be logged in to post </p>
       ) : (
@@ -101,9 +79,7 @@ render() {
               >
             <h3 className="post-parent-img-comment">{post.name}</h3>
             </Link>
-
-
-
+            <p dangerouslySetInnerHTML={{ __html: post.test}}></p>
           </div>
           <div className="post-parent-detail-container">
         <div className="post-parent-details">
