@@ -172,10 +172,6 @@ class MyBeer extends Component {
 //EDIT FUTURE BEERS
   editMyFutureBeers = (beer) => {
     this.setState({ brewery: beer.brewery, beer: beer.beer, notes: beer.notes, beer_id: beer._id, openFuture: true, editBtn: true })
-    console.log(beer, 'beer')
-    console.log(beer._id, 'beer id')
-    console.log(this.state.beer_id, ' state')
-    console.log(this.state.note)
 }
 
 
