@@ -22,9 +22,27 @@ p {
   margin-left: 5%;
 }
 
-.news-index{
+
+.news-index-parent{
   margin-top: 10%;
+  margin-bottom: 10%;
+  align-items: center;
 }
+
+.brews-news-paragraph-two:empty, .brews-news-paragraph-three:empty{
+  display: none;
+}
+
+
+
+.brews-news-title{
+  margin-top: 5%;
+}
+
+.brews-date-link{
+  margin-top: 0%;
+}
+
 
 .weather-index{
   margin-bottom: 10%;
@@ -64,11 +82,12 @@ p {
   max-height: 10%;
 }
 
-.brewery-index-content-subcontainer{
+.brewery-index-content-subcontainer, .news-index-li{
   background-color: #F6F6F6;
   padding: 2%;
   margin: 1% 10%;
   border-radius: 4%;
+  margin-bottom: 2%;
 }
 .brewery-index-from-website-content{
   text-align: center;
@@ -79,7 +98,23 @@ p {
   margin-right: 2%;
 }
 
+.event-date-link{
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-style: italic;
+}
 
+.brews-news-date, .brews-news-link{
+  font-size: 1.2em;
+  margin-top: 0%;
+}
+
+/* add space after date */
+.brews-news-date:after {
+  content: " ";
+  white-space: pre;
+}
 
 
 /* ADD POST REACT-DRAFTS RICH TEXT EDITOR */
@@ -312,8 +347,8 @@ cursor: pointer;
 
 
 .post-img{
-  width: 5em;
-  height: 10em;
+  height: 150px;
+  width: 150px;
   border-radius: 5px;
   top: 50%;
   margin: 0 auto;
@@ -485,8 +520,9 @@ h4.comment-username {
 
 .profile-img{
   border-radius: 50%;
-  height: 5%;
-  width: 5%;
+  height: 10%;
+  width: 10%;
+  margin-top: 5%;
 }
 
 /* MY BEERS CARD */
@@ -635,6 +671,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  margin-top: 2%;
 }
 
 .account-page-titles, .profile-img, .email-outline, .person-outline, .posts-outline, .comments-outline{
@@ -662,6 +699,10 @@ body {
   margin-left: auto;
 }
 
+.account-label:hover{
+  cursor: pointer;
+}
+
 .form-control-file{
   display: none;
 }
@@ -671,10 +712,9 @@ body {
   border-top: 1px solid black;
 }
 
-.member-since{
-  display: flex;
-  justify-content: flex;
-}
+
+
+
 
 .img-btn-hide-save{
   display: none;

@@ -22,7 +22,6 @@ class MyAccount extends Component {
       file: null,
       loggedOut: false,
       user: {},
-
       uploadImg: false,
       posts: 0,
       comments: 0,
@@ -203,7 +202,7 @@ updateEmail = (e) => {
       <Card className="my-account-parent">
           <p className="account-page-titles">My Account</p>
           <div className="img-username-changeimg-email">
-        <img className="profile" src={this.state.image} alt="profile" />
+        <img className="profile-img" src={this.state.image} alt="profile" />
           <p>{this.props.user.username}</p>
           <div className="form-group">
             <label htmlFor="image" onClick={this.uploadImg} className={this.state.uploadImg ? 'img-btn-hide-save' : 'account-label'}>Upload Image</label>
