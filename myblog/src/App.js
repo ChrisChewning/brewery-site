@@ -87,7 +87,7 @@ class App extends Component {
               />
               <Route path="/about" component={About} />
               <Route path="/login" component={() => <Login setUser={this.setUser} user={this.state.user}/>} />
-              <Route path="/register" component={CreateUser} />
+              <Route path="/register" component={() => <CreateUser setUser={this.setUser} user={this.state.user}/>}  />
               <Route path="/forgot-password" component={ForgotPassword} />
 
               <Route path="/MyAccount" component={() => (<MyAccount user={this.state.user} setUser={this.setUser} />)} />

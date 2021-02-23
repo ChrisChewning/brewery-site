@@ -41,11 +41,11 @@ class Login extends Component {
     axios
       .post("http://localhost:8000/api/login", auth)
       .then((res) => {
-        console.log(res, " RES token");
-        localStorage.setItem("token", res.data.token);
+        console.log(res.data, " RES data");
+        //localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", res.data.user._id);
         this.props.setUser(res.data.user);
-
+        console.log(res.data, "RES DATA")
         this.setState({
           username: res.data.user.username,
           user: res.data,
@@ -76,6 +76,8 @@ class Login extends Component {
   render() {
     console.log(this.state.loggedIn, ' logged in state')
     console.log(this.props, ' login props')
+
+
     if(localStorage.user){
       return <Redirect to={"/myaccount"} />
     }
@@ -124,8 +126,9 @@ class Login extends Component {
           </div>
         </form>
 
-        <p classname="forgot-password">
+        <p className="forgot-password">
         <Link to={'/forgot-password'}>Forgot password?</Link>
+        <Link to={'/register'}> Register</Link>
       </p>
       </>
     );

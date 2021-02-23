@@ -1,17 +1,22 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
+
 
 class CreateUser extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      user: {},
       username: "",
       email: "",
       password: "",
       passwordConfirm: "",
       errorMessage: "",
       customError: "",
+      loggedIn: false,
     };
   }
 
@@ -49,34 +54,51 @@ class CreateUser extends Component {
       passwordConfirm: this.state.password,
     };
 
-    console.log(register, " this is register");
-
-    //before creating user
-
     axios
       .post("http://localhost:8000/users/adduser", register)
-      .then((response) => {
-        console.log(response);
-        if (response.data.status === "created") {
-          this.props.handleSuccessAuth(response.data);
-        }
+      .then((res) => {
+        console.log(res.data.user, "RES DATA USER")
+          //this.props.handleSuccessAuth(res.data);
+          localStorage.setItem("user", res.data.user._id);
+          this.props.setUser(res.data.user)
+
+
+
+
+          this.setState({
+            username: res.config.data,
+            user: res.config,
+            loggedIn: true,
+          });
+        //}
       })
       .catch((error) => {
-        this.setState({ errorMessage: error.response.data.msg });
-        this.setState({ customError: error.response.data.toString() });
+        if (error.res){
+        this.setState({ errorMessage: error.res.data.msg });
+        this.setState({ customError: error.res.data.toString() });
+      }
       });
 
-    this.setState({
-      username: "",
-      email: "",
-      password: "",
-      passwordConfirm: "",
-      errorMessage: "",
-      customError: "",
-    });
+    // this.setState({
+    //   username: "",
+    //   email: "",
+    //   password: "",
+    //   passwordConfirm: "",
+    // //  errorMessage: "",
+    //  customError: "",
+    // });
   };
 
   render() {
+    console.log(localStorage, "LOCAL STORAGE")
+    console.log(this.props, "PROPS")
+
+    if(localStorage.user){
+      return <Redirect to={"/myaccount"} />
+    }
+    console.log(localStorage.user, ' local storage user')
+    console.log(this.state.user, "USER")
+    console.log(this.state.username, "USERNAME")
 
     return (
       <>
