@@ -82,7 +82,6 @@ console.log(editorState, ' editorState')
         editorClassName="editor-class"
         toolbarClassName="toolbar-class"
       />
-      <div className="preview" dangerouslySetInnerHTML={createMarkup(convertedContent)}></div>
 
 
 <Button variant="contained" color="primary" className="post-comment-btn"

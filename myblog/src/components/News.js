@@ -32,8 +32,8 @@ console.log(news)
             <p dangerouslySetInnerHTML={{ __html: news.content_two }} className="brews-news-paragraph-two" />
             <p dangerouslySetInnerHTML={{ __html: news.content_three }} className="brews-news-paragraph-three" />
             <div className="event-date-link">
-              <p className="brews-news-date"><Moment format=" M. D. YY"></Moment> * </p>
-            <p className="brews-news-link"><a href={news.link}>link</a></p>
+              <p className="brews-news-date">posted on: <Moment format=" M. D. YY"></Moment> * </p>
+            <p className="brews-news-link">read more <a href={news.link}>here</a></p>
             </div>
       </li>
           </div>

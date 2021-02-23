@@ -38,11 +38,11 @@ console.log(events)
 
   return (
     <>
-      <Card className="events-index">
+      <Card className="events-index-parent">
       <h2>Upcoming Events</h2>
       {upcomingEvents.map((upcomingEvent, i) => (
           <div key={i}>
-            <li key={i}>
+            <li key={i} className="events-index-li">
             <h3>{upcomingEvent.title}</h3>
             <p className="event-paragraph">
             {upcomingEvent.month}.{upcomingEvent.day}.{upcomingEvent.year}

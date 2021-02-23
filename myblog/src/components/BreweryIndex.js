@@ -4,6 +4,7 @@ import {withRouter} from 'react-router';
 import { Card } from '@material-ui/core';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
+import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import axios from 'axios';
 
 
@@ -68,17 +69,18 @@ console.log(this.state.closestThree)
       </div>
       <div className="brewery-index-content">
         <div className="brewery-index-content-subcontainer">
-      <p className="brewery-index-from-website-title"><a href={this.state.website}>From Their Website</a>:</p>
+      <p className="brewery-index-from-website-title"><a href={this.state.website} target="_blank">From Their Website</a>:</p>
       <p className="brewery-index-from-website-content">{this.state.from_website}</p>
       </div>
       </div>
       </Card>
 
       <Card className="brewery-index-map-parent">
-        <img className="brewery-index-map-img" src={this.state.image_map} alt="brewery map"/>
-        <p className="brewery-index-address">{this.state.address}</p>
-      <p className="closest-breweries-header">Make a day of it</p>
-      <p className="closest-breweries-subheader">Three closest breweries:</p>
+        <a href={`https://www.google.com/maps/search/${this.state.name}`} target="_blank">
+        <img className="brewery-index-map-img" src={this.state.image_map} alt="brewery map"></img></a>
+        <p className="brewery-index-address">{this.state.address} </p>
+        <p><a href={`https://www.google.com/maps/search/${this.state.name}`} target="_blank"><LocationOnOutlinedIcon /></a></p>
+      <p className="closest-breweries-header">Three closest breweries:</p>
 
       {this.state.closestThree.map((closest, i) => (
           <>
@@ -90,8 +92,7 @@ onClick={() =>
   this.setState({name: closest.name}, this.componentDidMount)}
 ><p>{closest.name}</p>
 </Link>
- <p className="brewery-address">{closest.address}</p>
- <img src={closest.image} />
+ <img className="closest-breweries-imgs" src={closest.image} />
  </>
       ))}
 

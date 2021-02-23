@@ -15,15 +15,18 @@ function BreweryList() {
            await axios.get("http://localhost:8000/api/brewery/breweries")
       .then(res => {
         setBreweries(res.data)
+
    });
 }
 fetchBreweries();
 }, []) //without [] here it calls it indefinitely.
 
+
+console.log(breweries, 'breweries')
        return (
            <>
            <div className="brewery-list-parent">
-           {breweries.map((brewery, i) => (
+           {breweries.sort((a, b) => a.name.localeCompare(b.name)).map((brewery, i) => (
              <>
              <Card className="brewery-list-card">
              <CardMedia image={brewery.image} className="brewery-list-img"
@@ -41,7 +44,7 @@ fetchBreweries();
             </>
 
          )
-        )}
+       )}
       </div>
            </>
        )
