@@ -76,12 +76,15 @@ console.log(this.state.closestThree)
       </Card>
 
       <Card className="brewery-index-map-parent">
+
         <a href={`https://www.google.com/maps/search/${this.state.name}`} target="_blank">
         <img className="brewery-index-map-img" src={this.state.image_map} alt="brewery map"></img></a>
+        <div className="brewery-map-marker">
+        <p><a href={`https://www.google.com/maps/search/${this.state.name}`} target="_blank"><LocationOnOutlinedIcon className="brewery-index-marker"/></a></p>
         <p className="brewery-index-address">{this.state.address} </p>
-        <p><a href={`https://www.google.com/maps/search/${this.state.name}`} target="_blank"><LocationOnOutlinedIcon /></a></p>
-      <p className="closest-breweries-header">Three closest breweries:</p>
+        </div>
 
+      <p className="closest-breweries-header">Three closest breweries:</p>
       {this.state.closestThree.map((closest, i) => (
           <>
   <Link

@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import Card from "@material-ui/core/Card";
+import {Button} from '@material-ui/core';
 
 
 class ForgotPassword extends Component {
@@ -16,23 +18,24 @@ onSubmit = (e) => {
 
     return (
       <>
-        <h3>Forgot Password</h3>
+      <Card className="forgot-pw-card">
+        <h3 className="forgot-pw-header">Forgot Password</h3>
 
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label>Email: </label>
+        <form onSubmit={this.onSubmit} className="forgot-pw-form">
+          <div className="forgot-pw">
+            <label className="forgot-pw-label">Email: </label>
             <input
+              className="forgot-pw-input"
               type="email"
               required
-              className="form-control"
               onChange={this.onChange}
             />
           </div>
 
-          <div className="form-group">
-            <input type="submit" value="Login" className="btn btn-primary" />
-          </div>
+          <Button variant="contained" color="primary" className="send-email-btn"
+              input type="submit" value="Register">Send Email</Button>
         </form>
+      </Card>
       </>
     );
 

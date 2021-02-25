@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Card from "@material-ui/core/Card";
+import {Divider} from '@material-ui/core';
+import {Button} from '@material-ui/core';
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 class Login extends Component {
@@ -30,6 +33,11 @@ class Login extends Component {
   togglePw = (e) => {
     this.setState({ revealPw: !this.state.revealPw });
   };
+
+
+forgotPw = (e) =>{
+  return <Redirect to={this.state.redirect} />;
+}
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -84,52 +92,57 @@ class Login extends Component {
 
     return (
       <>
+      <Card className="login-card">
         {this.renderRedirect()}
         <p className="alert">{this.state.error}</p>
 
-        <h3>Login</h3>
 
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label>Username: </label>
-            <input
+        <h3 className="login-header">Sign In to Your Account:</h3>
+
+        <form onSubmit={this.onSubmit} className="login-form">
+
+          <div className="login-username">
+            <label className="login-username-label">Username: </label>
+            <input className="login-username-input"
               type="text"
               required
-              className="form-control"
               value={this.state.username}
               onChange={this.onChangeUsername}
-            />
+            ></input>
           </div>
 
-          <div>
-            <div style={{ position: "relative" }}>
-              <div>
-                <label>Password: </label>
-                <input
+          <div className="login-password">
+                <label className="login-pw-label">Password: </label>
+                  <div className="login-pw-visibility">
+                <input className="login-pw-input"
                   type={this.state.revealPw ? "text" : "password"}
                   id="input"
                   required
                   value={this.state.password}
                   onChange={this.onChangePassword}
                 ></input>
-                <span onClick={this.togglePw}>
-                  <span>
+              <div onClick={this.togglePw} className="visibility">
                     {this.state.revealPw ? <VisibilityOff /> : <Visibility />}
-                  </span>
-                </span>
+                  </div>
               </div>
-            </div>
           </div>
 
-          <div className="form-group">
-            <input type="submit" value="Login" className="btn btn-primary" />
-          </div>
+          <Button variant="contained" color="primary" className="login-btn"
+            input type="submit" value="Login">Sign In</Button>
         </form>
 
-        <p className="forgot-password">
-        <Link to={'/forgot-password'}>Forgot password?</Link>
-        <Link to={'/register'}> Register</Link>
-      </p>
+        <div className="forgot-password-register">
+
+        <div className="forgot-password">
+          <p><Link to={'/forgot-password'} className="forgot-password-paragraph">Forgot Password</Link></p>
+        </div>
+        <Divider orientation="vertical" flexItem />
+        <div className="register-login">
+          <p className=""><Link to={'/register'} className="register-login-paragraph">Register</Link></p>
+      </div>
+
+      </div>
+    </Card>
       </>
     );
   }

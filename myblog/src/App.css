@@ -7,7 +7,9 @@ p {
   font-size: 24px;
 }
 
-
+body{
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 
 /*INDEX PAGE*/
 
@@ -52,13 +54,130 @@ p {
 }
 
 
-/*POST PAGE */
 
+/* AUTH PAGES */
+
+.login-card, .register-card, .forgot-pw-card{
+  position: absolute;
+  float: left;
+  left: 50%;
+  top: 50%;
+  max-width: 35%;
+  transform: translate(-50%, -50%);
+  clear: both;
+  border-radius: 3%;
+  display: block;
+}
+
+.register-card{
+  top: 60%;
+}
+
+.forgot-pw-card{
+  top: 40%;
+}
+
+.login-header, .register-header, .forgot-pw-header{
+  text-align: left;
+  margin-left: 5%;
+}
+
+.register-paragraph{
+  text-align: left;
+  margin-left: 5%;
+  font-size: 1rem;
+}
+
+.login-form, .register-form, .forgot-pw-form{
+  margin-left: 15%;
+  width: 80%;
+  text-align: left;
+}
+
+
+
+.login-pw-label, .login-username-label, .register-username-label,
+.register-email-label, .register-pw-label, .register-confirm-pw-label, .forgot-pw-label{
+  display: block;
+  text-align: left;
+  margin-top: 3%;
+}
+
+.login-pw-input, .login-username-input, .register-email-input, .register-username-input, .register-pw-input, .register-confirm-pw-input, .forgot-pw-input{
+  padding: 2%;
+  border-radius: 4%;
+  border: 1px solid #c0ccda;
+  background-color: rgb(232, 240, 254); /* c0ccda */
+  width: 80%;
+  margin-top: 2% !important;
+  text-align: left;
+}
+
+.login-btn, .register-btn, .send-email-btn{
+  width: 85%;
+  margin-top: 6% !important;
+}
+
+.send-email-btn{
+  margin-bottom: 6% !important;
+}
+
+
+
+.visibility{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 2%;
+  margin-top: 2% !important;
+  max-width: 10%;
+}
+
+
+.forgot-password-register, .register-instructions{
+  display: flex;
+  margin-top: 8%;
+  padding: 2%;
+  max-height: 50px;
+  background-color: rgb(232, 240, 254); /* c0ccda */
+;
+  border-top: 1px solid black;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.forgot-password, .register-login{
+  width: 50%;
+
+}
+
+
+.forgot-password-paragraph, .register-login-paragraph{
+  font-size: 1em;
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 1.0em;
+}
+
+
+.login-pw-visibility{
+  display: flex;
+}
+
+
+
+
+/*POST PAGE */
 .post-parent, .my-account-parent{
   width: 50%;
   margin: 2% auto 0px;
 }
 
+
+
+/* BREWERY INDEX PAGE */
 .brewery-index-parent, .index-parent {
   width: 80%;
   margin: 2% auto 0px;
@@ -103,6 +222,24 @@ p {
 .brewery-index-beer-icon, .brewery-index-hours-icon{
   margin-right: 2%;
 }
+
+.brewery-map-marker{
+  display: block;
+}
+
+.brewery-index-marker, .brewery-index-address{
+  border: 1px solid black;
+}
+
+.brewery-index-marker{
+ position: absolute;
+ top: 50%;
+ -ms-transform: translateY(-50%);
+ transform: translateY(-50%);
+}
+
+
+/* INDEX PAGE */
 
 .event-date-link{
   display: inline-flex;
@@ -274,7 +411,7 @@ cursor: pointer;
 
 
 
-/* BREWERY INDEX PAGE */
+/* BREWERY LIST PAGE */
 
 .brewery-list-parent{
   display: flex;
@@ -407,6 +544,8 @@ li{
   padding: 0;
   overflow: hidden;
   background-color: #dddddd;
+/* background-color: #f9fafc; */
+
 }
 .navbar li {
   display: inline;
@@ -698,7 +837,7 @@ body {
   justify-content: flex-end;
   margin-left: auto;
   margin-right: 5%;
-}
+} 
 
 
 .account-label{

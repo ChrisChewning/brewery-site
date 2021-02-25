@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import Card from "@material-ui/core/Card";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
+import {Button} from '@material-ui/core';
 
 
 class CreateUser extends Component {
@@ -102,6 +104,7 @@ class CreateUser extends Component {
 
     return (
       <>
+      <Card className="register-card">
         <p>{this.state.errorMessage}</p>
         <p
           className={`${
@@ -112,57 +115,60 @@ class CreateUser extends Component {
         >
           {this.state.customError}
         </p>
-        <h3>Create New User</h3>
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label>Username: </label>
+        <h3 className="register-header">Create New User</h3>
+        <form className="register-form" onSubmit={this.onSubmit}>
+          <div className="register-username">
+            <label className="register-username-label">Username: </label>
             <input
+              className="register-username-input"
               type="text"
               required
-              className="form-control"
               value={this.state.username}
               onChange={this.onChangeUsername}
             />
           </div>
-          <label>Email: </label>
+          <div className="register-email">
+          <label className="register-email-label">Email: </label>
           <input
+            className="register-email-input"
             type="text"
             required
-            className="form-control"
             value={this.state.email}
             onChange={this.onChangeEmail}
           />
+      </div>
 
-          <div className="form-group">
-            <label>Password: </label>
+        <div className="register-password">
+            <label className="register-pw-label">Password: </label>
             <input
+              className="register-pw-input"
               type="password"
               required
-              className="form-control"
               value={this.state.password}
               onChange={this.onChangePassword}
             />
           </div>
-          <label>Confirm Password: </label>
+          <div className="register-confirm-pw">
+          <label className="register-confirm-pw-label">Confirm Password: </label>
           <input
+            className="register-confirm-pw-input"
             type="password"
             required
-            className="form-control"
             value={this.state.passwordConfirm}
             onChange={this.onChangePasswordConfirm}
           />
-          <div className="form-group">
-            <input
-              type="submit"
-              value="Create User"
-              className="btn btn-primary"
-            />
-          </div>
+      </div>
+        <Button variant="contained" color="primary" className="register-btn"
+            input type="submit" value="Register">Register</Button>
         </form>
-        <p>
+
+        <div className="register-instructions">
+        <p className="register-paragraph">
           Passwords need to be at least 8 characters, have one capitalized
           letter, and one special character
         </p>
+      </div>
+      </Card>
       </>
     );
   }
