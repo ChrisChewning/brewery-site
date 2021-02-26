@@ -35,9 +35,6 @@ class Login extends Component {
   };
 
 
-forgotPw = (e) =>{
-  return <Redirect to={this.state.redirect} />;
-}
 
   onSubmit = (e) => {
     e.preventDefault();

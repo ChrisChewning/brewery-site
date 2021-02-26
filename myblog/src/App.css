@@ -69,6 +69,13 @@ body{
   display: block;
 }
 
+.contact-card{
+  margin-top: 5%;
+  max-width: 40% !important;
+  margin-left: 30% !important;
+  margin-bottom: 10%;
+}
+
 .register-card{
   top: 60%;
 }
@@ -77,7 +84,7 @@ body{
   top: 40%;
 }
 
-.login-header, .register-header, .forgot-pw-header{
+.login-header, .register-header, .forgot-pw-header, .contact-header{
   text-align: left;
   margin-left: 5%;
 }
@@ -88,22 +95,20 @@ body{
   font-size: 1rem;
 }
 
-.login-form, .register-form, .forgot-pw-form{
+.login-form, .register-form, .forgot-pw-form, .contact-form{
   margin-left: 15%;
   width: 80%;
   text-align: left;
 }
 
-
-
 .login-pw-label, .login-username-label, .register-username-label,
-.register-email-label, .register-pw-label, .register-confirm-pw-label, .forgot-pw-label{
+.register-email-label, .register-pw-label, .register-confirm-pw-label, .forgot-pw-label, .contact-text-label, .contact-email-label, .contact-name-label{
   display: block;
   text-align: left;
   margin-top: 3%;
 }
 
-.login-pw-input, .login-username-input, .register-email-input, .register-username-input, .register-pw-input, .register-confirm-pw-input, .forgot-pw-input{
+.login-pw-input, .login-username-input, .register-email-input, .register-username-input, .register-pw-input, .register-confirm-pw-input, .forgot-pw-input, .contact-name-input, .contact-email-input, .contact-text-input{
   padding: 2%;
   border-radius: 4%;
   border: 1px solid #c0ccda;
@@ -113,9 +118,14 @@ body{
   text-align: left;
 }
 
-.login-btn, .register-btn, .send-email-btn{
+.contact-text-input{
+  margin-left: 0%;
+}
+
+.login-btn, .register-btn, .send-email-btn, .contact-btn{
   width: 85%;
   margin-top: 6% !important;
+  margin-bottom: 8% !important;
 }
 
 .send-email-btn{
@@ -136,7 +146,6 @@ body{
 
 .forgot-password-register, .register-instructions{
   display: flex;
-  margin-top: 8%;
   padding: 2%;
   max-height: 50px;
   background-color: rgb(232, 240, 254); /* c0ccda */
@@ -200,14 +209,14 @@ body{
   max-width: 100%;
 }
 
-.brewery-index-beers-served, .brewery-index-hours{
+.brewery-index-beers-served, .brewery-index-hours, .brewery-index-map{
   display: flex;
   align-items: center;
   justify-content: center;
   max-height: 10%;
 }
 
-.brewery-index-content-subcontainer, .news-index-li, .events-index-li{
+.brewery-index-content-subcontainer, .news-index-li, .events-index-li, .contact-text{
   background-color: #F6F6F6;
   padding: 2%;
   margin: 1% 10%;
@@ -219,12 +228,12 @@ body{
   font-style: italic;
 }
 
-.brewery-index-beer-icon, .brewery-index-hours-icon{
+.brewery-index-beer-icon, .brewery-index-hours-icon, .brewery-index-location-icon{
   margin-right: 2%;
 }
 
 .brewery-map-marker{
-  display: block;
+  display: flex;
 }
 
 .brewery-index-marker, .brewery-index-address{
@@ -837,7 +846,7 @@ body {
   justify-content: flex-end;
   margin-left: auto;
   margin-right: 5%;
-} 
+}
 
 
 .account-label{

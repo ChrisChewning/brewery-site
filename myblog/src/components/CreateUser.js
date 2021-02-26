@@ -18,6 +18,8 @@ class CreateUser extends Component {
       passwordConfirm: "",
       errorMessage: "",
       customError: "",
+      revealPw: false,
+      revealPwConfirm: false,
       loggedIn: false,
     };
   }
@@ -46,6 +48,14 @@ class CreateUser extends Component {
     });
   };
 
+  togglePw = (e) => {
+    this.setState({ revealPw: !this.state.revealPw });
+  };
+
+  togglePwConfirm = (e) => {
+    this.setState({ revealPwConfirm: !this.state.revealPwConfirm})
+  }
+
   onSubmit = (e) => {
     e.preventDefault();
 
@@ -63,9 +73,6 @@ class CreateUser extends Component {
           //this.props.handleSuccessAuth(res.data);
           localStorage.setItem("user", res.data.user._id);
           this.props.setUser(res.data.user)
-
-
-
 
           this.setState({
             username: res.config.data,
@@ -140,23 +147,34 @@ class CreateUser extends Component {
 
         <div className="register-password">
             <label className="register-pw-label">Password: </label>
+              <div className="login-pw-visibility">
             <input
               className="register-pw-input"
-              type="password"
+              type={this.state.revealPw ? "text" : "password"}
               required
               value={this.state.password}
               onChange={this.onChangePassword}
             />
+            <div onClick={this.togglePw} className="visibility">
+                  {this.state.revealPw ? <VisibilityOff /> : <Visibility />}
+                </div>
+              </div>
           </div>
+
           <div className="register-confirm-pw">
           <label className="register-confirm-pw-label">Confirm Password: </label>
+            <div className="login-pw-visibility">
           <input
             className="register-confirm-pw-input"
-            type="password"
+            type={this.state.revealPwConfirm ? "text" : "password"}
             required
             value={this.state.passwordConfirm}
             onChange={this.onChangePasswordConfirm}
           />
+        <div onClick={this.togglePwConfirm} className="visibility">
+                {this.state.revealPwConfirm ? <VisibilityOff /> : <Visibility />}
+              </div>
+          </div>
       </div>
         <Button variant="contained" color="primary" className="register-btn"
             input type="submit" value="Register">Register</Button>

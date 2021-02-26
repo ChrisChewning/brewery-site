@@ -7,7 +7,6 @@ const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const path = require("path");
 
-const token = process.env.JWT_SECRET;
 
 var storage = multer.diskStorage({
   destination: "public/uploads/images",
@@ -21,6 +20,7 @@ const upload = multer({
   limits: { fileSize: 1000000 },
 }).single("image");
 
+//UPDATE USER'S IMAGE
 router.route("/update-image/:id").post((req, res) => {
   upload(req, res, (err) => {
     const image = req.file.filename;
@@ -35,6 +35,17 @@ router.route("/update-image/:id").post((req, res) => {
       .catch((err) => res.status(400).json("Error: " + err));
   });
 });
+
+//UPDATE USER'S EMAIL ADDRESS
+router.route("/update-email/:id").post((req, res) => {
+  const id = req.params.id;
+  const email = req.body;
+  User.findByIdAndUpdate(id, email)
+    .then(() => res.json("User Updated."))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+
 
 //GET ALL USERS
 router.route("/").get((req, res) => {
@@ -55,14 +66,10 @@ router.route("/:id").get((req, res) => {
 
 //ADD USER
 router.route("/adduser").post((req, res, user) => {
-  const { username, email, password, passwordConfirm, image } = req.body;
-  //JWT
+  const { username, email, password, passwordConfirm } = req.body;
   const payload = { id: user._id };
   const options = { expiresIn: 3600 };
-  const secret = process.env.JWT_SECRET;
-  const token = jwt.sign(payload, secret, options);
 
-  console.log(secret, " this is secret");
   //PW MATCH VALIDATION
   if (password !== passwordConfirm) {
     return res.status(400).json({ msg: "Passwords do not match" });
@@ -86,13 +93,12 @@ router.route("/adduser").post((req, res, user) => {
       email,
       password: hashedpassword,
       passwordConfirm: hashedpassword,
-      image,
     });
     newUser
       .save()
-      .then(() =>
-        res.json({ success: true, message: "here's your token", token: token })
-      )
+      .then((user => //
+        res.json({ success: true, user: user })
+      ))
       .catch((err) => res.status(400).json("Error " + err));
   });
 });
@@ -101,14 +107,6 @@ router.route("/adduser").post((req, res, user) => {
 router.route("/:id").delete((req, res) => {
   User.findByIdAndDelete(req.params.id)
     .then(() => res.json("User deleted."))
-    .catch((err) => res.status(400).json("Error: " + err));
-});
-
-router.route("/update-email/:id").post((req, res) => {
-  const id = req.params.id;
-  const email = req.body;
-  User.findByIdAndUpdate(id, email)
-    .then(() => res.json("User Updated."))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 

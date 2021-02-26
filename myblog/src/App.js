@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import Index from "./pages/Index";
-import About from "./pages/About";
+import Contact from "./pages/Contact";
 import CommunityPage from "./pages/CommunityPage";
 import CommunityPost from "./pages/CommunityPost";
 import BreweryIndex from "./components/BreweryIndex";
-//import BreweryListPage from "./pages/BreweryListPage";
 import {withRouter} from 'react-router';
 
 import BreweryList from "./components/BreweryList";
@@ -85,7 +84,7 @@ class App extends Component {
                   />
                 )}
               />
-              <Route path="/about" component={About} />
+              <Route path="/contact" component={Contact} />
               <Route path="/login" component={() => <Login setUser={this.setUser} user={this.state.user}/>} />
               <Route path="/register" component={() => <CreateUser setUser={this.setUser} user={this.state.user}/>}  />
               <Route path="/forgot-password" component={ForgotPassword} />

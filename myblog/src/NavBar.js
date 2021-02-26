@@ -11,10 +11,6 @@ class NavBar extends Component {
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-
-
-
-
   handleLogout = () => {
     localStorage.clear();
     this.props.setUser(null);
@@ -62,8 +58,8 @@ class NavBar extends Component {
               <li className="nav-pages">
                 <Link to="/Community">Community</Link>
               </li>
-              <li className="nav-pages" id="about">
-                <Link to="/About">About</Link>
+              <li className="nav-pages" id="contact">
+                <Link to="/Contact">Contact</Link>
 
               </li>
               {buttons}
