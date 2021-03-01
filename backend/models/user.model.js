@@ -49,6 +49,12 @@ const userSchema = new Schema({
  },
  future_beers: {
    type: Array
+ },
+ resetPasswordToken: {
+   type: String
+ },
+ resetPasswordExpires: {
+   type: String
  }
 });
 

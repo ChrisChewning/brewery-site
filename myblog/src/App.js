@@ -4,27 +4,20 @@ import Contact from "./pages/Contact";
 import CommunityPage from "./pages/CommunityPage";
 import CommunityPost from "./pages/CommunityPost";
 import BreweryIndex from "./components/BreweryIndex";
-import {withRouter} from 'react-router';
-
 import BreweryList from "./components/BreweryList";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
-  //Redirect,
 } from "react-router-dom";
 import NavBar from "./NavBar";
 import NotFound from "./pages/NotFound";
-//import AddComments from "./components/AddComments";
 import "./App.css";
 import CreateUser from "./components/CreateUser";
 import ForgotPassword from "./components/ForgotPassword";
 import Login from "./components/Login";
 import MyAccount from "./components/MyAccount";
-//import AddBeerModal from "./components/AddBeer";
-//import AddPosts from "./components/AddPosts";
 import axios from "axios";
-//import { withRouter } from "react-router";
 
 class App extends Component {
   constructor() {

@@ -15,42 +15,39 @@ class ForgotPassword extends Component {
     }
   }
 
-onChange = (e) => {
-
-}
 
 sendEmail = async (e) => {
     e.preventDefault();
-    const { email } = this.state.email;
+    const email = {  //has to be an obj, not just const email = this.state.email
+      email: this.state.email,
+    };
 
-    if (email === '') {
-      this.setState({
-        response: 'Email address cannot be empty'
-      });
-    }
-    else
-      try {
-        const response = await axios.post(
-          'http://localhost:3000/forgot-password',
-          {
-            email, //send email
-          },
-        );
-        console.log(response.data);
-        if (response.data === 'recovery email sent') {
-          this.setState({
-            message: 'recovery email sent'
-          });
-        }
-      } catch (error) {
-        console.error(error.response.data);
-        if (error.response.data === 'email not in db') {
+
+
+    //email won't let you send if null. no need for null check.
+      axios.post(
+          'http://localhost:3000/api/login/forgot-password', email)
+          .then((res) => {
+            console.log(res)
+            console.log(email)
+
+            if (res.data === 'recovery email sent') {
+              this.setState({
+                message: 'recovery email sent'
+              });
+
+          }
+        })
+       .catch((err) => {
+        console.error(err);
+        if (err === 'email not in db') {
           this.setState({
             message: 'Email address is not found. Please try again or register for an account.'
           });
+          console.log("NOT IN DB")
         }
-      }
-    } //end of fn
+      })
+    }
 
 
 
@@ -60,14 +57,14 @@ onSubmit = (e) => {
 }
 
   render() {
-    console.log(this.state.email, "EMAIL STATE")
+    console.log(this.state.email, "EMAIL")
     console.log(this.state.response, "RESPONSE")
     return (
       <>
       <Card className="forgot-pw-card">
         <h3 className="forgot-pw-header">Forgot Password</h3>
 
-        <form onSubmit={this.onSubmit} className="forgot-pw-form">
+        <form onSubmit={this.sendEmail} className="forgot-pw-form">
           <div className="forgot-pw">
             <label className="forgot-pw-label">Email: </label>
             <input

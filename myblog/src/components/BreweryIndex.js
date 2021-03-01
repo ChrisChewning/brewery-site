@@ -69,7 +69,7 @@ console.log(this.state.closestThree)
       </div>
       <div className="brewery-index-content">
         <div className="brewery-index-content-subcontainer">
-      <p className="brewery-index-from-website-title"><a href={this.state.website} target="_blank">From Their Website</a>:</p>
+      <p className="brewery-index-from-website-title"><a href={this.state.website} target="_blank" rel="noopener noreferrer">From Their Website</a>:</p>
       <p className="brewery-index-from-website-content">{this.state.from_website}</p>
       </div>
       </div>
@@ -77,7 +77,7 @@ console.log(this.state.closestThree)
 
       <Card className="brewery-index-map-parent">
 
-        <a href={`https://www.google.com/maps/search/${this.state.name}`} target="_blank">
+        <a href={`https://www.google.com/maps/search/${this.state.name}`} target="_blank" rel="noopener noreferrer">
         <img className="brewery-index-map-img" src={this.state.image_map} alt="brewery map"></img></a>
 
 

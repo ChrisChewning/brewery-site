@@ -20,6 +20,7 @@ const upload = multer({
   limits: { fileSize: 1000000 },
 }).single("image");
 
+
 //UPDATE USER'S IMAGE
 router.route("/update-image/:id").post((req, res) => {
   upload(req, res, (err) => {
@@ -64,44 +65,6 @@ router.route("/:id").get((req, res) => {
 
 
 
-//ADD USER
-router.route("/adduser").post((req, res, user) => {
-  const { username, email, password, passwordConfirm } = req.body;
-  const payload = { id: user._id };
-  const options = { expiresIn: 3600 };
-
-  //PW MATCH VALIDATION
-  if (password !== passwordConfirm) {
-    return res.status(400).json({ msg: "Passwords do not match" });
-  }
-
-  //PW REGEX VALIDATION
-  var pwValidate = /^(?=.*)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/;
-  if (!password.match(pwValidate)) {
-    return res
-      .status(400)
-      .json({
-        msg:
-          "Password must be at least 8 characters, have a capital, and have a special character",
-      });
-  }
-
-  //HASH PW
-  Bcrypt.hash(password, 12).then((hashedpassword) => {
-    const newUser = new User({
-      username,
-      email,
-      password: hashedpassword,
-      passwordConfirm: hashedpassword,
-    });
-    newUser
-      .save()
-      .then((user => //
-        res.json({ success: true, user: user })
-      ))
-      .catch((err) => res.status(400).json("Error " + err));
-  });
-});
 
 //DELETE USER
 router.route("/:id").delete((req, res) => {
