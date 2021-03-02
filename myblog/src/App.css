@@ -57,7 +57,7 @@ body{
 
 /* AUTH PAGES */
 
-.login-card, .register-card, .forgot-pw-card{
+.login-card, .register-card, .forgot-pw-card, .reset-pw-card{
   position: absolute;
   float: left;
   left: 50%;
@@ -84,7 +84,7 @@ body{
   top: 40%;
 }
 
-.login-header, .register-header, .forgot-pw-header, .contact-header{
+.login-header, .register-header, .forgot-pw-header, .contact-header, .reset-pw-header{
   text-align: left;
   margin-left: 5%;
 }
@@ -95,20 +95,20 @@ body{
   font-size: 1rem;
 }
 
-.login-form, .register-form, .forgot-pw-form, .contact-form{
+.login-form, .register-form, .forgot-pw-form, .contact-form, .reset-pw-form{
   margin-left: 15%;
   width: 80%;
   text-align: left;
 }
 
 .login-pw-label, .login-username-label, .register-username-label,
-.register-email-label, .register-pw-label, .register-confirm-pw-label, .forgot-pw-label, .contact-text-label, .contact-email-label, .contact-name-label{
+.register-email-label, .register-pw-label, .register-confirm-pw-label, .forgot-pw-label, .contact-text-label, .contact-email-label, .contact-name-label, .reset-pw-label{
   display: block;
   text-align: left;
   margin-top: 3%;
 }
 
-.login-pw-input, .login-username-input, .register-email-input, .register-username-input, .register-pw-input, .register-confirm-pw-input, .forgot-pw-input, .contact-name-input, .contact-email-input, .contact-text-input{
+.login-pw-input, .login-username-input, .register-email-input, .register-username-input, .register-pw-input, .register-confirm-pw-input, .forgot-pw-input, .contact-name-input, .contact-email-input, .contact-text-input, .reset-pw-input{
   padding: 2%;
   border-radius: 4%;
   border: 1px solid #c0ccda;

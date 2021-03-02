@@ -85,7 +85,7 @@ router.route("/forgot-password").post(async (req, res) => {
      {
     $set: {
       resetPasswordToken: token, //set key in db resetPasswordToken to token here.
-      resetPasswordExpires: Date.now() + 180000 //30 min.
+      resetPasswordExpires: Date.now() + 1800000 //30 min.
     },
   },
     { new: true }
@@ -123,13 +123,12 @@ router.route("/forgot-password").post(async (req, res) => {
     })
 
 
-router.get('/reset', (req, res) => {
+
+ router.get('/reset-password/:token', (req, res) => {
    User.findOne({
-     where: {
-       resetPasswordToken: req.query.resetPasswordToken,
+       resetPasswordToken: req.params.token,
        resetPasswordExpires: {
-         [Op.gt]: Date.now(), //Operator alias comparison. is it > 30 min?
-       },
+       $gt: Date.now(),
      },
    }).then((user) => {
      if (user == null) {
@@ -138,11 +137,73 @@ router.get('/reset', (req, res) => {
      } else {
        res.status(200).send({
          username: user.username,
-         message: 'password reset link ic good',
+         message: 'password reset link a-ok',
        });
      }
    });
  });
+
+
+
+
+ //UPDATE USER'S EMAIL ADDRESS
+
+ router.route("/update-email/:id").post((req, res) => {
+   const id = req.params.id;
+   const email = req.body;
+   User.findByIdAndUpdate(id, email)
+     .then(() => res.json("User Updated."))
+     .catch((err) => res.status(400).json("Error: " + err));
+ });
+
+router.route("/update-password").post(async (req, res) => {
+    const {resetPasswordToken, username} = req.body;
+
+    User.findOne({ 
+        resetPasswordToken,
+        username,
+        resetPasswordExpires: {
+          $gt: Date.now(),
+        },
+    }).then(user => {
+      if (user == null) {
+        console.error('password reset link is invalid or has expired');
+        res.status(403).send('password reset link is invalid or has expired');
+      } else if (user != null) {
+        console.log('user exists in db');
+
+
+        //PW REGEX VALIDATION
+        var pwValidate = /^(?=.*)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/;
+        if (!password.match(pwValidate)) {
+          return res
+            .status(400)
+            .json({
+              msg:
+                "Password must be at least 8 characters, have a capital, and have a special character",
+            });
+        }
+
+
+        //hash the password
+        Bcrypt.hash(req.body.password, 12).then((hashedpassword) => {
+            user.update({
+              password: hashedPassword,
+              passwordConfirm: hashedPassword,
+              resetPasswordToken: null,
+              resetPasswordExpires: null,
+            });
+          })
+          .then(() => {
+            console.log('password updated');
+            res.status(200).send({ message: 'password updated' });
+          });
+      } else {
+        console.error('no user exists in db to update');
+        res.status(401).json('no user exists in db to update');
+      }
+    });
+  });
 
 
 module.exports = router;

@@ -16,6 +16,7 @@ import "./App.css";
 import CreateUser from "./components/CreateUser";
 import ForgotPassword from "./components/ForgotPassword";
 import Login from "./components/Login";
+import ResetPassword from "./pages/ResetPassword";
 import MyAccount from "./components/MyAccount";
 import axios from "axios";
 
@@ -81,6 +82,7 @@ class App extends Component {
               <Route path="/login" component={() => <Login setUser={this.setUser} user={this.state.user}/>} />
               <Route path="/register" component={() => <CreateUser setUser={this.setUser} user={this.state.user}/>}  />
               <Route path="/forgot-password" component={ForgotPassword} />
+              <Route path="/reset-password/:token" component={ResetPassword} />
 
               <Route path="/MyAccount" component={() => (<MyAccount user={this.state.user} setUser={this.setUser} />)} />
               <Route component={NotFound} />

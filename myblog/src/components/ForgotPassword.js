@@ -57,8 +57,6 @@ onSubmit = (e) => {
 }
 
   render() {
-    console.log(this.state.email, "EMAIL")
-    console.log(this.state.response, "RESPONSE")
     return (
       <>
       <Card className="forgot-pw-card">
