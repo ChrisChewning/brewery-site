@@ -183,10 +183,58 @@ body{
 
 
 /*POST PAGE */
-.post-parent, .my-account-parent{
-  width: 50%;
+.post-parent-card, .my-account-parent, .comments-post-card, .comments-comments-card{
+  width: 60% !important;
   margin: 2% auto 0px;
 }
+
+
+
+
+
+
+
+/* COMMENT PAGE */
+
+.comments-post-card, .comments-comments-card{
+  width: 60% !important;
+  margin-left: 20% !important;
+}
+
+.votes-parent{
+  width: 20%;
+  margin: auto;
+  border: 1px solid yellow;
+}
+
+.comments-comments-parent{
+  display: flex;
+}
+
+.comment-img-parent{
+  margin-bottom: 5%;
+  margin-right: 5%;
+  margin-left: 0% !important;
+}
+
+
+
+.comment-date-parent{
+  width: 70%;
+  text-align: left;
+  margin-bottom: 0px !important
+}
+
+.comment-date{
+  text-align: left !important;
+  font-size: .75rem;
+}
+
+.comment-username{
+  font-size: 1rem;
+  margin-top: 0px;
+}
+
 
 
 
@@ -389,7 +437,11 @@ cursor: pointer;
 /* POSTS LIST */
 .card-post, .card-comment {
   margin: 20px;
-  width: 40%;
+/*  width: 40%; */
+}
+
+.card-comment{
+  width: 50%;
 }
 
 /* .post-list{
@@ -470,22 +522,22 @@ cursor: pointer;
 
 .post-item-parent, .comment-item-parent{
   display: flex;
-/*flex-direction: column;*/
 }
 
 .post-parent-title-content{
-  width: 45%;
+  width: 25%;
   margin: 0% 5%;
 }
 
 .post-parent-detail-container{
-  width: 45%;
+  width: 25%;
   margin-right: 5%;
 }
 
 .post-parent-content{
   display: flex;
   justify-content: center;
+
 }
 
 .post-parent-img-content{
@@ -494,34 +546,34 @@ cursor: pointer;
   margin-top: 50%;
 }
 
-.post-comment-content{
+.post-comment-content-parent{
   margin: auto;
   width: 50%;
   flex-direction: row;
 }
 
 
-.post-img{
-  height: 150px;
-  width: 150px;
+.post-img, .comment-img{
+  height: 80%;
   border-radius: 5px;
-  top: 50%;
-  margin: 0 auto;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  max-width: 100%;
 }
 
-.post-img-parent{
-  height: 100%;
+.post-img-parent, .comment-img-parent{
+  height: 150px;
   width: 25%;
-  border-radius: 50%;
-  margin: auto;
-  width: 10%;
-  margin-left: 1%;
+  margin-top: 0%;
+  margin-left: 2%;
 }
 
-.votes-parent{
-  width: 20%;
-  margin: auto;
-  border: 1px solid yellow;
+
+
+
+
+.post-parent-details{
+  margin-top: 5%;
 }
 
 
@@ -803,7 +855,7 @@ box-sizing: border-box;
 
 
 .MuiCard-root {
-  width: 100%;
+  width: 100% !important;
   margin-left: 0%;
   margin-right: 0%;
 }

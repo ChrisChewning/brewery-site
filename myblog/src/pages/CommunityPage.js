@@ -57,7 +57,7 @@ componentDidMount() {
 render() {
   return (
       <>
-      <div className="post-parent">
+      <div className="post-parent-card">
         <p>{this.content}</p>
       {!this.props.user || this.props.user.username === undefined ? (
         <p>You  must be logged in to post </p>

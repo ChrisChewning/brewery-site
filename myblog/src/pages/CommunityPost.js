@@ -75,14 +75,15 @@ class CommunityPost extends Component {
 
     return (
       <>
-        <Card className="card-comment">
+      <div className="comment-page-parent">
+        <Card className="comments-post-card">
           <div className="comment-item-parent">
           <div className="votes-parent">
             <ThumbUpIcon onClick={this.upvotePost} />
             <p> {this.state.votes} </p>
             <ThumbDownIcon onClick={this.downvotePost} />
           </div>
-          <div className="post-comment-content">
+          <div className="post-comment-content-parent">
           <div className="post-title-parent">
           <h2 className="post-title">{this.state.name}</h2>
           </div>
@@ -109,22 +110,27 @@ class CommunityPost extends Component {
         <div className="comments-parent">
           <p>Comments ({this.state.commentsLength})</p>
           {this.state.comments.map((comment, i) => (
-            <Card>
+            <Card className="comments-comments-card">
               <p key={i}>
-                <img className="post-img" src={comment.image} alt="username for comment"/>
-                {comment.username} |{" "}
-                <i>
-                  <Moment format="MMM DD, YYYY/h:mm a">
+                <div className="comments-comments-parent">
+                <div className="comment-img-parent">
+                <img className="comment-img" src={comment.image} alt="user"/>
+                <p className="comment-username">{comment.username}</p>
+              </div>
+              <div className="comment-date-parent">
+                <i className="comment-date">
+                  <Moment format="MMM D, YYYY h:mm a">
                     {comment.addDate}
                   </Moment>
                 </i>
-                <br></br>
-                <br></br>
-                  <p dangerouslySetInnerHTML={{ __html: comment.comment}} />
-              </p>
+                  <p className="comment-text" dangerouslySetInnerHTML={{ __html: comment.comment}} />
+                  </div>
+                </div>
+            </p>
             </Card>
           ))}
         </div>
+      </div>
       </>
     );
   }
