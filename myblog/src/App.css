@@ -11,6 +11,10 @@ body{
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.displayNone{
+  display: none;
+}
+
 /*INDEX PAGE*/
 
 .sidenav-index-parent{
@@ -216,7 +220,7 @@ body{
   max-height: 10%;
 }
 
-.brewery-index-content-subcontainer, .news-index-li, .events-index-li, .contact-text{
+.brewery-index-content-subcontainer, .news-index-li, .events-index-li, .contact-text, .pw-verification-message{
   background-color: #F6F6F6;
   padding: 2%;
   margin: 1% 10%;

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
-import TextField from '@material-ui/core/TextField';
 import {Button} from '@material-ui/core';
 import Card from "@material-ui/core/Card";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
@@ -30,14 +28,14 @@ export default class ResetPassword extends Component {
 
 //http://localhost:3000/api/login?resetPasswordToken=acef63f71aa0710445410265b501eacac88e6fbe
   async componentDidMount() {
-   await axios.get(`http://localhost:3000/api/login/reset-password/${this.props.match.params.token}`, {
+    await axios.get(`http://localhost:3000/api/login/reset-password/${this.props.match.params.token}`, {
        params: {
          token: this.props.match.token,
        },
      })
      .then(response => {
       console.log(response);
-      if (response.data.message === 'password reset link a-ok') {
+      if (response.data.message === 'password reset link is good') {
         this.setState({
           username: response.data.username,
           updated: false,
@@ -62,29 +60,26 @@ export default class ResetPassword extends Component {
     this.setState({ revealPw: !this.state.revealPw });
   };
 
-  handleChange = name => (event) => {
-    this.setState({
-      [name]: event.target.value,
-    });
-  };
+  onChange = (e) => {
+    this.setState({password: e.target.value})
+  }
 
   updatePassword = (e) => {
     e.preventDefault();
-    const { username, password } = this.state;
-    const {
-      match: {
-        params: { token },
-      },
-    } = this.props;
+    const password = {
+      password: this.state.password
+    }
+
     try {
-      const response = axios.put(
-        'http://localhost:3000/api/login/update-password',
-        {
-          password: this.state.password,
-          username: this.state.username,
-          resetPasswordToken: token,
+      const response = axios.post((
+        `http://localhost:3000/api/login/update-password/${this.props.match.params.token}`),  {
+        params: {
+          token: this.props.match.token,
+        },
+        password: this.state.password
         })
           console.log(response.data)
+          console.log(password, "PASSWORD") //WORKS
           if (response.data.message === 'password updated') {
                 this.setState({
                   updated: true,
@@ -97,11 +92,12 @@ export default class ResetPassword extends Component {
                 });
               }
             } catch (error) {
-              console.log(error.response.data);
+              console.log(error);
             }
           };
 
   render() {
+    console.log(this.state.password)
     console.log(this.props, "PROPS")
     const {
  password, error, isLoading, updated
@@ -112,14 +108,8 @@ export default class ResetPassword extends Component {
         <div>
           <div style={loading}>
             <h4>Problem resetting password. Please send another reset link.</h4>
-            <Button
-              buttonText="Go Home"
-              link="/"
-            />
-            <Button
-              buttonText="Forgot Password?"
-              link="/forgot-Password"
-            />
+            <Button link="/">Home</Button>
+            <Button link="/forgot-password">Forgot Password</Button>
           </div>
         </div>
       );
@@ -151,23 +141,12 @@ export default class ResetPassword extends Component {
           </div>
 
           <Button variant="contained" color="primary" className="send-email-btn"
-              input type="submit" value="Register">Send Email</Button>
+              input type="submit" value="Register">Submit</Button>
         </form>
       </Card>
 
 
-        <form className="password-form" onSubmit={this.updatePassword}>
-          <TextField
-            id="password"
-            label="password"
-            onChange={this.handleChange('password')}
-            value={password}
-            type="password"
-          />
-          <Button
-            buttonText="Update Password"
-          />
-        </form>
+
 
         {updated && (
           <div>
@@ -176,12 +155,11 @@ export default class ResetPassword extends Component {
               again.
             </p>
             <Button
-              buttonText="Login"
-              link="/login"
-            />
+              link="/login">Login
+            </Button>
           </div>
         )}
-        <Button buttonText="Go Home" link="/" />
+        <Button link="/">Home</Button>
       </div>
     );
   }

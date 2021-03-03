@@ -87,15 +87,6 @@ class CreateUser extends Component {
         this.setState({ customError: error.res.data.toString() });
       }
       });
-
-    // this.setState({
-    //   username: "",
-    //   email: "",
-    //   password: "",
-    //   passwordConfirm: "",
-    // //  errorMessage: "",
-    //  customError: "",
-    // });
   };
 
   render() {

@@ -85,7 +85,7 @@ router.route("/forgot-password").post(async (req, res) => {
      {
     $set: {
       resetPasswordToken: token, //set key in db resetPasswordToken to token here.
-      resetPasswordExpires: Date.now() + 1800000 //30 min.
+      resetPasswordExpires: Date.now() + 3600000 //1hr.
     },
   },
     { new: true }
@@ -106,7 +106,7 @@ router.route("/forgot-password").post(async (req, res) => {
           text:
             'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n'
             + 'Please click on the following link, or paste this into your browser to complete the process within one hour of receiving it:\n\n'
-            + `http://localhost:3000/reset/${token}\n\n`
+            + `http://localhost:3000/reset-password/${token}\n\n`
             + 'If you did not request this, please ignore this email and your password will remain unchanged.\n',
         };
 
@@ -124,54 +124,50 @@ router.route("/forgot-password").post(async (req, res) => {
 
 
 
- router.get('/reset-password/:token', (req, res) => {
-   User.findOne({
-       resetPasswordToken: req.params.token,
-       resetPasswordExpires: {
-       $gt: Date.now(),
-     },
-   }).then((user) => {
-     if (user == null) {
-       console.error('password reset link is invalid or has expired');
-       res.status(403).send('password reset link is invalid or has expired');
-     } else {
-       res.status(200).send({
-         username: user.username,
-         message: 'password reset link a-ok',
-       });
-     }
-   });
- });
-
-
-
-
- //UPDATE USER'S EMAIL ADDRESS
-
- router.route("/update-email/:id").post((req, res) => {
-   const id = req.params.id;
-   const email = req.body;
-   User.findByIdAndUpdate(id, email)
-     .then(() => res.json("User Updated."))
-     .catch((err) => res.status(400).json("Error: " + err));
- });
-
-router.route("/update-password").post(async (req, res) => {
-    const {resetPasswordToken, username} = req.body;
-
-    User.findOne({ 
-        resetPasswordToken,
-        username,
-        resetPasswordExpires: {
+    router.get('/reset-password/:token', (req, res) => {
+      User.findOne({
+          resetPasswordToken: req.params.token,
+          resetPasswordExpires: {
           $gt: Date.now(),
         },
+      }).then((user) => {
+        if (user == null) {
+          console.error('password reset link is invalid or has expired');
+          res.status(403).send('password reset link is invalid or has expired');
+        } else {
+          res.status(200).send({
+            username: user.username,
+            message: 'password reset link is good',
+          });
+        }
+      });
+    });
+
+
+    //UPDATE USER'S EMAIL ADDRESS
+    router.route("/update-email/:id").post((req, res) => {
+      const id = req.params.id;
+      const email = req.body;
+      User.findByIdAndUpdate(id, email)
+        .then(() => res.json("User Updated."))
+        .catch((err) => res.status(400).json("Error: " + err));
+    });
+
+
+
+router.route("/update-password/:token").post((req, res) => {
+    const password = req.body.password; //can be used in regex validation.
+    console.log(password, "PASSWORD")
+    User.findOne({
+        resetPasswordToken: req.params.token,
     }).then(user => {
       if (user == null) {
         console.error('password reset link is invalid or has expired');
         res.status(403).send('password reset link is invalid or has expired');
       } else if (user != null) {
-        console.log('user exists in db');
+      //  console.log(user, 'user exists in db');
 
+//WORKS UP UNTIL THIS POINT...
 
         //PW REGEX VALIDATION
         var pwValidate = /^(?=.*)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/;
@@ -184,20 +180,21 @@ router.route("/update-password").post(async (req, res) => {
             });
         }
 
-
         //hash the password
         Bcrypt.hash(req.body.password, 12).then((hashedpassword) => {
-            user.update({
-              password: hashedPassword,
-              passwordConfirm: hashedPassword,
-              resetPasswordToken: null,
-              resetPasswordExpires: null,
-            });
-          })
+          console.log(hashedpassword, 'HASHED')
+          console.log(user, "THIS IS USER")
+          user.update({
+             password: hashedpassword,
+             passwordConfirm: hashedpassword,
+             resetPasswordToken: null,
+             resetPasswordExpires: null,
+           })
           .then(() => {
             console.log('password updated');
             res.status(200).send({ message: 'password updated' });
           });
+        })
       } else {
         console.error('no user exists in db to update');
         res.status(401).json('no user exists in db to update');

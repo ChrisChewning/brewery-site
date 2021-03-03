@@ -12,6 +12,7 @@ class ForgotPassword extends Component {
     this.state = {
       email: '',
       response: '',
+      message: '',
     }
   }
 
@@ -27,20 +28,21 @@ sendEmail = async (e) => {
     //email won't let you send if null. no need for null check.
       axios.post(
           'http://localhost:3000/api/login/forgot-password', email)
-          .then((res) => {
+          .then(res => {
             console.log(res)
             console.log(email)
-
-            if (res.data === 'recovery email sent') {
+            if (res.data === 'email not in db') {
+              this.setState({message: 'Email address is not found. Please try again or register for an account.'})
+            }
+            else if (res.data === 'recovery email sent') {
               this.setState({
-                message: 'recovery email sent'
+                message: 'recovery email has  been sent'
               });
-
           }
         })
        .catch((err) => {
-        console.error(err);
-        if (err === 'email not in db') {
+         console.log(err, "ERRRRRR")
+        if (err) {
           this.setState({
             message: 'Email address is not found. Please try again or register for an account.'
           });
@@ -61,6 +63,9 @@ onSubmit = (e) => {
       <>
       <Card className="forgot-pw-card">
         <h3 className="forgot-pw-header">Forgot Password</h3>
+
+
+      <p className={this.state.message == "" ? 'displayNone' : 'pw-verification-message'}>{this.state.message}</p>
 
         <form onSubmit={this.sendEmail} className="forgot-pw-form">
           <div className="forgot-pw">
